@@ -128,7 +128,7 @@ body {
     flex: 4;
 }
 
-.card1 p span {
+.card1 p input {
     min-width: 14em;
     padding: .5em;
     text-align: center;
@@ -137,11 +137,13 @@ body {
     text-transform: uppercase;
     color: #ff568e;
     letter-spacing: .1em;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
-.card1 p:hover span {
+.card1 p input:hover {
     transform: rotate(0);
 }
-
-
-
