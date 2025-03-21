@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Orhan's Birthday Plan</title>
     <link rel="stylesheet" href="./Orhans-Birthday-Plan.css">
 </head>
 <body>
@@ -13,19 +13,40 @@
         <span>Article on</span>
         <span>23-March-2025</span>
       </div>
-      <p class="heading">Orhans Birthday</p>
+      <p class="heading">Orhan's Birthday</p>
       <div class="card1">
-        <p><span></span></p>
-        <p><span></span></p>
-        <p><span>Cake</span></p>
-        <p><span>Cake</span></p>
-        <p><span>Cake</span></p>
-        <p><span>Cake</span></p>
+        <p><input type="text" class="input-field" id="input1" placeholder="Enter item 1"></p>
+        <p><input type="text" class="input-field" id="input2" placeholder="Enter item 2"></p>
+        <p><input type="text" class="input-field" id="input3" placeholder="Enter item 3" value="Cake"></p>
+        <p><input type="text" class="input-field" id="input4" placeholder="Enter item 4" value="Cake"></p>
+        <p><input type="text" class="input-field" id="input5" placeholder="Enter item 5" value="Cake"></p>
+        <p><input type="text" class="input-field" id="input6" placeholder="Enter item 6" value="Cake"></p>
       </div>
     </div>
     <div class="footer">
       by PapaRizz
     </div>
 </div>
+
+<script>
+  // On page load, populate the input fields with stored values (if any)
+  window.onload = function() {
+    for (let i = 1; i <= 6; i++) {
+      const inputField = document.getElementById('input' + i);
+      const savedValue = localStorage.getItem('input' + i);
+      if (savedValue) {
+        inputField.value = savedValue;
+      }
+    }
+  }
+
+  // Save the input field values to localStorage when the user types in them
+  const inputFields = document.querySelectorAll('.input-field');
+  inputFields.forEach(input => {
+    input.addEventListener('input', function() {
+      localStorage.setItem(input.id, input.value);
+    });
+  });
+</script>
 </body>
 </html>
