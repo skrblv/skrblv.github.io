@@ -1,0 +1,147 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.card {
+    width: 320px;
+    height: 380px;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(#212121, #212121) padding-box,
+                linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transform-origin: center;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    position: relative;
+    animation: borderAnimation 4s linear infinite;
+}
+
+/* Hover animation for the card tilt */
+.card:hover {
+    animation: tiltAnimation 1.8s ease-in-out forwards;
+}
+
+/* Tilt animation */
+@keyframes tiltAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(15deg); /* Tilting the card */
+    }
+    100% {
+        transform: rotate(0deg); /* Returning to the original position */
+    }
+}
+
+.card .main-content {
+    flex: 1;
+}
+
+.card .header span:first-child {
+    font-weight: 600;
+    color: #717171;
+    margin-right: 4px;
+}
+
+.card .heading {
+    font-size: 24px;
+    margin: 24px 0 16px;
+    font-weight: 600;
+}
+
+.card .categories {
+    display: flex;
+    gap: 8px;
+}
+
+.card .categories span {
+    background-color: #e81cff;
+    padding: 4px 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 50em;
+}
+
+.card .footer {
+    font-weight: 600;
+    color: #717171;
+    margin-right: 4px;
+}
+
+/* Keyframe for the moving border */
+@keyframes borderAnimation {
+    0% {
+        border-image: linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) 1;
+    }
+    25% {
+        border-image: linear-gradient(225deg, transparent 35%, #e81cff, #40c9ff) 1;
+    }
+    50% {
+        border-image: linear-gradient(315deg, transparent 35%, #e81cff, #40c9ff) 1;
+    }
+    75% {
+        border-image: linear-gradient(45deg, transparent 35%, #e81cff, #40c9ff) 1;
+    }
+    100% {
+        border-image: linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) 1;
+    }
+}
+
+.card1 {
+    width: 210px;
+    height: 254px;
+    border-radius: 4px;
+    background: #212121;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: .4em;
+}
+
+.card1 p {
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .5s;
+    background: #212121;
+    border: 1px solid #ff5a91;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card1 p:hover {
+    flex: 4;
+}
+
+.card1 p span {
+    min-width: 14em;
+    padding: .5em;
+    text-align: center;
+    transform: rotate(-90deg);
+    transition: all .5s;
+    text-transform: uppercase;
+    color: #ff568e;
+    letter-spacing: .1em;
+}
+
+.card1 p:hover span {
+    transform: rotate(0);
+}
+
+
+
