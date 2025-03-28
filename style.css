@@ -922,3 +922,221 @@ body {
     min-width: 40px; /* Prevent layout shift when numbers change */
     display: inline-block; /* Ensure width is applied */
 }
+/* Add to style.css */
+
+.card.feature-card {
+    overflow: hidden; /* Crucial: Hide the content moving outside */
+    position: relative; /* Needed if you add absolute indicators later */
+    /* Ensure cards have a defined height if content height varies */
+     min-height: 250px; /* Example: Adjust as needed */
+     display: flex; /* Ensure wrapper takes full height */
+}
+
+.card-content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Distribute space vertically */
+    padding: 20px; /* Move padding here from the card */
+    transition: transform 0.3s ease-out; /* For snap animation */
+    will-change: transform; /* Optimize animation */
+    /* Ensure elements inside wrapper are centered */
+    text-align: center;
+}
+
+/* Adjust padding on the card element itself if needed */
+.card.feature-card {
+     padding: 0; /* Remove padding from card if moved to wrapper */
+}
+
+
+/* Make sure images inside the wrapper fit */
+.card-content-wrapper .venue-image-small {
+    max-width: 80%; /* Adjust as needed */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Style for rating stars */
+.card-content-wrapper .rating span {
+    font-size: 1.3em;
+    color: #ccc; /* Default empty star color */
+}
+.card-content-wrapper .rating span.filled {
+    color: var(--accent-color); /* Filled star color */
+}
+
+/* Ensure text elements wrap if needed */
+.card-content-wrapper .venue-name,
+.card-content-wrapper .rating-text {
+    word-wrap: break-word;
+    width: 95%; /* Prevent text touching edges */
+}
+
+/* Add a class for visual feedback during swipe */
+.card-content-wrapper.is-swiping {
+    transition: none; /* Disable transition during active swipe */
+}
+
+/* --- Add/Modify in style.css --- */
+
+/* Style the Venue Details card for background image */
+.card.feature-card.venue-details {
+    background-size: cover;         /* Cover the entire area */
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat;   /* Don't tile the image */
+    position: relative; /* Needed for the overlay pseudo-element */
+    color: #ffffff; /* Make default text color white for contrast */
+    /* Ensure a minimum height if content is short */
+    min-height: 250px;
+    border: none; /* Remove default border if it exists */
+    /* Remove background color if set previously */
+    background-color: transparent;
+}
+
+/* Overlay for readability */
+.card.feature-card.venue-details .card-content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+    border-radius: var(--border-radius); /* Match card's border radius */
+    z-index: 0; /* Place it behind the content */
+}
+
+/* Ensure content sits above the overlay */
+.card.feature-card.venue-details .card-content-wrapper > * {
+    position: relative; /* Needed to stack above the ::before pseudo-element */
+    z-index: 1;
+}
+
+/* Text styling for contrast on background */
+.card.feature-card.venue-details .venue-name,
+.card.feature-card.venue-details .venue-date {
+    color: #ffffff; /* Force white */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
+}
+.card.feature-card.venue-details .venue-name {
+    font-size: 1.3em; /* Make name slightly larger */
+    margin-bottom: auto; /* Push name towards top */
+    padding-top: 10px;
+}
+.card.feature-card.venue-details .venue-date {
+     margin-top: 10px; /* Space above date */
+}
+
+
+/* Ensure wrapper takes full height and content is distributed */
+.card.feature-card .card-content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Pushes title up, date/dots down */
+    padding: 20px;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+    text-align: center;
+    /* position: relative; /* Make sure z-index works if needed */
+    /* z-index: 1; /* Make sure content is above potential background layers */
+}
+
+
+/* --- Dot Animation --- */
+
+/* --- Modify/Add in style.css --- */
+
+/* Remove the pulse animation */
+/*
+@keyframes pulseDots { ... }
+*/
+
+/* --- Dot Sliding Styles --- */
+
+.dots {
+    margin-top: auto; /* Push dots to bottom */
+    padding-top: 15px;
+    width: 60px; /* Adjust width to comfortably fit ~3 dots */
+    overflow: hidden; /* Clip the inner container */
+    position: relative; /* Position context for inner absolute if needed */
+    margin-left: auto; /* Center the dots container */
+    margin-right: auto;
+}
+
+.dots-inner {
+    display: flex; /* Lay out dots horizontally */
+    /* No wrapping */
+    position: relative; /* Keep inline */
+    transition: transform 0.3s ease-out; /* Smooth sliding transition */
+    will-change: transform; /* Performance hint */
+}
+
+/* Individual dot styling (inactive state) */
+.dots span { /* Target spans inside .dots-inner implicitly or explicitly */
+    display: block; /* Use block or inline-block */
+    flex-shrink: 0; /* Prevent dots from shrinking */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.15); /* Default inactive color */
+    margin: 0 4px; /* Spacing */
+    opacity: 0.5;
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Transition for active state change */
+
+    /* Remove animation properties */
+    /* animation-name: none; */
+    /* animation-duration: unset; */
+    /* animation-iteration-count: unset; */
+    /* animation-timing-function: unset; */
+    /* animation-delay: unset; */
+}
+
+/* Active dot styling */
+.dots span.active {
+    background-color: var(--accent-color); /* Active color */
+    opacity: 1;
+    transform: scale(1.1); /* Optional: Slightly larger active dot */
+}
+
+/* --- Dot Color Overrides for different card backgrounds --- */
+
+/* Dots on Venue Details Card (dark background overlay) */
+.venue-details .dots span { /* Target inactive dots */
+    background-color: rgba(255, 255, 255, 0.4);
+    opacity: 0.4;
+}
+.venue-details .dots span.active { /* Target active dot */
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+}
+
+/* Example: If venue-suggestion is also dark/blue */
+.venue-suggestion .dots span {
+    background-color: rgba(255, 255, 255, 0.4);
+    opacity: 0.4;
+}
+.venue-suggestion .dots span.active {
+     background-color: rgba(255, 255, 255, 0.9);
+     opacity: 1;
+}
+
+/* Dots on light cards (choose-venue, reminders-ideas, cutlery) */
+.choose-venue .dots span,
+.reminders-ideas .dots span,
+.cutlery .dots span {
+     background-color: rgba(0,0,0,0.15);
+     opacity: 0.5;
+}
+.choose-venue .dots span.active,
+.reminders-ideas .dots span.active,
+.cutlery .dots span.active {
+    background-color: var(--accent-color);
+     opacity: 1;
+}
