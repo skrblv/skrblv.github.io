@@ -36,61 +36,56 @@
                 <p>Tauras me donc para na olanlamo coa b'aray nar oon aus ane al oio onile yiiio eatolie iluaioh oaej onain aor o'aen aiacio one niie ooair iu.</p>
                 <button class="btn btn-primary">Change Details</button>
                 <!-- Phone Mockup -->
-                       <!-- Phone Mockup -->
-               <!-- Phone Mockup -->
-               <div class="phone-mockup">
-                <div class="phone-screen">
-                    <!-- Music Player UI Start -->
-                    <div class="music-player">
-                        <!-- The actual audio element (hidden) -->
-                        <audio id="audio-player" src="./assets/Fifty Fifty - Cupid (Twin Version).mp3" preload="metadata"></audio>
-    
-                        <img src=".//assets/hq720 (1).jpg" alt="Album Art" class="album-art">
-    
-                        <div class="track-info">
-                            <h3 id="track-title" class="track-title">Cupid (Twin Ver.)</h3>
-                            <p id="artist-name" class="artist-name">FIFTY FIFTY</p>
-                        </div>
-    
-                        <div id="progress-container" class="progress-bar-container">
-                            <span id="current-time" class="time current-time">0:00</span>
-                            <div class="progress-bar">
-                                <div id="progress" class="progress"></div> <!-- Width updated by JS -->
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <!-- Music Player UI Start -->
+                        <div class="music-player">
+                            <!-- The actual audio element (hidden) -->
+                            <audio id="audio-player" src="./Fifty Fifty - Cupid (Twin Version).mp3" preload="metadata"></audio>
+
+                            <img src="./hq720 (1).jpg" alt="Album Art" class="album-art">
+
+                            <div class="track-info">
+                                <h3 id="track-title" class="track-title">Cupid (Twin Ver.)</h3>
+                                <p id="artist-name" class="artist-name">FIFTY FIFTY</p>
                             </div>
-                            <span id="total-time" class="time total-time">0:00</span>
+
+                            <div id="progress-container" class="progress-bar-container">
+                                <span id="current-time" class="time current-time">0:00</span>
+                                <div class="progress-bar">
+                                    <div id="progress" class="progress"></div> <!-- Width updated by JS -->
+                                </div>
+                                <span id="total-time" class="time total-time">0:00</span>
+                            </div>
+
+                            <div class="controls">
+                                <button id="prev-btn" class="control-btn skip-back" aria-label="Previous Track (Restart)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6l-8.5 6z"/></svg>
+                                </button>
+                                <button id="play-pause-btn" class="control-btn play-pause main-control" aria-label="Play">
+                                    <!-- SVG Icon will be managed by JS -->
+                                    <span id="play-pause-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36px" height="36px"><path d="M8 5v14l11-7z"/></svg>
+                                    </span>
+                                </button>
+                                <button id="next-btn" class="control-btn skip-forward" aria-label="Next Track (Restart)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                                </button>
+                            </div>
+
+                            <div class="volume-control">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                                <input id="volume-slider" type="range" class="volume-slider" min="0" max="100" value="70" aria-label="Volume">
+                            </div>
                         </div>
-    
-                        <div class="controls">
-                            <button id="prev-btn" class="control-btn skip-back" aria-label="Previous Track (Restart)">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6l-8.5 6z"/></svg>
-                            </button>
-                            <button id="play-pause-btn" class="control-btn play-pause main-control" aria-label="Play">
-                                <!-- SVG Icon will be managed by JS -->
-                                <span id="play-pause-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="36px" height="36px"><path d="M8 5v14l11-7z"/></svg>
-                                </span>
-                            </button>
-                            <button id="next-btn" class="control-btn skip-forward" aria-label="Next Track (Restart)">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                            </button>
-                        </div>
-    
-                        <div class="volume-control">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                            <input id="volume-slider" type="range" class="volume-slider" min="0" max="100" value="70" aria-label="Volume">
-                        </div>
+                        <!-- Music Player UI End -->
                     </div>
-                    <!-- Music Player UI End -->
                 </div>
-            </div>
-                <!-- Music Player UI End -->
-            </div>
-        </div>
             </div>
 
             <div class="hero-card card">
                 <div class="venue-image">
-                    <img src=".//assets/heart.png" alt="Venue Interior">
+                    <img src="./heart.png" alt="Venue Interior"> 
                 </div>
                 <div class="countdown-section">
                     <!-- Date Selection Area -->
@@ -106,7 +101,7 @@
                             <span class="number" id="days-num">--</span>
                             <span class="label">Days</span>
                         </div>
-                         <div class="time-block">
+                        <div class="time-block">
                             <span class="number" id="hours-num">--</span>
                             <span class="label">Hours</span>
                         </div>
@@ -123,7 +118,7 @@
                     <!-- Calendar Days Display -->
                     <div class="calendar-days" id="calendar-view">
                          <span class="cal-day" id="cal-day-1">--</span>
-                         <span class="cal-day highlight" id="cal-day-2">--</span> <!-- Middle one is highlighted by default -->
+                         <span class="cal-day highlight" id="cal-day-2">--</span>
                          <span class="cal-day" id="cal-day-3">--</span>
                     </div>
                 </div>
@@ -133,52 +128,73 @@
         <section class="features">
             <h2>CHOOSE VENUE</h2>
             <div class="feature-cards">
-                <div class="card feature-card venue-details">
-                    <h3>DATE DA E</h3>
-                     <img src="https://via.placeholder.com/150x80/C7D8E3/666?text=Venue+Facade" alt="Venue Facade">
-                    <p class="date">APRIL 5-6</p>
-                     <div class="dots"><span></span><span></span><span></span></div>
-                </div>
-                <div class="card feature-card venue-suggestion">
-                    <h3>APRIL CAFE</h3>
-                     <img src="https://via.placeholder.com/100x60/C7D8E3/666?text=Car" alt="Cafe Area">
-                     <p class="small-text">Filter: Cafe</p>
-                     <!-- Placeholder for adding own options -->
-                     <!-- <button class="btn btn-secondary btn-small">Add Option</button> -->
-                     <div class="dots"><span></span><span></span><span></span></div>
-                </div>
-                <div class="card feature-card choose-venue">
-                    <h3>CHOOSE VENUE</h3>
-                    <div class="rating">
-                        <span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
-                    </div>
-                    <p class="small-text">View ratings & reviews</p>
-                    <div class="venue-icons">
-                       <span><i class="icon"></i>2)</span> <span><i class="icon"></i>>></span>
-                    </div>
-                     <div class="dots"><span></span><span></span><span></span></div>
-                </div>
-                <div class="card feature-card reminders-ideas">
-                    <h3>REMINDERS IDEAS</h3>
-                    <span class="icon-feature">★</span> <!-- Star Icon -->
-                    <ul class="checklist">
-                        <li>Buy flowers</li>
-                        <li>Choose outfit</li>
-                        <li>Confirm time</li>
-                        <!-- Add more checklist items -->
-                    </ul>
-                    <p class="small-text">Leave a note (e.g., dress code)</p>
-                     <div class="dots"><span></span><span></span><span></span></div>
-                </div>
-                 <div class="card feature-card cutlery">
-                     <div class="cutlery-icons">
-                        <span></span> <!-- Fork -->
-                        <span></span> <!-- Knife -->
+
+                <!-- Venue Details Card (HAS DOTS) -->
+                <div class="card feature-card venue-details" id="venue-details-card">
+                    <div class="card-content-wrapper">
+                        <h3 class="venue-name">DATE DA E</h3>
+                        <p class="venue-date date">APRIL 5-6</p>
+                         <div class="dots">
+                             <div class="dots-inner">{/* Spans generated by JS */}</div>
+                         </div>
                      </div>
-                     <div class="dots"><span></span><span></span><span></span></div>
+                </div>
+
+                <!-- Venue Suggestion Card (NO DOTS) -->
+                <div class="card feature-card venue-suggestion">
+                     <div class="card-content-wrapper">
+                        <h3>APRIL CAFE</h3>
+                        <img src="https://via.placeholder.com/100x60/C7D8E3/666?text=Car" alt="Cafe Area">
+                        <p class="small-text">Filter: Cafe</p>
+                        
+                    </div>
+                </div>
+
+                <!-- Choose Venue Card (HAS DOTS) -->
+                <div class="card feature-card choose-venue" id="choose-venue-card">
+                    <div class="card-content-wrapper">
+                       <h3>CHOOSE VENUE</h3>
+                       <div class="rating">
+                           <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                       </div>
+                       <p class="rating-text small-text">View ratings & reviews</p>
+                       <div class="venue-icons">
+                          <span class="venue-icon-1"></span> <span class="venue-icon-2"></span>
+                       </div>
+                        <div class="dots">
+                            <div class="dots-inner">{/* Spans generated by JS */}</div>
+                        </div>
+                   </div>
+               </div>
+
+                <!-- Reminders Ideas Card (NO DOTS) -->
+                 <div class="card feature-card reminders-ideas">
+                     <div class="card-content-wrapper">
+                        <h3>REMINDERS IDEAS</h3>
+                        <span class="icon-feature">★</span>
+                        <ul class="checklist">
+                            <li>Buy flowers</li>
+                            <li>Choose outfit</li>
+                            <li>Confirm time</li>
+                        </ul>
+                        <p class="small-text">Leave a note</p>
+                         
+                     </div>
+                </div>
+
+                 <!-- Cutlery Card (NO DOTS) -->
+                 <div class="card feature-card cutlery">
+                     <div class="card-content-wrapper">
+                         <div class="cutlery-icons">
+                            <span>🍽️</span>
+                            <span>🔪</span>
+                         </div>
+                          
+                    </div>
                 </div>
             </div>
-             <!-- Placeholder for global reminders/notifications -->
+
+             <!-- Global Reminders -->
             <div class="global-reminders">
                  <span class="notification-badge">98</span>
                  <button class="btn btn-secondary">REMINDERS</button>
@@ -187,7 +203,7 @@
 
     </main>
 
-    <!-- Decorative elements (optional, could be background images in CSS) -->
+    <!-- Decorative elements -->
     <div class="deco flower"></div>
     <div class="deco plate"></div>
 
