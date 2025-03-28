@@ -6,15 +6,25 @@
 }
 
 :root {
-    --primary-color: #FFEADD; /* Light Peach/Salmon */
-    --secondary-color: #C7D8E3; /* Light Blue */
-    --accent-color: #FCAE7C; /* Deeper Peach for highlights */
-    --text-color: #5D5C61; /* Muted Dark Grey/Blue */
-    --text-dark: #073B4C; /* Dark Blue for headings */
+    --primary-color: #FFEADD;
+    --secondary-color: #C7D8E3;
+    --accent-color: #FCAE7C;
+    --text-color: #5D5C61;
+    --text-dark: #073B4C;
     --white: #FFFFFF;
     --card-bg: var(--white);
     --border-radius: 15px;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --spotify-green: #1DB954;
+    --spotify-dark: #121212;
+    --spotify-light-grey: #b3b3b3;
+    --spotify-dark-grey: #282828;
+    --spotify-progress-grey: #535353;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Add this line to prevent horizontal scroll on the html element */
 }
 
 body {
@@ -23,16 +33,16 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     padding: 20px;
-    position: relative; /* For absolute positioning of decorations */
-    overflow-x: hidden; /* Prevent horizontal scroll from decorations */
+    position: relative;
+    /* overflow-x: hidden; */ /* This rule can often be handled by the html element, keeping it is fine too */
 }
 
-/* --- Header --- */
+/* Header */
 .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 5%; /* Use percentage for better scaling */
+    padding: 10px 5%;
     margin-bottom: 30px;
 }
 
@@ -64,9 +74,7 @@ body {
 }
 
 .status-icons span {
-    /* Style your icons here */
     margin-left: 10px;
-    /* Placeholder styling */
     display: inline-block;
     width: 18px;
     height: 18px;
@@ -75,30 +83,29 @@ body {
     opacity: 0.7;
 }
 
-
-/* --- Main Container --- */
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
 
-/* --- Hero Section --- */
+/* Hero Section */
 .hero {
     display: flex;
     gap: 30px;
     margin-bottom: 50px;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
 }
 
 .hero-text {
-    flex: 1; /* Takes up available space */
+    flex: 1;
     padding-right: 20px;
-    position: relative; /* For phone mockup positioning */
+    position: relative;
 }
 
 .hero-text h1 {
-    font-size: 3.5em; /* Larger font size */
+    font-size: 3.5em;
     color: var(--text-dark);
     line-height: 1.1;
     margin-bottom: 15px;
@@ -106,35 +113,107 @@ body {
 
 .hero-text p {
     margin-bottom: 25px;
-    max-width: 450px; /* Limit text width */
+    max-width: 450px;
 }
 
 .hero-card {
-    flex: 1.5; /* Takes slightly more space */
+    flex: 1.5;
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    overflow: hidden; /* Ensures image corners are rounded */
+    overflow: hidden;
 }
 
-.venue-image img {
-    width: 2.5%;
-    display: block; /* Remove extra space below image */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 280px; /* Control image height */
-    object-fit: cover; /* Crop image nicely */
+.hero-card .venue-image {
+    width: 3%; /* This seems very small, might be intentional or a typo */
+    margin-left: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.hero-card .venue-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .countdown-section {
-    padding: 25px;
+    padding: 20px;
 }
 
-.date-display {
-    font-size: 1.5em;
+.date-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.date-selection label {
+    color: var(--text-color);
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+#event-date-picker {
+    background: linear-gradient(to right, #fddea3, #fb7b88);
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: white;
+    padding: 8px 15px;
+    font-family: inherit;
+    font-size: 0.9em;
+    cursor: pointer;
+    min-width: 160px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color-scheme: light;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+#event-date-picker::placeholder,
+#event-date-picker::-webkit-input-placeholder,
+#event-date-picker::-moz-placeholder,
+#event-date-picker:-ms-input-placeholder,
+#event-date-picker::-ms-input-placeholder {
+    color: #aaa;
+    opacity: 0.8;
+}
+
+#event-date-picker:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(252, 174, 124, 0.3);
+}
+
+#event-date-picker::-webkit-calendar-picker-indicator {
+    filter: invert(0.5) brightness(1);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+    margin-left: 8px;
+}
+
+#event-date-picker:hover::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    filter: invert(0.3) brightness(1);
+}
+
+#set-date-btn {
+    border-radius: 20px;
+    background-color: #fddea3;
+
+    color: var(--white);
     font-weight: bold;
-    color: var(--text-dark);
-    margin-bottom: 20px;
-    text-align: center;
+    border: none;
+    padding: 9px 18px;
+    transition: background-color 0.2s ease;
+}
+
+#set-date-btn:hover {
+    background-color: #f9a068;
 }
 
 .timer {
@@ -142,6 +221,8 @@ body {
     justify-content: space-around;
     margin-bottom: 25px;
     text-align: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .time-block .number {
@@ -150,6 +231,7 @@ body {
     font-weight: bold;
     color: var(--text-dark);
     line-height: 1;
+    min-width: 40px;
 }
 
 .time-block .label {
@@ -162,6 +244,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 15px;
+    margin-top: 20px;
 }
 
 .cal-day {
@@ -171,189 +254,374 @@ body {
     font-weight: 600;
     min-width: 40px;
     text-align: center;
+    border: 1px solid transparent;
 }
 
-.cal-day.current {
-    background-color: var(--secondary-color);
-    color: var(--text-dark);
-}
 .cal-day.highlight {
-     background-color: var(--accent-color);
-     color: var(--white);
+    background-color: var(--accent-color);
+    color: var(--white);
+    font-weight: bold;
+    border-color: var(--accent-color);
 }
 
-
-/* --- Features Section --- */
+/* Features Section */
 .features {
     margin-bottom: 50px;
-    position: relative; /* For positioning global reminders */
+    position: relative;
 }
 
 .features h2 {
     color: var(--text-dark);
     margin-bottom: 25px;
-    /* text-align: center; */ /* Optional: Center title */
     font-size: 1.3em;
-    padding-left: 10px; /* Align with cards */
+    padding-left: 10px;
 }
 
 .feature-cards {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-    justify-content: center; /* Center cards when they wrap */
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+/* General Card Styles */
 .card {
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    padding: 20px;
-    text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+.feature-card {
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    position: relative;
 }
 
-.feature-card {
-    flex: 1; /* Distribute space evenly */
-    min-width: 180px; /* Minimum width before wrapping */
-    max-width: 220px; /* Maximum width */
+.card-content-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+    text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
+.card-content-wrapper.is-swiping {
+    transition: none;
+    cursor: grabbing;
+}
 
-.feature-card h3 {
+/* Specific Card Styles */
+.venue-details {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    border: none;
+    background-color: var(--secondary-color);
+}
+
+.venue-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: var(--border-radius);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.venue-details .venue-name,
+.venue-details .venue-date {
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.venue-details .venue-name {
+    font-size: 1.3em;
+    margin-bottom: auto;
+    padding-top: 10px;
+    width: 95%;
+    word-wrap: break-word;
+}
+
+.venue-details .venue-date {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.choose-venue {
+    background-color: var(--primary-color);
+    border: 1px solid #f0d8c9;
+}
+
+.choose-venue .venue-header {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    width: 95%;
+    word-wrap: break-word;
+}
+
+.choose-venue .rating span {
+    font-size: 1.3em;
+    color: #ccc;
+}
+
+.choose-venue .rating span.filled {
+    color: var(--accent-color);
+}
+
+.choose-venue .rating-text {
+    font-size: 0.85em;
+    margin: 5px 0 10px;
+    width: 95%;
+    word-wrap: break-word;
+}
+
+.choose-venue .venue-icons span {
+    display: inline-block;
+    margin: 10px 5px 0;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* --- Reminders Ideas Card (Updated Checklist Styles) --- */
+.reminders-ideas {
+    background-color: var(--card-bg);
+    border: 1px solid #eee;
+}
+
+.reminders-ideas h3 {
     color: var(--text-dark);
     margin-bottom: 15px;
     font-size: 1.1em;
 }
 
-.feature-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.feature-card .date {
-    font-weight: bold;
-    color: var(--accent-color);
-    margin-top: auto; /* Pushes date down */
-    padding-top: 10px;
-}
-
-.feature-card .small-text {
-    font-size: 0.85em;
-    margin-bottom: 10px;
-}
-
-/* Specific Card Styles */
-.venue-details { background-color: var(--secondary-color); }
-.venue-suggestion { background-color: var(--secondary-color); }
-.choose-venue { background-color: var(--primary-color); border: 1px solid #f0d8c9;}
-.reminders-ideas { background-color: var(--card-bg); border: 1px solid #eee;}
-.cutlery { background-color: var(--secondary-color); }
-
-
-.rating span {
-    font-size: 1.3em;
-    color: var(--accent-color);
-}
-.rating span:nth-child(n+4) { /* Style empty stars */
-    color: #ccc;
-}
-
-.venue-icons span {
-    display: inline-block;
-    margin: 10px 5px 0;
-    font-weight: bold;
-    /* Style icons properly later */
-    color: var(--accent-color);
-}
-
-.checklist {
-    list-style: none;
-    text-align: left;
-    font-size: 0.9em;
-    margin: 10px 0;
-    width: 100%;
-    padding-left: 15px;
-}
-
-.checklist li {
-    margin-bottom: 5px;
-    position: relative;
-}
-.checklist li::before {
-    content: '☐'; /* Basic checkbox */
-    position: absolute;
-    left: -15px;
-    color: var(--accent-color);
-}
-
-.icon-feature {
+.reminders-ideas .icon-feature {
     font-size: 1.5em;
     color: var(--accent-color);
     margin-bottom: 10px;
 }
 
-.cutlery-icons span {
+.reminders-ideas .checklist {
+    /* General list styling */
+    list-style: none;
+    text-align: left;
+    font-size: 0.9em;
+    margin: 10px 0;
+    width: 100%;
+    padding-left: 5px;
+    /* Adjust if needed */
+}
+
+.interactive-checklist li {
+    display: flex;
+    /* Align checkbox and label */
+    align-items: center;
+    /* Vertically center items */
+    margin-bottom: 8px;
+    /* Space between list items */
+    cursor: pointer;
+    /* Indicate the item is interactive */
+    position: relative;
+    /* Needed if adding custom checkbox overlays */
+}
+
+.interactive-checklist input[type="checkbox"] {
+    margin-right: 10px;
+    /* Space between checkbox and text */
+    flex-shrink: 0;
+    /* Prevent checkbox from shrinking */
+    accent-color: var(--accent-color);
+    /* Color the checkbox checkmark/background */
+    width: 18px;
+    /* Checkbox size */
+    height: 18px;
+    cursor: pointer;
+    /* Pointer cursor on the checkbox */
+    /* Add more custom styles if desired, but browser support varies */
+}
+
+.interactive-checklist label {
+    color: var(--text-color);
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+    /* Smooth transitions */
+    flex-grow: 1;
+    /* Allow label to take remaining width */
+    cursor: pointer;
+    /* Make label clickable */
+}
+
+/* Style for checked items: line-through and muted color */
+.interactive-checklist input[type="checkbox"]:checked+label {
+    text-decoration: line-through;
+    color: #999;
+    /* Lighter, muted color */
+}
+
+.reminders-ideas .small-text {
+    font-size: 0.85em;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+/* Push "Leave a note" down */
+
+
+.cutlery {
+    background-color: var(--secondary-color);
+}
+
+.cutlery .cutlery-icons {
+    margin: auto;
+}
+
+.cutlery .cutlery-icons span {
     font-size: 2.5em;
     color: var(--text-dark);
     margin: 0 10px;
-    display: inline-block; /* Needed for potential transforms */
-}
-.cutlery-icons span:first-child{
-   transform: rotate(-15deg);
-}
-.cutlery-icons span:last-child{
-   transform: rotate(15deg);
-}
-.cutlery .cutlery-icons {
-    margin-top: 15px; /* Add some space */
-    margin-bottom: auto; /* Push to middle */
-    padding-bottom: 10px;
+    display: inline-block;
 }
 
-.dots {
-    margin-top: auto; /* Push dots to bottom */
-    padding-top: 10px;
+.cutlery .cutlery-icons span:first-child {
+    transform: rotate(-15deg);
 }
+
+.cutlery .cutlery-icons span:last-child {
+    transform: rotate(15deg);
+}
+
+/* Venue Suggestion Card (Map Container) */
+.venue-suggestion {
+    background-color: var(--secondary-color);
+}
+
+.venue-suggestion .card-content-wrapper {
+    padding: 10px;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+#venue-map {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    border-radius: calc(var(--border-radius) - 10px);
+    z-index: 1;
+}
+
+/* Dot Sliding Styles */
+.dots {
+    margin-top: auto;
+    padding-top: 15px;
+    width: 60px;
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 12px;
+}
+
+.dots-inner {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    align-items: center;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+}
+
 .dots span {
-    display: inline-block;
+    display: block;
+    flex-shrink: 0;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(0,0,0,0.15);
-    margin: 0 3px;
-}
-.dots span:nth-child(2) { /* Highlight middle dot */
-   background-color: var(--accent-color);
-}
-.venue-details .dots span:nth-child(1),
-.venue-suggestion .dots span:nth-child(3) {
-     background-color: var(--accent-color); /* Different highlight for blue cards */
-}
-.venue-details .dots span:nth-child(2),
-.venue-suggestion .dots span:nth-child(2) {
-    background-color: rgba(0,0,0,0.15);
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 4px;
+    opacity: 0.6;
+    transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* --- Global Reminders (Floating) --- */
+.dots span.active {
+    background-color: var(--accent-color);
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.venue-details .dots span {
+    background-color: rgba(255, 255, 255, 0.4);
+    opacity: 0.5;
+}
+
+.venue-details .dots span.active {
+    background-color: rgba(255, 255, 255, 0.95);
+    opacity: 1;
+}
+
+.choose-venue .dots span {
+    background-color: rgba(0, 0, 0, 0.15);
+    opacity: 0.5;
+}
+
+.choose-venue .dots span.active {
+    background-color: var(--accent-color);
+    opacity: 1;
+}
+
+/* Leaflet Popup Styling Override */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+}
+
+.leaflet-popup-content {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.leaflet-popup-content b {
+    color: var(--text-dark);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    color: #aaa;
+}
+
+/* Global Reminders */
 .global-reminders {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
+    top: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    z-index: 10;
 }
 
 .notification-badge {
@@ -377,11 +645,11 @@ body {
     font-size: 0.9em;
 }
 
-/* --- Buttons --- */
+/* Buttons */
 .btn {
     padding: 10px 25px;
     border: none;
-    border-radius: 20px; /* Pill shape */
+    border-radius: 20px;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -403,6 +671,7 @@ body {
     background-color: var(--accent-color);
     color: var(--white);
 }
+
 .btn-secondary:hover {
     background-color: #f9a068;
     transform: translateY(-2px);
@@ -413,43 +682,31 @@ body {
     font-size: 0.8em;
 }
 
-
-/* --- Phone Mockup --- */
+/* Phone Mockup & Music Player */
 .phone-mockup {
     position: absolute;
-    bottom: -100px; /* Position below the button */
+    bottom: -100px;
     left: 0;
-    width: 200px; /* Adjust size as needed */
+    width: 200px;
     height: 400px;
     background-color: var(--white);
-    border: 8px solid #333; /* Phone border */
+    border: 8px solid #333;
     border-radius: 30px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     padding: 15px;
-    overflow: hidden; /* Clip content */
+    overflow: hidden;
 }
 
-/* --- Spotify Player Styles --- */
-/* Define Spotify Green */
-:root {
-    --spotify-green: #1DB954;
-    --spotify-dark: #121212; /* Primary dark background */
-    --spotify-light-grey: #b3b3b3; /* Secondary text */
-    --spotify-dark-grey: #282828; /* Slightly lighter dark for elements */
-    --spotify-progress-grey: #535353; /* Background of progress/volume */
-}
-
-/* Adjust phone screen background */
 .phone-screen {
     background-color: var(--spotify-dark);
     color: var(--spotify-light-grey);
-    padding: 20px 15px; /* Keep padding consistent */
-    display: flex; /* Use flex to center player */
+    padding: 20px 15px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Ensure it fills the mockup screen */
-    border-radius: 20px; /* Maintain inner radius */
-    overflow: hidden; /* Hide any overflow */
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .music-player {
@@ -457,34 +714,33 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 300px; /* Max width inside phone */
-    height: 100%; /* Try to fill the phone screen height */
-    justify-content: space-around; /* Distribute space */
-    padding: 10px 0; /* Vertical padding */
+    max-width: 300px;
+    height: 100%;
+    justify-content: space-around;
+    padding: 10px 0;
 }
 
 .album-art {
-    width: 75%; /* Relative width */
-    max-width: 180px; /* Max pixel width */
-    aspect-ratio: 1 / 1; /* Keep it square */
+    width: 75%;
+    max-width: 180px;
+    aspect-ratio: 1 / 1;
     border-radius: 8px;
     object-fit: cover;
-    margin-bottom: 15px; /* Space below art */
+    margin-bottom: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .track-info {
     text-align: center;
-    margin-bottom: 15px; /* Space below track info */
-    width: 90%; /* Prevent text touching edges */
+    margin-bottom: 15px;
+    width: 90%;
 }
 
 .track-title {
-    color: #ffffff; /* White title */
+    color: #ffffff;
     font-size: 1.1em;
     font-weight: 600;
     margin-bottom: 4px;
-    /* Prevent overflow */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -493,7 +749,6 @@ body {
 .artist-name {
     font-size: 0.9em;
     color: var(--spotify-light-grey);
-    /* Prevent overflow */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -503,14 +758,14 @@ body {
     display: flex;
     align-items: center;
     width: 90%;
-    margin-bottom: 15px; /* Space below progress */
+    margin-bottom: 15px;
     gap: 8px;
 }
 
 .time {
     font-size: 0.7em;
     color: var(--spotify-light-grey);
-    min-width: 28px; /* Prevent time labels jumping */
+    min-width: 28px;
     text-align: center;
 }
 
@@ -520,14 +775,14 @@ body {
     background-color: var(--spotify-progress-grey);
     border-radius: 3px;
     overflow: hidden;
-    cursor: pointer; /* Indicate interactivity */
+    cursor: pointer;
 }
 
 .progress {
     height: 100%;
     background-color: var(--spotify-green);
     border-radius: 3px;
-    transition: width 0.1s linear; /* Smooth progress update */
+    transition: width 0.1s linear;
 }
 
 .controls {
@@ -535,8 +790,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 80%;
-    margin-bottom: 20px; /* Space below controls */
-    gap: 20px; /* Space between buttons */
+    margin-bottom: 20px;
+    gap: 20px;
 }
 
 .control-btn {
@@ -545,32 +800,27 @@ body {
     color: var(--spotify-light-grey);
     cursor: pointer;
     padding: 5px;
-    display: flex; /* Center icon */
+    display: flex;
     justify-content: center;
     align-items: center;
     transition: color 0.2s ease;
 }
 
 .control-btn:hover {
-    color: #ffffff; /* White on hover */
+    color: #ffffff;
 }
 
 .control-btn svg {
-    display: block; /* Remove extra space below SVG */
+    display: block;
 }
 
 .main-control {
-    color: #ffffff; /* Main button is white */
-    /* Optional: Add a subtle background circle */
-    /* background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    padding: 10px; */
+    color: #ffffff;
 }
 
 .main-control:hover {
-    transform: scale(1.1); /* Slightly enlarge main button on hover */
+    transform: scale(1.1);
 }
-
 
 .volume-control {
     display: flex;
@@ -578,42 +828,40 @@ body {
     width: 70%;
     gap: 10px;
 }
+
 .volume-control svg {
     color: var(--spotify-light-grey);
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    flex-shrink: 0;
 }
 
 .volume-slider {
     flex-grow: 1;
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none;
     appearance: none;
-    width: 100%; /* Full width within container */
+    width: 100%;
     height: 5px;
-    background: var(--spotify-progress-grey); /* Track background */
+    background: var(--spotify-progress-grey);
     border-radius: 3px;
     outline: none;
     cursor: pointer;
 }
 
-/* --- Volume Slider Thumb (Chrome, Safari, Edge) --- */
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px; /* Thumb size */
+    width: 14px;
     height: 14px;
-    background: #ffffff; /* White thumb */
+    background: #ffffff;
     border-radius: 50%;
     cursor: pointer;
-    margin-top: -4.5px; /* Center thumb vertically */
+    margin-top: -4.5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-/* Show thumb on hover/active (optional, mimics Spotify better) */
+
 .volume-control:hover .volume-slider::-webkit-slider-thumb {
     background: var(--spotify-green);
 }
 
-
-/* --- Volume Slider Track Background (Firefox) --- */
 .volume-slider::-moz-range-track {
     width: 100%;
     height: 5px;
@@ -622,62 +870,64 @@ body {
     cursor: pointer;
 }
 
-/* --- Volume Slider Thumb (Firefox) --- */
 .volume-slider::-moz-range-thumb {
     width: 14px;
     height: 14px;
     background: #ffffff;
     border-radius: 50%;
-    border: none; /* Remove default border */
+    border: none;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-/* Show thumb on hover/active (Firefox) */
+
 .volume-control:hover .volume-slider::-moz-range-thumb {
     background: var(--spotify-green);
 }
 
-/* --- Responsiveness for Player within Mockup --- */
-/* The mockup itself is responsive. These ensure player content scales nicely within it. */
-@media (max-height: 400px) { /* Adjust for shorter phone mockups */
+@media (max-height: 400px) {
     .music-player {
-        justify-content: flex-start; /* Align to top on very short screens */
-        gap: 10px; /* Reduce gaps */
+        justify-content: flex-start;
+        gap: 10px;
         padding: 5px 0;
     }
-    .album-art { margin-bottom: 10px; }
-    .track-info { margin-bottom: 10px; }
-    .progress-bar-container { margin-bottom: 10px; }
-    .controls { margin-bottom: 10px; }
+
+    .album-art,
+    .track-info,
+    .progress-bar-container,
+    .controls {
+        margin-bottom: 10px;
+    }
 }
-/* --- Decorative Elements --- */
-/* Position these using absolute/fixed positioning if needed */
+
+/* Decorative Elements */
 .deco {
     position: absolute;
-    z-index: -1; /* Place behind content */
-    opacity: 0.6; /* Make them subtle */
+    z-index: -1;
+    opacity: 0.6;
 }
+
 .flower {
-     /* Placeholder - use background-image */
-     width: 200px;
-     height: 300px;
-     /* background: url('flower.png') no-repeat center center / contain; */
-     top: 50px;
-     right: 10px;
-     transform: rotate(15deg);
+    width: 200px;
+    height: 300px;
+    top: 50px;
+    right: 10px;
+    transform: rotate(15deg);
 }
+
+/* Placeholder */
 .plate {
-    /* Placeholder */
     width: 180px;
     height: 180px;
     background-color: #F0EBE3;
     border-radius: 50%;
     bottom: 20px;
     right: 50px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
-.plate::before { /* Napkin */
-    content:'';
+
+/* Placeholder */
+.plate::before {
+    content: '';
     position: absolute;
     width: 80px;
     height: 50px;
@@ -688,44 +938,50 @@ body {
     border-radius: 4px;
 }
 
+/* Placeholder */
 
-/* --- Responsive Adjustments --- */
+/* Responsive Adjustments */
 @media (max-width: 992px) {
     .hero {
         flex-direction: column;
-        align-items: center; /* Center items when stacked */
+        align-items: center;
     }
+
     .hero-text {
         padding-right: 0;
-        text-align: center; /* Center text */
-        display: flex; /* Use flexbox to center button */
+        text-align: center;
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
-     .hero-text p {
+
+    .hero-text p {
         max-width: 100%;
     }
+
     .hero-card {
-        width: 100%; /* Make card full width */
-        max-width: 500px; /* But not too wide */
+        width: 100%;
+        max-width: 500px;
     }
+
     .phone-mockup {
-        position: static; /* Remove absolute positioning */
-        margin-top: 30px; /* Add space */
-        width: 220px; /* Adjust size */
+        position: static;
+        margin-top: 30px;
+        width: 220px;
         height: 440px;
     }
+
     .global-reminders {
-        position: static; /* Remove absolute positioning */
+        position: static;
         flex-direction: row;
         justify-content: center;
         margin-top: 20px;
     }
+
     .features h2 {
         text-align: center;
         padding-left: 0;
     }
-
 }
 
 @media (max-width: 768px) {
@@ -733,410 +989,92 @@ body {
         flex-direction: column;
         gap: 10px;
     }
+
     .top-nav nav ul {
-        padding-left: 0; /* Remove padding when stacked */
+        padding-left: 0;
         justify-content: center;
         flex-wrap: wrap;
     }
-     .top-nav nav ul li {
+
+    .top-nav nav ul li {
         margin: 0 10px;
     }
+
     .hero-text h1 {
         font-size: 2.8em;
     }
+
     .timer {
-        flex-wrap: wrap; /* Allow timer blocks to wrap */
         gap: 15px;
     }
+
     .time-block .number {
         font-size: 2.2em;
     }
+
     .feature-cards {
-       justify-content: center;
+        justify-content: center;
     }
 }
 
 @media (max-width: 480px) {
-     body {
+    /* body already has overflow-x: hidden; no need to repeat here */
+    body {
         padding: 10px;
-     }
+        /* overflow-x: hidden; REMOVED - Redundant */
+    }
+
     .hero-text h1 {
         font-size: 2.2em;
     }
-     .btn {
+
+    .btn {
         padding: 8px 20px;
         font-size: 0.8em;
     }
+
     .feature-card {
-        min-width: 150px; /* Adjust min-width */
-        max-width: 180px;
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-right: 0;
     }
-     .phone-mockup {
+
+    .feature-card:nth-child(odd) {
+        margin-right: 10px;
+    }
+
+    .feature-card:nth-child(even) {
+        margin-right: 0;
+    }
+
+    /* Two cards per row */
+    .phone-mockup {
         width: 180px;
         height: 360px;
         border-width: 6px;
         border-radius: 25px;
-     }
-     .phone-screen {
+    }
+
+    .phone-screen {
         padding: 15px 10px;
         border-radius: 15px;
-     }
+    }
 
-}
-/* --- Add to style.css --- */
-
-.countdown-section {
-    padding: 20px; /* Slightly reduce padding if needed */
-}
-.date-selection{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-.date-selection label {
-    color: var(--spotify-light-grey); /* Match player text */
-    font-weight: normal; /* Less emphasis than default */
-    font-size: 0.9em;
-
+    .global-reminders {
+        right: 10px;
+        top: 10px;
+    }
 }
 
-#event-date-picker {
-    background: linear-gradient(to right, #fddea3, #fb7b88); /* Use a dark grey from theme */
-    border: 1px solid var(--spotify-progress-grey); /* Subtle border */
-    border-radius: 20px; /* Make it pill-shaped, more playful */
-    color: #ffffff; /* White text for the selected date */
-    padding: 8px 15px; /* Comfortable padding */
-    font-family: inherit;
-    font-size: 0.9em;
-    cursor: pointer;
-    min-width: 160px; /* Give it some space */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+@media (max-width: 380px) {
+    .feature-card {
+        min-width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+    }
 
-    /* Try to force dark mode appearance for internal elements */
-    color-scheme: dark;
-
-    /* Remove default arrows/spinners in some browsers */
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: textfield; /* For Firefox */
-}
-
-/* Style the placeholder text (often 'yyyy-mm-dd') */
-#event-date-picker::placeholder {
-    color: var(--spotify-light-grey);
-    opacity: 0.8;
-}
-/* For older Webkit */
-#event-date-picker::-webkit-input-placeholder {
-     color: var(--spotify-light-grey);
-     opacity: 0.8;
-}
-/* For Firefox */
-#event-date-picker::-moz-placeholder {
-     color: var(--spotify-light-grey);
-     opacity: 0.8;
-}
-/* For Edge/IE */
-#event-date-picker:-ms-input-placeholder {
-     color: var(--spotify-light-grey);
-     opacity: 0.8;
-}
-#event-date-picker::-ms-input-placeholder {
-     color: var(--spotify-light-grey);
-     opacity: 0.8;
-}
-
-
-/* Focus style - Apply the Cupid Pink accent */
-#event-date-picker:focus {
-    outline: none; /* Remove default outline */
-    border-color: #F8B4C4; /* Soft Cupid Pink */
-    box-shadow: 0 0 0 3px rgba(248, 180, 196, 0.3); /* Subtle pink glow */
-}
-
-/* --- Calendar Icon Styling (Browser Specific) --- */
-
-/* WebKit Browsers (Chrome, Safari, Edge) */
-#event-date-picker::-webkit-calendar-picker-indicator {
-    /* Use filter to try and make the default icon lighter */
-    filter: invert(0.8) brightness(1);
-    opacity: 0.7;
-    cursor: pointer;
-    transition: opacity 0.2s ease, filter 0.2s ease;
-    margin-left: 8px; /* Space between date text and icon */
-}
-
-/* Make icon lighter/whiter on hover (direct pink tinting is hard) */
-#event-date-picker:hover::-webkit-calendar-picker-indicator {
-    opacity: 1;
-    filter: invert(1) brightness(1.1); /* Make it appear brighter/whiter */
-}
-
-/* For Firefox - Less direct control, relies on color-scheme: dark */
-/* Ensure input background doesn't obscure potential icon */
-
-
-/* --- Style the "Set" Button (Optional Enhancement) --- */
-#set-date-btn {
-    border-radius: 20px; /* Match input shape */
-    background-color: #fddea3; /* Keep using theme green */
-    color: var(--spotify-dark); /* Dark text on green */
-    font-weight: bold;
-    border: none;
-    padding: 9px 18px; /* Slightly adjust padding */
-    transition: background-color 0.2s ease;
-}
-#set-date-btn:hover {
-     background-color: #fb7b88; /* Brighter green on hover */
-}
-
-
-/* Adjust timer layout if needed */
-.timer {
-    gap: 10px; /* Add gap for smaller screens if blocks get too close */
-}
-
-/* Ensure calendar view adapts */
-.calendar-days {
-     margin-top: 20px; /* Add space above calendar view */
-}
-
-/* Ensure highlighted day stands out */
-.cal-day.highlight {
-     background-color: var(--accent-color);
-     color: var(--white);
-     font-weight: bold;
-     border: 1px solid var(--accent-color); /* Add border for emphasis */
-}
-
-/* Non-highlighted days */
-.cal-day {
-    background-color: #eee;
-    border: 1px solid transparent; /* Keep size consistent */
-}
-
-/* Countdown placeholder style */
-#countdown-timer .number {
-    min-width: 40px; /* Prevent layout shift when numbers change */
-    display: inline-block; /* Ensure width is applied */
-}
-/* Add to style.css */
-
-.card.feature-card {
-    overflow: hidden; /* Crucial: Hide the content moving outside */
-    position: relative; /* Needed if you add absolute indicators later */
-    /* Ensure cards have a defined height if content height varies */
-     min-height: 250px; /* Example: Adjust as needed */
-     display: flex; /* Ensure wrapper takes full height */
-}
-
-.card-content-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* Distribute space vertically */
-    padding: 20px; /* Move padding here from the card */
-    transition: transform 0.3s ease-out; /* For snap animation */
-    will-change: transform; /* Optimize animation */
-    /* Ensure elements inside wrapper are centered */
-    text-align: center;
-}
-
-/* Adjust padding on the card element itself if needed */
-.card.feature-card {
-     padding: 0; /* Remove padding from card if moved to wrapper */
-}
-
-
-/* Make sure images inside the wrapper fit */
-.card-content-wrapper .venue-image-small {
-    max-width: 80%; /* Adjust as needed */
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-/* Style for rating stars */
-.card-content-wrapper .rating span {
-    font-size: 1.3em;
-    color: #ccc; /* Default empty star color */
-}
-.card-content-wrapper .rating span.filled {
-    color: var(--accent-color); /* Filled star color */
-}
-
-/* Ensure text elements wrap if needed */
-.card-content-wrapper .venue-name,
-.card-content-wrapper .rating-text {
-    word-wrap: break-word;
-    width: 95%; /* Prevent text touching edges */
-}
-
-/* Add a class for visual feedback during swipe */
-.card-content-wrapper.is-swiping {
-    transition: none; /* Disable transition during active swipe */
-}
-
-/* --- Add/Modify in style.css --- */
-
-/* Style the Venue Details card for background image */
-.card.feature-card.venue-details {
-    background-size: cover;         /* Cover the entire area */
-    background-position: center center; /* Center the image */
-    background-repeat: no-repeat;   /* Don't tile the image */
-    position: relative; /* Needed for the overlay pseudo-element */
-    color: #ffffff; /* Make default text color white for contrast */
-    /* Ensure a minimum height if content is short */
-    min-height: 250px;
-    border: none; /* Remove default border if it exists */
-    /* Remove background color if set previously */
-    background-color: transparent;
-}
-
-/* Overlay for readability */
-.card.feature-card.venue-details .card-content-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
-    border-radius: var(--border-radius); /* Match card's border radius */
-    z-index: 0; /* Place it behind the content */
-}
-
-/* Ensure content sits above the overlay */
-.card.feature-card.venue-details .card-content-wrapper > * {
-    position: relative; /* Needed to stack above the ::before pseudo-element */
-    z-index: 1;
-}
-
-/* Text styling for contrast on background */
-.card.feature-card.venue-details .venue-name,
-.card.feature-card.venue-details .venue-date {
-    color: #ffffff; /* Force white */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
-}
-.card.feature-card.venue-details .venue-name {
-    font-size: 1.3em; /* Make name slightly larger */
-    margin-bottom: auto; /* Push name towards top */
-    padding-top: 10px;
-}
-.card.feature-card.venue-details .venue-date {
-     margin-top: 10px; /* Space above date */
-}
-
-
-/* Ensure wrapper takes full height and content is distributed */
-.card.feature-card .card-content-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* Pushes title up, date/dots down */
-    padding: 20px;
-    transition: transform 0.3s ease-out;
-    will-change: transform;
-    text-align: center;
-    /* position: relative; /* Make sure z-index works if needed */
-    /* z-index: 1; /* Make sure content is above potential background layers */
-}
-
-
-/* --- Dot Animation --- */
-
-/* --- Modify/Add in style.css --- */
-
-/* Remove the pulse animation */
-/*
-@keyframes pulseDots { ... }
-*/
-
-/* --- Dot Sliding Styles --- */
-
-.dots {
-    margin-top: auto; /* Push dots to bottom */
-    padding-top: 15px;
-    width: 60px; /* Adjust width to comfortably fit ~3 dots */
-    overflow: hidden; /* Clip the inner container */
-    position: relative; /* Position context for inner absolute if needed */
-    margin-left: auto; /* Center the dots container */
-    margin-right: auto;
-}
-
-.dots-inner {
-    display: flex; /* Lay out dots horizontally */
-    /* No wrapping */
-    position: relative; /* Keep inline */
-    transition: transform 0.3s ease-out; /* Smooth sliding transition */
-    will-change: transform; /* Performance hint */
-}
-
-/* Individual dot styling (inactive state) */
-.dots span { /* Target spans inside .dots-inner implicitly or explicitly */
-    display: block; /* Use block or inline-block */
-    flex-shrink: 0; /* Prevent dots from shrinking */
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.15); /* Default inactive color */
-    margin: 0 4px; /* Spacing */
-    opacity: 0.5;
-    transition: background-color 0.3s ease, opacity 0.3s ease; /* Transition for active state change */
-
-    /* Remove animation properties */
-    /* animation-name: none; */
-    /* animation-duration: unset; */
-    /* animation-iteration-count: unset; */
-    /* animation-timing-function: unset; */
-    /* animation-delay: unset; */
-}
-
-/* Active dot styling */
-.dots span.active {
-    background-color: var(--accent-color); /* Active color */
-    opacity: 1;
-    transform: scale(1.1); /* Optional: Slightly larger active dot */
-}
-
-/* --- Dot Color Overrides for different card backgrounds --- */
-
-/* Dots on Venue Details Card (dark background overlay) */
-.venue-details .dots span { /* Target inactive dots */
-    background-color: rgba(255, 255, 255, 0.4);
-    opacity: 0.4;
-}
-.venue-details .dots span.active { /* Target active dot */
-    background-color: rgba(255, 255, 255, 0.9);
-    opacity: 1;
-}
-
-/* Example: If venue-suggestion is also dark/blue */
-.venue-suggestion .dots span {
-    background-color: rgba(255, 255, 255, 0.4);
-    opacity: 0.4;
-}
-.venue-suggestion .dots span.active {
-     background-color: rgba(255, 255, 255, 0.9);
-     opacity: 1;
-}
-
-/* Dots on light cards (choose-venue, reminders-ideas, cutlery) */
-.choose-venue .dots span,
-.reminders-ideas .dots span,
-.cutlery .dots span {
-     background-color: rgba(0,0,0,0.15);
-     opacity: 0.5;
-}
-.choose-venue .dots span.active,
-.reminders-ideas .dots span.active,
-.cutlery .dots span.active {
-    background-color: var(--accent-color);
-     opacity: 1;
+    /* One card per row */
+    .feature-card:nth-child(odd) {
+        margin-right: 0;
+    }
 }
