@@ -24,7 +24,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Add this line to prevent horizontal scroll on the html element */
+    overflow-x: hidden; /* Prevent horizontal scroll on the html element */
 }
 
 body {
@@ -34,7 +34,7 @@ body {
     line-height: 1.6;
     padding: 20px;
     position: relative;
-    /* overflow-x: hidden; */ /* This rule can often be handled by the html element, keeping it is fine too */
+    /* overflow-x: hidden; */ /* Can be handled by html, keeping is okay */
 }
 
 /* Header */
@@ -279,9 +279,9 @@ body {
 
 .feature-cards {
     display: flex;
-    gap: 20px;
+    gap: 20px; /* This gap applies between rows and columns when wrapping */
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; /* Centers items if there's space, but width calc handles columns */
 }
 
 /* General Card Styles */
@@ -293,9 +293,9 @@ body {
 }
 
 .feature-card {
-    flex: 1;
-    min-width: 180px;
-    max-width: 220px;
+    flex: 1; /* Allows shrinking but prefers base size */
+    min-width: 180px; /* Default minimum width */
+    max-width: 220px; /* Default maximum width */
     min-height: 280px;
     display: flex;
     flex-direction: column;
@@ -425,59 +425,41 @@ body {
 }
 
 .reminders-ideas .checklist {
-    /* General list styling */
     list-style: none;
     text-align: left;
     font-size: 0.9em;
     margin: 10px 0;
     width: 100%;
     padding-left: 5px;
-    /* Adjust if needed */
 }
 
 .interactive-checklist li {
     display: flex;
-    /* Align checkbox and label */
     align-items: center;
-    /* Vertically center items */
     margin-bottom: 8px;
-    /* Space between list items */
     cursor: pointer;
-    /* Indicate the item is interactive */
     position: relative;
-    /* Needed if adding custom checkbox overlays */
 }
 
 .interactive-checklist input[type="checkbox"] {
     margin-right: 10px;
-    /* Space between checkbox and text */
     flex-shrink: 0;
-    /* Prevent checkbox from shrinking */
     accent-color: var(--accent-color);
-    /* Color the checkbox checkmark/background */
     width: 18px;
-    /* Checkbox size */
     height: 18px;
     cursor: pointer;
-    /* Pointer cursor on the checkbox */
-    /* Add more custom styles if desired, but browser support varies */
 }
 
 .interactive-checklist label {
     color: var(--text-color);
     transition: color 0.2s ease, text-decoration 0.2s ease;
-    /* Smooth transitions */
     flex-grow: 1;
-    /* Allow label to take remaining width */
     cursor: pointer;
-    /* Make label clickable */
 }
 
-/* Style for checked items: line-through and muted color */
 .interactive-checklist input[type="checkbox"]:checked+label {
     text-decoration: line-through;
     color: #999;
-    /* Lighter, muted color */
 }
 
 .reminders-ideas .small-text {
@@ -485,8 +467,6 @@ body {
     margin-top: auto;
     padding-top: 10px;
 }
-
-/* Push "Leave a note" down */
 
 
 .cutlery {
@@ -966,7 +946,7 @@ body {
 
     .phone-mockup {
         position: static;
-        margin-top: 30px;
+        margin: 30px auto 0; /* Center mockup when static */
         width: 220px;
         height: 440px;
     }
@@ -997,7 +977,7 @@ body {
     }
 
     .top-nav nav ul li {
-        margin: 0 10px;
+        margin: 5px 10px; /* Add vertical margin when wrapped */
     }
 
     .hero-text h1 {
@@ -1015,13 +995,12 @@ body {
     .feature-cards {
         justify-content: center;
     }
+    /* On tablets, feature cards might still wrap based on their min/max widths */
 }
 
 @media (max-width: 480px) {
-    /* body already has overflow-x: hidden; no need to repeat here */
     body {
         padding: 10px;
-        /* overflow-x: hidden; REMOVED - Redundant */
     }
 
     .hero-text h1 {
@@ -1033,26 +1012,28 @@ body {
         font-size: 0.8em;
     }
 
+    /* --- START: Two cards per row for phones --- */
     .feature-card {
-        min-width: calc(50% - 10px);
-        max-width: calc(50% - 10px);
-        margin-right: 0;
+        /* Each card takes up half the width minus half the gap */
+        /* The parent .feature-cards has gap: 20px */
+        flex-grow: 0; /* Prevent growing */
+        flex-shrink: 0; /* Prevent shrinking beyond basis */
+        flex-basis: calc(50% - 10px); /* 10px is half of the 20px gap */
+        max-width: calc(50% - 10px); /* Ensure max width respects the calculation */
+        min-width: unset; /* Remove the default min-width */
+        /* Removed margin-right rules - the parent's 'gap' property handles spacing */
     }
+    /* --- END: Two cards per row for phones --- */
 
-    .feature-card:nth-child(odd) {
-        margin-right: 10px;
-    }
 
-    .feature-card:nth-child(even) {
-        margin-right: 0;
-    }
-
-    /* Two cards per row */
     .phone-mockup {
         width: 180px;
         height: 360px;
         border-width: 6px;
         border-radius: 25px;
+        /* Ensure it's centered if static */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .phone-screen {
@@ -1060,21 +1041,31 @@ body {
         border-radius: 15px;
     }
 
+    /* Adjust global reminders positioning if needed */
     .global-reminders {
-        right: 10px;
-        top: 10px;
+        /* Keep as is unless it overlaps badly */
+        /* Example adjustment if needed:
+        top: 5px;
+        right: 5px;
+        */
     }
 }
 
 @media (max-width: 380px) {
+    /* --- START: One card per row for very small phones --- */
     .feature-card {
-        min-width: 100%;
-        max-width: 100%;
-        margin-right: 0;
+        /* Override the 2-column layout for very narrow screens */
+        flex-basis: 100%;
+        /* No need for margin overrides as gap handles spacing */
+    }
+    /* --- END: One card per row for very small phones --- */
+
+     .hero-text h1 {
+        font-size: 2em; /* Slightly smaller for very narrow screens */
     }
 
-    /* One card per row */
-    .feature-card:nth-child(odd) {
-        margin-right: 0;
+    .phone-mockup {
+        width: 160px; /* Even smaller if needed */
+        height: 320px;
     }
 }
