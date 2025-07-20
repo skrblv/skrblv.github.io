@@ -4,84 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Henry Cavill: The Path to Strength</title>
-    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital@1&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <!-- Подключение файла стилей -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Главный экран с видеофоном -->
-    <header id="header" class="hero-section audio-section" data-audio="song1">
-        <div class="video-background"><video autoplay loop muted playsinline src="./Workout.mp4"></video></div>
+    <!-- Добавляем атрибут data-audio для связи с музыкой -->
+    <header class="hero-section audio-section" data-audio="song1">
+        <div class="video-background"><video autoplay loop muted playsinline src="workout.mp4"></video></div>
         <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="fade-in">Путь к Силе</h1>
-            <p class="fade-in">Философия Генри Кавилла</p>
-            <a href="#principles" class="scroll-down"></a>
-        </div>
+        <div class="hero-content"><h1 class="fade-in">Путь к Силе</h1><p class="fade-in">Философия Генри Кавилла</p><a href="#principles" class="scroll-down"></a></div>
     </header>
 
-    <main>
-        <!-- Секция с тремя принципами -->
-        <section id="principles" class="principles-section audio-section" data-audio="song2">
-            <h2 class="fade-in">Три Принципа Силы</h2>
-            <div class="principles-grid">
-                <div class="principle-card fade-in"><h3>Дисциплина</h3><p>Фундамент, на котором строятся все достижения. Это решение делать то, что нужно, даже когда этого не хочется.</p></div>
-                <div class="principle-card fade-in"><h3>Постоянство</h3><p>Маленькие, но регулярные усилия со временем превращаются в монументальные результаты. Ключ не в интенсивности, а в постоянстве.</p></div>
-                <div class="principle-card fade-in"><h3>Преодоление</h3><p>Рост происходит за пределами зоны комфорта. Каждая тренировка — это возможность стать сильнее, чем вчера.</p></div>
-            </div>
-        </section>
-
-        <!-- Секция с цитатой -->
-        <section class="quote-section audio-section" data-audio="song3">
-            <div class="quote-container fade-in">
-                <div class="quote-image"><img src="./images.jpg" alt="Henry Cavill"></div>
-                <div class="quote-text-content">
-                    <blockquote>"If you like her, ask her out. It always works for me."</blockquote>
-                    <cite>— Henry Cavill</cite>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция с видеореакцией -->
-        <section class="media-section audio-section" data-audio="song4">
-            <div class="media-container fade-in">
-                <div class="media-text">
-                    <h2>Центр Внимания</h2>
-                    <p>Иногда один взгляд говорит больше, чем тысяча слов. Этот момент — не просто реакция, это отражение ауры, которую создают дисциплина и уверенность.</p>
-                </div>
-                <div class="media-mockup"><video autoplay loop muted playsinline src="./tiktok_reaction.mp4"></video></div>
-            </div>
-        </section>
-
-        <!-- Секция "Наследие" с анимацией прокрутки -->
-        <section class="legacy-section audio-section" data-audio="song5">
-            <div class="legacy-sticky-container">
-                <div class="legacy-video-container">
-                    <video class="legacy-video mos" loop muted playsinline src="./scene-mos.mp4"></video>
-                    <video class="legacy-video bvs" loop muted playsinline src="./scene-bvs.mp4"></video>
-                    <video class="legacy-video zsjl" loop muted playsinline src="./scene-zsjl.mp4"></video>
-                    <div class="vignette-bar left"></div>
-                    <div class="vignette-bar right"></div>
-                </div>
-                <div class="legacy-overlay"></div>
-                <div class="legacy-content-wrapper mos"><div class="legacy-content"><h2>Человек из стали</h2><p>Рождение надежды в мире, который его боится.</p></div></div>
-                <div class="legacy-content-wrapper bvs"><div class="legacy-content"><h2>Бэтмен против Супермена</h2><p>Битва богов, которая ставит под сомнение саму суть героизма.</p></div></div>
-                <div class="legacy-content-wrapper zsjl"><div class="legacy-content"><h2>Лига Справедливости</h2><p>Воскрешение символа и объединение семи для спасения всего сущего.</p></div></div>
-            </div>
-        </section>
+    <main id="principles" class="principles-section audio-section" data-audio="song2">
+        <h2 class="fade-in">Три Принципа Силы</h2>
+        <div class="principles-grid">
+            <div class="principle-card fade-in"><h3>Дисциплина</h3><p>Фундамент, на котором строятся все достижения. Это решение делать то, что нужно, даже когда этого не хочется.</p></div>
+            <div class="principle-card fade-in"><h3>Последовательность</h3><p>Маленькие, но регулярные усилия со временем превращаются в монументальные результаты. Ключ не в интенсивности, а в постоянстве.</p></div>
+            <div class="principle-card fade-in"><h3>Преодоление</h3><p>Рост происходит за пределами зоны комфорта. Каждая тренировка — это возможность стать сильнее, чем вчера.</p></div>
+        </div>
     </main>
 
-    <!-- Аудиоплееры, которые будут управляться скриптом -->
-    <audio id="audio-song1" loop src="./song1.mp3"></audio>
-    <audio id="audio-song2" loop src="./song2.mp3"></audio>
-    <audio id="audio-song3" loop src="./song3.mp3"></audio>
-    <audio id="audio-song4" loop src="./song4.mp3"></audio>
-    <audio id="audio-song5" loop src="./song5.mp3"></audio>
+    <section class="quote-section audio-section" data-audio="song3">
+        <div class="quote-container fade-in">
+            <div class="quote-image"><img src="/images.jpg" alt="Henry Cavill"></div>
+            <div class="quote-text-content"><blockquote>"If you like her, ask her out. It always works for me."</blockquote><cite>— Henry Cavill</cite></div>
+        </div>
+    </section>
 
-    <!-- Подключение файла JavaScript -->
+    <section class="media-section audio-section" data-audio="song4">
+        <div class="media-container fade-in">
+            <div class="media-text"><h2>Центр Внимания</h2><p>Иногда один взгляд говорит больше, чем тысяча слов. Этот момент — не просто реакция, это отражение ауры, которую создают дисциплина и уверенность.</p></div>
+            <div class="media-mockup"><video autoplay loop muted playsinline src="tiktok_reaction.mp4"></video></div>
+        </div>
+    </section>
+
+    <section class="legacy-section audio-section" data-audio="song5">
+        <div class="legacy-sticky-container">
+            <div class="legacy-video-container">
+                <video class="legacy-video mos" loop muted playsinline src="scene-mos.mp4"></video>
+                <video class="legacy-video bvs" loop muted playsinline src="scene-bvs.mp4"></video>
+                <video class="legacy-video zsjl" loop muted playsinline src="scene-zsjl.mp4"></video>
+                <div class="vignette-bar left"></div>
+                <div class="vignette-bar right"></div>
+            </div>
+            <div class="legacy-overlay"></div>
+            <div class="legacy-content-wrapper mos"><div class="legacy-content"><h2>Человек из стали</h2><p>Рождение надежды в мире, который его боится.</p></div></div>
+            <div class="legacy-content-wrapper bvs"><div class="legacy-content"><h2>Бэтмен против Супермена</h2><p>Битва богов, которая ставит под сомнение саму суть героизма.</p></div></div>
+            <div class="legacy-content-wrapper zsjl"><div class="legacy-content"><h2>Лига Справедливости</h2><p>Воскрешение символа и объединение семи для спасения всего сущего.</p></div></div>
+        </div>
+    </section>
+
+    <!-- Аудиоплееры -->
+    <audio id="audio-song1" loop src="song1.mp3"></audio>
+    <audio id="audio-song2" loop src="song2.mp3"></audio>
+    <audio id="audio-song3" loop src="song3.mp3"></audio>
+    <audio id="audio-song4" loop src="song4.mp3"></audio>
+    <audio id="audio-song5" loop src="song5.mp3"></audio>
+
     <script src="script.js"></script>
 </body>
 </html>
