@@ -21,14 +21,14 @@
         <h2 class="fade-in">Три Принципа Силы</h2>
         <div class="principles-grid">
             <div class="principle-card fade-in"><h3>Дисциплина</h3><p>Фундамент, на котором строятся все достижения. Это решение делать то, что нужно, даже когда этого не хочется.</p></div>
-            <div class="principle-card fade-in"><h3>Последовательность</h3><p>Маленькие, но регулярные усилия со временем превращаются в монументальные результаты. Ключ не в интенсивности, а в постоянстве.</p></div>
+            <div class="principle-card fade-in"><h3>Постоянство</h3><p>Маленькие, но регулярные усилия со временем превращаются в монументальные результаты. Ключ не в интенсивности, а в постоянстве.</p></div>
             <div class="principle-card fade-in"><h3>Преодоление</h3><p>Рост происходит за пределами зоны комфорта. Каждая тренировка — это возможность стать сильнее, чем вчера.</p></div>
         </div>
     </main>
 
     <section class="quote-section audio-section" data-audio="song3">
         <div class="quote-container fade-in">
-            <div class="quote-image"><img src="/images.jpg" alt="Henry Cavill"></div>
+            <div class="quote-image"><img src="images.jpg" alt="Henry Cavill"></div>
             <div class="quote-text-content"><blockquote>"If you like her, ask her out. It always works for me."</blockquote><cite>— Henry Cavill</cite></div>
         </div>
     </section>
@@ -62,6 +62,15 @@
     <audio id="audio-song3" loop src="song3.mp3"></audio>
     <audio id="audio-song4" loop src="song4.mp3"></audio>
     <audio id="audio-song5" loop src="song5.mp3"></audio>
+
+    <!-- Модальное окно для включения аудио -->
+    <div id="audio-modal-overlay">
+        <div id="audio-modal">
+            <h2>Звуковое сопровождение</h2>
+            <p>Этот сайт использует фоновую музыку для полного погружения. Включить звук?</p>
+            <button id="enable-audio-btn">Да, включить</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
