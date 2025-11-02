@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baitur Raimjanov - Developer Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts: Cormorant Garamond (Serif) & Inter (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- 1. HERO SECTION (ULTRA-MODULE INTERFACE STYLE) -->
+    <section id="hero" class="hero-section">
+        
+        <!-- Background Layer: Subtle noise/texture -->
+        <div class="background-texture" data-depth="0.1"></div> 
+        
+        <!-- Large Parallax Text (Furthest layer) -->
+        <h1 class="parallax-text" data-depth="0.3">CODE</h1>
+
+        <!-- 1.1. Fixed Top Nav/Search Bar -->
+        <!-- <header class="navbar">
+            <nav class="nav-interface-panel" data-depth="1.5">
+                <div class="nav-links">
+                    <a href="#about">About me</a>
+                    <a href="#resume">Resume</a>
+                    <a href="#contact" class="btn-contact">Get in touch!</a>
+                </div>
+            </nav>
+        </header> -->
+
+        <div class="main-content-area">
+            
+            <!-- Left Panel (Data Layer 2.0) -->
+            <div class="data-panel left-float" data-depth="2.0">
+                <h1 class="card-title">BAITUR</h1>
+                <h2 class="card-subtitle">RAIMJANOV</h2>
+                <p class="card-role">Web Developer, Mentor, Tech Enthusiast</p>
+            </div>
+            
+            <!-- Central Image (Layer 3.0 - Closest to camera) -->
+            <img src="your-photo.png" alt="Baitur Raimjanov" class="central-image" data-depth="3.0">
+            
+
+            <!-- Floating Right Navigation Menu (Layer 1.8) -->
+            <div class="nav-menu right-float" data-depth="1.8">
+                <a href="#about"><i class="fas fa-user"></i> Profile</a>
+                <a href="#resume"><i class="fas fa-file-alt"></i> Resume</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Message</a>
+                <a href="#"><i class="fas fa-camera"></i> Gallery</a>
+            </div>
+
+            <!-- Quote/Action Card (Layer 2.5) -->
+            <div class="quote-card bottom-float" data-depth="2.5">
+                <p class="quote-text">
+                    "I approach design problems in a rational and pragmatic way, seeking the simplest and most functional solutions possible."
+                </p>
+                <div class="action-buttons">
+                    <button class="quote-action-btn">SEEN BAITUR'S POSTS</button>
+                </div>
+            </div>
+
+            <!-- DATA CARD 1 (Age) -->
+            <div class="data-card data-age" data-depth="3.5">
+                 <p class="data-label">Age</p>
+                 <p class="data-value">17 th</p>
+            </div>
+
+            <!-- DATA CARD 2 (Height/Date) -->
+            <div class="data-card data-height" data-depth="3.2">
+                 <p class="data-label">Height</p>
+                 <p class="data-value">187 cm</p>
+            </div>
+
+            <!-- <div class="data-card data-birth" data-depth="3.2">
+                 <p class="data-label">Birthday</p>
+                 <p class="data-value">December 31</p>
+            </div> -->
+
+
+            <!-- Action Links Module (Layer 2.2) -->
+            <div class="action-links-module" data-depth="2.2">
+                <div class="bottom-links">
+                    <a href="https://github.com/skrblv" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                 </div>
+                 <!-- <a href="#about" class="next-page-btn">NEXT PAGE <i class="fas fa-chevron-right"></i></a> -->
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- 2. ABOUT ME & CONTACT (LUXURY INTERFACE) -->
+    <section id="about" class="about-section">
+        <!-- Decorative background element for visual break -->
+        <div class="decorative-grid-overlay"></div>
+        
+        <!-- Wavy Transition ::before is here implicitly -->
+
+        <!-- NEW WRAPPER FOR OVERFLOW CONTROL -->
+        <div class="about-content-wrapper"> 
+            
+            <!-- Decorative Scroll-Driven Elements (Blood Bubbles) - MOVED INSIDE WRAPPER -->
+            <!-- data-scroll-speed определяет, насколько быстро они будут падать при прокрутке -->
+            <div class="scroll-visual-asset bubble-1" data-scroll-speed="0.5" style="left: 15%; top: -80px;"></div>
+            <div class="scroll-visual-asset bubble-2" data-scroll-speed="0.8" style="right: 10%; top: -50px;"></div>
+            <div class="scroll-visual-asset bubble-3" data-scroll-speed="0.3" style="left: 50%; top: 400px;"></div>
+
+            <div class="container-grid about-complex-grid">
+                
+                <!-- LEFT COLUMN: Bio and Key Metrics Module -->
+                <div class="bio-wrapper">
+                    <h1 class="bio-heading">
+                        <span class="serif-title">PROFILE</span>
+                        Self-Taught & Driven.
+                    </h1>
+                    <p class="bio-main-text">I’m a 17-year-old self-taught web developer passionate about technology, design, and education. I’ve participated in 15+ hackathons, mentored dozens of students at Codify, and I’m currently preparing to study Computer Science in Korea.</p>
+                    
+                    <!-- New Key Metrics Module - Structured Data Log -->
+                    <div class="key-metrics">
+                        <h3>[ PRIMARY METRICS LOG ]</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-value">15+</span>
+                                <span class="metric-label">Hackathons Attended</span>
+                            </div>
+                             <div class="metric-item">
+                                <span class="metric-value">50+</span>
+                                <span class="metric-label">Students Mentored</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">KOREA</span>
+                                <span class="metric-label">Future Study Destination</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://github.com/skrblv" target="_blank" class="link-btn github-large-btn">
+                        <i class="fab fa-github"></i> View Active Development
+                    </a>
+                </div>
+
+                <!-- RIGHT COLUMN: Contact Card (Stylized Sticky Module) -->
+                <div class="contact-card contact-revamped">
+                    <h3 class="contact-title">
+                        <i class="fas fa-code-branch"></i> CONTACT INTERFACE
+                    </h3>
+                    
+                    <div class="contact-group"><i class="fas fa-map-marker-alt"></i><p>Bishkek, Kyrgyzstan</p></div>
+                    <div class="contact-group"><i class="fas fa-envelope"></i><p>baiturraimjanov@gmail.com</p></div>
+                    <div class="contact-group"><i class="fab fa-telegram-plane"></i><p>@baiturdev</p></div>
+                    
+                    <hr class="contact-divider">
+
+                    <div class="languages-small">
+                        <h4>Primary Communication Protocols:</h4>
+                        <span>Kyrgyz (Native)</span>
+                        <span>Russian (Fluent)</span>
+                        <span>English (Intermediate)</span>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End about-content-wrapper -->
+    </section>
+
+    <!-- 3. RESUME (DARK BLOCK) -->
+    <section id="resume" class="resume-section">
+        <h1 class="parallax-text resume-bg-text">RESUME</h1>
+        <div class="resume-content container-grid">
+            <div class="resume-block education-block reveal-element">
+                <h2>Education</h2>
+                <div class="timeline-item"><span class="year">2023–Present</span><p class="title">Bishkek College of Computer Systems & Technologies</p><p class="details">Web Development Major</p></div>
+                <div class="timeline-item"><span class="year">2021–2023</span><p class="title">Self-Education & Mastery</p><p class="details">Intensive focus on React, TypeScript, and Django REST Framework.</p></div>
+            </div>
+            <div class="resume-block experience-block reveal-element">
+                <h2>Experience</h2>
+                <div class="timeline-item"><span class="year">2025</span><p class="title">Mentor – Codify</p><p class="details">Taught foundational web development (HTML/CSS) to 50+ students.</p></div>
+                <div class="timeline-item"><span class="year">2025</span><p class="title">Support Intern – Telepilot</p><p class="details">Managed user requests and improved service communication flows.</p></div>
+                <div class="tag-group"><span>#Leadership</span><span>#Mentoring</span><span>#ProblemSolving</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SKILLS & HOBBIES (COMPLEX LIGHT SECTION) -->
+    <section id="skills-hobbies" class="skills-hobbies-section">
+        <div class="container-grid">
+            <div class="skills-wrapper">
+                <h2>Technical Skills</h2>
+                <div class="skill-group coding-skills"><h3>Core Technologies</h3><div class="skill-tags"><span>React</span><span>TypeScript</span><span>Python</span><span>JavaScript</span></div></div>
+                <div class="skill-group backend-db"><h3>Backend & Data</h3><div class="skill-tags"><span>Django REST Framework</span><span>PostgreSQL</span><span>REST APIs</span></div></div>
+                <div class="skill-group tools-workflow"><h3>Tools & Workflow</h3><div class="skill-tags"><span>Git & CI/CD</span><span>Figma</span><span>WebSockets</span></div></div>
+            </div>
+            <div class="interests-card">
+                <h2>Interests & Focus</h2>
+                <div class="hobby-list">
+                    <p>Full-Stack Architecture</p>
+                    <p>Volleyball & Gym Training</p>
+                    <p>Music Production (Komuz)</p>
+                    <p>Competitive Coding</p>
+                </div>
+                <div class="soft-skills-block">
+                    <h3>Soft Skills</h3>
+                    <div class="tag-group"><span>Mentoring</span><span>Communication</span><span>Leadership</span><span>Problem Solving</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. CONTACT CTA -->
+    <section id="contact" class="cta-section">
+        <h2>Ready for a challenge?</h2>
+        <p>I thrive on innovation. Let's build something truly impactful.</p>
+        <a href="mailto:baiturraimjanov@gmail.com" class="btn-large">Get in Touch</a>
+    </section>
+    
+    <!-- 6. MUSIC PLAYER -->
+    <div id="music-player" class="music-player closed">
+        <div class="vinyl-icon" title="Toggle Player">
+             <i class="fas fa-compact-disc"></i>
+        </div>
+        
+        <div class="controls-panel">
+            <p class="track-info">Now Playing: <span id="current-track-name">Loading...</span></p>
+            <div class="controls">
+                <button id="prev-btn"><i class="fas fa-backward"></i></button>
+                <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+                <button id="next-btn"><i class="fas fa-forward"></i></button>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-low"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.3">
+                <i class="fas fa-volume-high"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
