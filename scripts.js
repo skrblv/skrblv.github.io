@@ -154,10 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // IMPORTANT: Make sure these paths point to your files in /assets/music/
     const tracks = [
-        { name: "Neon Lights (Synthwave)", src: "assets/music/track1.mp3" },
-        { name: "Deep Focus (Lo-Fi)", src: "assets/music/track2.mp3" },
-        { name: "Code Flow (Ambient)", src: "assets/music/track3.mp3" },
-        { name: "Kybernetica (Electronic)", src: "assets/music/track4.mp3" },
+        { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" },
+        { name: "The Way I Are", src: "assets/music/track3.mp3" },
+        { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
+        { name: "Ecstasy", src: "assets/music/track4.mp3" },
         { name: "Digital Nomad (Beat)", src: "assets/music/track5.mp3" }
     ];
 
