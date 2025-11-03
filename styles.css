@@ -117,7 +117,78 @@ h1, h2, h3 {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
+/* ====================================== */
+/* GLOBAL KEYFRAMES (ДРЕЙФ)               */
+/* ====================================== */
 
+/* НОВЫЕ АНИМАЦИИ ДРЕЙФА */
+@keyframes drift-fg-v {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-5px, 20px, 0); } /* Небольшой сдвиг по X, основной по Y */
+}
+
+/* Дрейф для заднего плана (Более медленное и тонкое движение) */
+@keyframes drift-bg-v {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(3px, -8px, 0); } /* Очень медленное и противоположное движение */
+}
+
+
+/* НОВЫЙ КЛАСС ДЛЯ ДРЕЙФА */
+[data-depth].drifting {
+    transition: transform 2s ease-in-out !important; 
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; /* Это заставляет их двигаться туда-обратно */
+}
+
+/* ИНДИВИДУАЛЬНАЯ НАСТРОЙКА СКОРОСТИ И ЗАДЕРЖКИ ДЛЯ НЕЗАВИСИМОСТИ */
+
+/* 1. Фон (CODE, Depth 0.3) - Самый медленный, использует BG keyframe */
+[data-depth="0.3"].drifting { 
+    animation-name: drift-bg-v;
+    animation-duration: 10s; /* Очень медленно */
+    animation-delay: 0s;
+}
+
+/* 2. Средний план / Модули (Depth 1.8 - 2.5) */
+[data-depth="1.8"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 5.5s; 
+    animation-delay: 0.5s; 
+}
+[data-depth="2.0"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 6.5s; 
+    animation-delay: 1.2s; 
+}
+[data-depth="2.2"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 4.8s; 
+    animation-delay: 0.2s;
+}
+[data-depth="2.5"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 7s; 
+    animation-delay: 1.5s;
+}
+
+/* 3. Передний план (Image и Data Cards) - Самый быстрый */
+[data-depth="3.0"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 3.5s; 
+    animation-delay: 0.8s;
+}
+[data-depth="3.2"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 4s; 
+    animation-delay: 0s;
+}
+[data-depth="3.5"].drifting { 
+    animation-name: drift-fg-v;
+    animation-duration: 4.5s; 
+    animation-delay: 1s;
+}
 /* ====================================== */
 /* 1. HERO SECTION (Interface Style)      */
 /* ====================================== */
@@ -149,7 +220,6 @@ h1, h2, h3 {
     position: absolute;
     top: 0; 
     left: 0; 
-    transform: translate(-50%, -50%); 
     font-size: 35vw; 
     color: rgba(244, 227, 178, 0.08); 
     line-height: 0.8;
@@ -164,7 +234,6 @@ h1, h2, h3 {
     position: absolute;
     top: 18%; 
     left: 25%; 
-    transform: translate(-50%, -50%);
     z-index: 20;
     width: 580px; 
     height: 630px;
@@ -182,7 +251,6 @@ h1, h2, h3 {
 .data-panel, .nav-menu, .quote-card, .action-links-module, .data-card {
     position: absolute;
     z-index: 30;
-    /* Clean, translucent, dark background */
     background: var(--color-module-bg); 
     backdrop-filter: blur(8px);
     border: 1px solid var(--color-detail-line);
@@ -225,7 +293,7 @@ h1, h2, h3 {
 .nav-menu {
     top: 15%; 
     right: 5%; 
-    width: 220px; 
+    width: 220px; /* Ширина для текста и иконки */
     padding: 15px; 
     border: 1px solid var(--color-accent-strong); 
     box-shadow: 0 0 20px rgba(229, 57, 53, 0.4); 
@@ -235,6 +303,7 @@ h1, h2, h3 {
 }
 
 .nav-menu a {
+    /* Desktop: Display text and icon */
     display: flex;
     align-items: center;
     padding: 10px 10px;
@@ -261,6 +330,11 @@ h1, h2, h3 {
 }
 .nav-menu a:hover i {
     color: var(--color-bg); 
+}
+
+/* На рабочем столе текст виден */
+.nav-menu a .nav-text {
+    display: block; 
 }
 
 /* Quote Card (Depth 2.5) */
@@ -364,7 +438,7 @@ h1, h2, h3 {
     padding-top: 150px; 
     background: var(--color-accent-soft); 
     color: var(--color-text-dark); 
-    position: relative; /* ВАЖНО для absolute пузырьков и волны */
+    position: relative; 
     z-index: 16; 
 }
 
@@ -373,7 +447,7 @@ h1, h2, h3 {
     position: relative;
     height: 100%;
     width: 100%;
-    overflow: hidden; /* <-- ОБРЕЗАЕМ ПУЗЫРЬКИ ЗДЕСЬ */
+    overflow: hidden; 
 }
 
 
@@ -385,7 +459,7 @@ h1, h2, h3 {
     left: 0;
     width: 100%;
     height: 150px; 
-    z-index: 17; /* Выше Hero (10) */
+    z-index: 17; 
     pointer-events: none;
     
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,80 C200,160 400,0 600,80 C800,160 1000,0 1000,0 L1000,150 L0,150 Z' fill='%23F4E3B2' /%3E%3C/svg%3E") repeat-x;
@@ -417,12 +491,12 @@ h1, h2, h3 {
     background: var(--color-blood);
     opacity: 0.6;
     filter: blur(8px); 
-    z-index: 2; /* ЗАДВИГАЕМ ЗА ТЕКСТ */
+    z-index: 2; 
     transition: transform 0.1s linear; 
     box-shadow: 0 0 40px rgba(139, 0, 0, 0.8); 
 }
 
-/* КОНФИГУРАЦИЯ ПУЗЫРЬКОВ ПО ЗАПРОСУ */
+/* КОНФИГУРАЦИЯ ПУЗЫРЬКОВ */
 .bubble-1 {
     width: 250px; 
     height: 250px;
@@ -455,7 +529,7 @@ h1, h2, h3 {
     grid-template-columns: 2.5fr 1fr; 
     align-items: start;
     position: relative;
-    z-index: 5; /* ВАЖНО: z-index контента выше, чем у пузырьков (2) */
+    z-index: 5; 
 }
 
 /* --- Animation on Load for Main Wrapper --- */
@@ -473,7 +547,7 @@ h1, h2, h3 {
     line-height: 1;
     font-family: var(--font-serif);
     font-weight: 700;
-    border-bottom: 5px solid var(--color-accent-strong); /* Heavy accent line */
+    border-bottom: 5px solid var(--color-accent-strong); 
     padding-bottom: 10px;
     margin-bottom: 40px;
 }
@@ -503,7 +577,7 @@ h1, h2, h3 {
 }
 .github-large-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px var(--color-accent-strong); /* Add subtle glow on hover */
+    box-shadow: 0 0 15px var(--color-accent-strong); 
 }
 
 
@@ -511,18 +585,16 @@ h1, h2, h3 {
 .key-metrics {
     margin-top: 60px;
     padding: 25px;
-    background: var(--color-text-light); /* Invert color scheme for contrast */
+    background: var(--color-text-light); 
     border: 3px solid var(--color-text-dark); 
-    box-shadow: 8px 8px 0 var(--color-accent-strong); /* Stamped/heavy shadow effect */
+    box-shadow: 8px 8px 0 var(--color-accent-strong); 
     transition: all 0.3s;
     
-    /* Animation on Load */
     animation: fadeInUp 0.8s ease-out 0.4s forwards;
     opacity: 0;
 }
 
 .key-metrics:hover {
-    /* Slight lift and rotate on hover for module focus */
     transform: translate(-3px, -3px); 
     box-shadow: 12px 12px 0 var(--color-accent-strong);
 }
@@ -558,12 +630,11 @@ h1, h2, h3 {
     font-size: 2.8em;
     font-family: var(--font-serif);
     font-weight: 700;
-    color: var(--color-text-dark); /* Dark value on light background */
+    color: var(--color-text-dark); 
     display: block;
     line-height: 1;
     margin-bottom: 3px;
     
-    /* Subtle text shadow for "engraved" effect */
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); 
 }
 .metric-label {
@@ -588,7 +659,6 @@ h1, h2, h3 {
     position: sticky;
     top: 50px; 
     
-    /* Apply a continuous pulse/glow animation */
     animation: pulseAccent 4s infinite ease-in-out, fadeInUp 0.8s ease-out 0.6s forwards;
     opacity: 0;
 }
@@ -597,7 +667,7 @@ h1, h2, h3 {
     color: var(--color-accent-soft);
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--color-accent-strong); /* Heavy accent line */
+    border-bottom: 2px solid var(--color-accent-strong); 
     font-family: var(--font-sans);
     font-weight: 800;
     font-size: 1.3em;
@@ -617,7 +687,7 @@ h1, h2, h3 {
     transition: transform 0.2s;
 }
 .contact-group:hover i {
-    transform: scale(1.2) rotate(-5deg); /* Micro interaction on hover */
+    transform: scale(1.2) rotate(-5deg); 
     color: var(--color-accent-soft);
 }
 
@@ -914,27 +984,26 @@ h1, h2, h3 {
 /* ====================================== */
 
 @media (max-width: 1250px) {
-    /* On smaller desktops, allow content to scale down dynamically, 
-       but preserve the absolute positioning effect until small mobile break. 
-       Crucially: we stop the complex parallax on screens where it might break
-       the layout by pushing content offscreen. */
+    /* На средних экранах отключаем плавность параллакса,
+       чтобы избежать странных переходов при изменении размера окна */
     .data-panel, .nav-menu, .quote-card, .data-card, .action-links-module, .central-image {
-        /* Only disable parallax movement, keep original absolute coordinates */
         transition: none !important; 
-        transform: none !important; 
+        /* Оставляем transform, чтобы анимация дрейфа работала */
+        /* transform: none !important; */ 
     }
 }
 
 
 @media (max-width: 900px) {
-    /* Stack About section elements earlier than 768px for a better look */
+    
+    /* About section improvements */
     .about-complex-grid {
         grid-template-columns: 1fr; 
     }
     
     .key-metrics {
         margin-top: 40px;
-        box-shadow: 5px 5px 0 var(--color-accent-strong); /* Reduce shadow size on mobile */
+        box-shadow: 5px 5px 0 var(--color-accent-strong); 
     }
     
     .metrics-grid {
@@ -942,24 +1011,23 @@ h1, h2, h3 {
     }
 
     .contact-revamped {
-        position: relative; /* Disable sticky on mobile */
+        position: relative; /* Отключаем sticky */
         top: initial;
     }
     
     .contact-card {
-        animation: none; /* Disable continuous animation on mobile for performance */
-        opacity: 1; /* Ensure visibility */
+        animation: none; 
+        opacity: 1; 
     }
     
-    /* Disable bubbles on smaller screens */
-    .scroll-visual-asset {
-        display: none !important;
-    }
+    /* SCROLL BUBBLES: Оставляем их, но делаем поменьше, чтобы не перегружать */
+    .bubble-1 { width: 150px; height: 150px; }
+    .bubble-2 { width: 80px; height: 80px; }
+    .bubble-3 { width: 60px; height: 60px; }
 }
 
 
 @media (max-width: 768px) {
-    /* Full mobile stacking for small screens */
     
     :root {
         --padding-section: 60px 5%;
@@ -970,77 +1038,212 @@ h1, h2, h3 {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-
-    /* Hero section must switch to flow layout */
-    .hero-section {
-        min-height: auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
-    .main-content-area {
-        position: relative; 
-        height: auto;
-        width: 100%;
-        transform: none;
-        left: 0;
-        margin: 0 auto;
-        padding: 0 5%;
-    }
     
-    /* Collapse absolute elements into vertical, centered stack */
-    .data-panel, .nav-menu, .quote-card, .data-card, .action-links-module, .central-image {
-        position: relative;
-        left: initial;
-        right: initial;
-        top: initial;
-        bottom: initial;
-        margin: 20px auto;
-        transform: none !important; 
-        width: 100%; 
-        max-width: 400px; 
-    }
-    
-    .central-image {
-        width: 90%;
-        max-width: 400px;
-        height: auto;
-        display: block;
-        margin: 30px auto;
-        mix-blend-mode: normal; /* Cleaner look on mobile */
-    }
-    
-    .parallax-text {
-        font-size: 20vw;
-        top: 50px; 
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    /* Hide the small floating data cards, they clutter mobile */
-    .data-card {
-        display: none;
-    }
-    
-    /* Disable bubbles on mobile to prevent performance issues */
-    .scroll-visual-asset {
-        display: none !important;
-    }
-
     .bio-heading {
         font-size: 3em;
     }
+
+    /* ------------------------------------------- */
+    /* HERO SECTION REDESIGN (Mobile Interface) - Сохраняем абсолюты! */
+    /* ------------------------------------------- */
+
+    .hero-section {
+        min-height: 80vh; /* Уменьшаем общую высоту */
+        padding-top: 0;
+        padding-bottom: 0;
+    }
     
+    /* Фоновый текст */
+    .parallax-text {
+        font-size: 25vw; /* Увеличиваем, чтобы лучше выглядел */
+        top: 5%; 
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute; /* Возвращаем absolute */
+        opacity: 0.15;
+    }
+    
+    /* Main Content Area: Теперь это просто контейнер, привязанный к центру */
+    .main-content-area {
+        position: absolute; 
+        width: 90%; 
+        max-width: 500px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        padding: 0; 
+    }
+    
+    /* ОБЩИЕ ПРАВИЛА ДЛЯ МОДУЛЕЙ НА МОБИЛЬНОМ */
+    .data-panel, .nav-menu, .quote-card, .action-links-module, .data-card, .central-image {
+        /* Все они остаются absolute, но используют процентные размеры и меньшие отступы */
+        margin: 0 !important; 
+        width: auto;
+        padding: 15px; 
+    }
+    
+    /* 1. Центральное изображение (Central Image) */
+    .central-image {
+        top: 25%; 
+        left: 0; 
+        /* width: 70%; Уменьшаем размер */
+        height: 70%;
+        width: 100%;
+        transform: translate(-50%, 0);
+        opacity: 1; /* Убираем hard-light, делаем ярче */
+        mix-blend-mode: normal; 
+        border-width: 2px;
+    }
+    
+    /* 2. Data Panel (Имя) - Сверху слева */
+    .data-panel {
+        top: 13%; 
+        left: 2%; 
+        width: 45%; 
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(229, 57, 53, 0.4); 
+    }
+    .card-title {
+        font-size: 1.8em; 
+        letter-spacing: 2px;
+    }
+    .card-subtitle {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .card-role {
+        font-size: 0.7em; /* Уменьшаем до минимума */
+        letter-spacing: 1px;
+    }
+
+    /* 3. Nav Menu (Навигация) - Сверху справа (ИКОНКИ ONLY) */
+    .nav-menu {
+        top: 8%; 
+        right: 5%;
+        display: grid;
+        grid-template-columns: 50px 50px;
+
+        width: 120px; /* Уменьшенная ширина для режима только иконок */
+        padding: 8px; /* Уменьшаем паддинг контейнера */
+        align-items: center; 
+        box-shadow: 0 0 5px rgba(229, 57, 53, 0.2); 
+    }
+    
+    /* Скрываем текст */
+    .nav-menu a .nav-text {
+        display: none; 
+    }
+
+    .nav-menu a {
+        padding: 8px 0; /* Оптимизируем вертикальный паддинг */
+        margin: 4px 0;
+        width: 100%;
+        justify-content: center; /* Центрируем иконку */
+        font-size: 1.2em; /* Базовый размер шрифта для контроля размера иконки */
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a:active {
+        background-color: var(--color-accent-strong); 
+        padding-left: 8px; /* Сброс анимации отступа */
+        color: var(--color-bg);
+    }
+
+    .nav-menu a i {
+        /* Делаем иконку крупнее и убираем горизонтальный отступ */
+        font-size: 1.5em; /* Делаем иконку заметной */
+        margin-right: 0; 
+        width: auto;
+        color: var(--color-accent-strong); 
+    }
+    
+    .nav-menu a:hover i,
+    .nav-menu a:active i {
+        color: var(--color-bg); 
+    }
+
+
+    /* 4. Quote Card (Цитата) - Внизу справа */
+    .quote-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        bottom: 18%; 
+        right: 1%; 
+        width: 45%;
+        padding: 15px;
+    }
+    .quote-text {
+        font-size: 0;
+        margin-bottom: 10px;
+    }
+    .quote-action-btn {
+        padding: 5px 10px;
+        font-size: 0.7em;
+    }
+    
+    /* 5. Data Cards (Возраст/Рост) */
+    .data-age {
+        display: block; /* Показываем Age */
+        top: 65%; 
+        left: 10%;
+        width: 80px;
+        height: 80px;
+        padding: 5px;
+    }
+    .data-height {
+        display: block; /* Показываем Height */
+        bottom: 50%;
+        left: 70%;
+        width: 80px;
+        height: 80px;
+        padding: 5px;
+    }
+    .data-card .data-value {
+        font-size: 1.5em;
+    }
+    
+    /* 6. Action Links Module (Соц. сети) - Внизу слева */
+    .action-links-module {
+        bottom: 10%; 
+        left: 5%;
+        width: 45%; 
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+    .bottom-links a {
+        font-size: 1.2em;
+        margin-inline: 5px;
+    }
+
+
+    /* About Section */
     .about-section::before {
         height: 100px; 
+        transform: translateY(-98%);
     }
     
-    .cta-section h2 {
-        font-size: 2.5em;
+    /* Bubbles: Снова включаем их, т.к. они адаптированы выше */
+    .scroll-visual-asset {
+        display: block !important;
     }
-    .btn-large {
-        font-size: 1.1em;
-        padding: 15px 30px;
+
+    /* Метрики */
+    .metrics-grid {
+        /* Принудительный перенос на две строки на очень маленьких экранах */
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .metric-item {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        padding-bottom: 10px;
+    }
+    .metric-item:last-child {
+        border-bottom: none;
     }
     
     .music-player {

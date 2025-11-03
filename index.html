@@ -15,13 +15,13 @@
     <!-- 1. HERO SECTION (ULTRA-MODULE INTERFACE STYLE) -->
     <section id="hero" class="hero-section">
         
-        <!-- Background Layer: Subtle noise/texture -->
-        <div class="background-texture" data-depth="0.1"></div> 
+        <!-- Background Layer: Subtle noise/texture (Depth 0.5 - Moves slightly with cursor) -->
+        <div class="background-texture" data-depth="0.5"></div> 
         
-        <!-- Large Parallax Text (Furthest layer) -->
-        <h1 class="parallax-text" data-depth="0.3">CODE</h1>
+        <!-- Large Parallax Text (Furthest layer, Depth 0.1 - Moves slowly with cursor) -->
+        <h1 class="parallax-text" data-depth="0.1">CODE</h1>
 
-        <!-- 1.1. Fixed Top Nav/Search Bar -->
+        <!-- 1.1. Fixed Top Nav/Search Bar (Disabled, but kept as a comment) -->
         <!-- <header class="navbar">
             <nav class="nav-interface-panel" data-depth="1.5">
                 <div class="nav-links">
@@ -34,27 +34,47 @@
 
         <div class="main-content-area">
             
-            <!-- Left Panel (Data Layer 2.0) -->
-            <div class="data-panel left-float" data-depth="2.0">
+            <!-- Left Panel (Data Layer, Depth 1.5 - Moves against cursor) -->
+            <div class="data-panel left-float" data-depth="1.5">
                 <h1 class="card-title">BAITUR</h1>
                 <h2 class="card-subtitle">RAIMJANOV</h2>
                 <p class="card-role">Web Developer, Mentor, Tech Enthusiast</p>
             </div>
             
-            <!-- Central Image (Layer 3.0 - Closest to camera) -->
-            <img src="your-photo.png" alt="Baitur Raimjanov" class="central-image" data-depth="3.0">
+            <!-- Central Image (Layer 2.5 - Strong opposing movement) -->
+            <img src="your-photo.png" alt="Baitur Raimjanov" class="central-image" data-depth="2.5">
             
 
-            <!-- Floating Right Navigation Menu (Layer 1.8) -->
-            <div class="nav-menu right-float" data-depth="1.8">
-                <a href="#about"><i class="fas fa-user"></i> Profile</a>
-                <a href="#resume"><i class="fas fa-file-alt"></i> Resume</a>
-                <a href="#contact"><i class="fas fa-envelope"></i> Message</a>
-                <a href="#"><i class="fas fa-camera"></i> Gallery</a>
+            <!-- Floating Right Navigation Menu (Layer 1.2 - Gentle opposing movement) -->
+            <div class="nav-menu right-float" data-depth="1.2">
+                <div class="link">
+                    <a href="#about">
+                        <i class="fas fa-user"></i>
+                        <span class="nav-text"> Profile</span>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="#resume">
+                        <i class="fas fa-file-alt"></i> 
+                        <span class="nav-text">Resume</span>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="#contact">
+                        <i class="fas fa-envelope"></i>
+                        <span class="nav-text"> Message</span>
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="#">
+                        <i class="fas fa-camera"></i>
+                        <span class="nav-text"> Gallery</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Quote/Action Card (Layer 2.5) -->
-            <div class="quote-card bottom-float" data-depth="2.5">
+            <!-- Quote/Action Card (Layer 1.4 - Moderate opposing movement) -->
+            <div class="quote-card bottom-float" data-depth="1.4">
                 <p class="quote-text">
                     "I approach design problems in a rational and pragmatic way, seeking the simplest and most functional solutions possible."
                 </p>
@@ -63,30 +83,24 @@
                 </div>
             </div>
 
-            <!-- DATA CARD 1 (Age) -->
+            <!-- DATA CARD 1 (Age) (Depth 3.5 - Closest element, strongest opposing movement) -->
             <div class="data-card data-age" data-depth="3.5">
                  <p class="data-label">Age</p>
                  <p class="data-value">17 th</p>
             </div>
 
-            <!-- DATA CARD 2 (Height/Date) -->
-            <div class="data-card data-height" data-depth="3.2">
+            <!-- DATA CARD 2 (Height/Date) (Depth 3.0 - Very close element) -->
+            <div class="data-card data-height" data-depth="3.0">
                  <p class="data-label">Height</p>
                  <p class="data-value">187 cm</p>
             </div>
 
-            <!-- <div class="data-card data-birth" data-depth="3.2">
-                 <p class="data-label">Birthday</p>
-                 <p class="data-value">December 31</p>
-            </div> -->
-
-
-            <!-- Action Links Module (Layer 2.2) -->
-            <div class="action-links-module" data-depth="2.2">
+            <!-- Action Links Module (Layer 1.8 - Slightly further in front of other modules) -->
+            <div class="action-links-module" data-depth="1.8">
                 <div class="bottom-links">
                     <a href="https://github.com/skrblv" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://t.me/yshkg"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="https://www.instagram.com/raimzhanovba?igsh=ZnVnMm1waWo4bmYw"><i class="fab fa-instagram"></i></a>
                  </div>
                  <!-- <a href="#about" class="next-page-btn">NEXT PAGE <i class="fas fa-chevron-right"></i></a> -->
             </div>
@@ -151,8 +165,8 @@
                     </h3>
                     
                     <div class="contact-group"><i class="fas fa-map-marker-alt"></i><p>Bishkek, Kyrgyzstan</p></div>
-                    <div class="contact-group"><i class="fas fa-envelope"></i><p>baiturraimjanov@gmail.com</p></div>
-                    <div class="contact-group"><i class="fab fa-telegram-plane"></i><p>@baiturdev</p></div>
+                    <div class="contact-group"><i class="fas fa-envelope"></i><p>raimjanovbaitur77@gmail.com</p></div>
+                    <div class="contact-group"><i class="fab fa-telegram-plane"></i><p>@yshkg</p></div>
                     
                     <hr class="contact-divider">
 
@@ -173,8 +187,8 @@
         <div class="resume-content container-grid">
             <div class="resume-block education-block reveal-element">
                 <h2>Education</h2>
-                <div class="timeline-item"><span class="year">2023–Present</span><p class="title">Bishkek College of Computer Systems & Technologies</p><p class="details">Web Development Major</p></div>
-                <div class="timeline-item"><span class="year">2021–2023</span><p class="title">Self-Education & Mastery</p><p class="details">Intensive focus on React, TypeScript, and Django REST Framework.</p></div>
+                <div class="timeline-item"><span class="year">2023–2026</span><p class="title">Bishkek College of Computer Systems & Technologies</p><p class="details">Web Development Major</p></div>
+                <div class="timeline-item"><span class="year">2023–Present</span><p class="title">Self-Education & Mastery</p><p class="details">Intensive focus on React, TypeScript, and Django REST Framework.</p></div>
             </div>
             <div class="resume-block experience-block reveal-element">
                 <h2>Experience</h2>
@@ -199,7 +213,7 @@
                 <div class="hobby-list">
                     <p>Full-Stack Architecture</p>
                     <p>Volleyball & Gym Training</p>
-                    <p>Music Production (Komuz)</p>
+                    <p>Music Production (Komuz x Taiko)</p>
                     <p>Competitive Coding</p>
                 </div>
                 <div class="soft-skills-block">
@@ -214,7 +228,7 @@
     <section id="contact" class="cta-section">
         <h2>Ready for a challenge?</h2>
         <p>I thrive on innovation. Let's build something truly impactful.</p>
-        <a href="mailto:baiturraimjanov@gmail.com" class="btn-large">Get in Touch</a>
+        <a href="raimjanovbaitur77@gmail.com" class="btn-large">Get in Touch</a>
     </section>
     
     <!-- 6. MUSIC PLAYER -->

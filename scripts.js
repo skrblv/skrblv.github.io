@@ -1,17 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // ======================================
-    // 1. MOUSE PARALLAX EFFECT
+    // 1. MOUSE PARALLAX EFFECT & IDLE DRIFT (REVISED FOR DIFFERENTIAL DEPTH)
     // ======================================
 
     const heroSection = document.getElementById('hero');
     const parallaxItems = heroSection.querySelectorAll('[data-depth]');
     const heroArea = document.querySelector('.main-content-area'); 
+    let idleTimer; 
+
+    // --- Функция для проверки сенсорного устройства ---
+    const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // --- Функция: Запускает дрейф ---
+    function startIdleDrift() {
+        parallaxItems.forEach(item => {
+            // 1. Добавляем класс, который меняет transition и запускает CSS-анимацию
+            item.classList.add('drifting');
+            
+            // 2. Очищаем transform, заданный JS. 
+            // Это позволяет CSS-анимации (которая теперь имеет !important transition) взять контроль.
+            item.style.transform = ''; 
+        });
+    }
 
     function mouseParallax(e) {
-        // Проверяем, если мы на мобильном устройстве (где Parallax отключается через CSS),
-        // можно прекратить выполнение функции для оптимизации.
-        if (window.innerWidth <= 768) return; 
+        // --- ЛОГИКА: Отключаем mouseParallax, если это сенсорное устройство ---
+        if (isTouchDevice() && window.innerWidth <= 1024) return;
+        
+        // 1. Сбрасываем таймер при любом движении
+        clearTimeout(idleTimer);
+
+        // 2. Немедленно убираем класс дрейфа. 
+        parallaxItems.forEach(item => {
+            item.classList.remove('drifting');
+        });
+
+        // 3. Запускаем новый таймер. Если он сработает, запускаем дрейф.
+        // Задержка 200 мс — это стандартное время для определения "бездействия"
+        idleTimer = setTimeout(startIdleDrift, 200);
+        // ------------------------------------
 
         if (!heroArea) return;
         
@@ -19,21 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        // ИЗМЕНЕНИЕ: Увеличение чувствительности параллакса
+        // Чувствительность параллакса
         const offsetX = (e.clientX - centerX) / 50; 
         const offsetY = (e.clientY - centerY) / 50;
         
         parallaxItems.forEach(item => {
             const depth = parseFloat(item.getAttribute('data-depth'));
             
-            const moveX = offsetX * depth * -1;
-            const moveY = offsetY * depth * -1;
-            
+            // ===============================================
+            // ЛОГИКА ДИФФЕРЕНЦИАЛЬНОГО ПАРАЛЛАКСА (Depth 1.0 = 0 движение)
+            const relativeDepthFactor = depth - 1.0;
+
+            const moveX = offsetX * relativeDepthFactor * -1;
+            const moveY = offsetY * relativeDepthFactor * -1;
+            // ===============================================
+
+            // 4. JS-transform немедленно применяется (с transition 0.1s, определенным в CSS)
             item.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
         });
     }
 
-    window.addEventListener('mousemove', mouseParallax);
+    // Включаем слушатель только для не-тач устройств
+    if (!isTouchDevice()) {
+        window.addEventListener('mousemove', mouseParallax);
+    }
+    
+    // Запускаем дрейф при первоначальной загрузке страницы
+    startIdleDrift();
 
 
     // ======================================
@@ -44,22 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutSection = document.getElementById('about');
 
     function updateScrollVisuals() {
-        // Отключаем на мобильных устройствах
-        if (window.innerWidth <= 768) return;
         
-        // Текущее положение прокрутки всего окна
         const scrollY = window.pageYOffset; 
-        
-        // Вертикальная позиция начала секции #about относительно верха документа
         const sectionTop = aboutSection.offsetTop;
-        
-        // Насколько пользователь прокрутил, начиная с момента, когда секция #about началась.
         const scrollRelative = scrollY - sectionTop;
         
         visualAssets.forEach(asset => {
             const speed = parseFloat(asset.getAttribute('data-scroll-speed'));
             
-            // Расчет вертикального смещения
             let movement = scrollRelative * speed; 
             
             asset.style.transform = `translateY(${movement}px)`;
