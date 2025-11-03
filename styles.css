@@ -1051,6 +1051,7 @@ h1, h2, h3 {
         min-height: 80vh; /* Уменьшаем общую высоту */
         padding-top: 0;
         padding-bottom: 0;
+        margin-bottom: 0;
     }
     
     /* Фоновый текст */
@@ -1088,12 +1089,14 @@ h1, h2, h3 {
         top: 25%; 
         left: 0; 
         /* width: 70%; Уменьшаем размер */
-        height: 70%;
+        height: 85%;
         width: 100%;
         transform: translate(-50%, 0);
         opacity: 1; /* Убираем hard-light, делаем ярче */
         mix-blend-mode: normal; 
         border-width: 2px;
+        border: none;
+        box-shadow: none;
     }
     
     /* 2. Data Panel (Имя) - Сверху слева */
