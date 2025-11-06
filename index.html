@@ -6,7 +6,7 @@
     <title>Baitur Raimjanov - Developer Interface</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Fonts: Cormorant Garamond (Serif) & Inter (Sans) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -78,9 +78,9 @@
                 <p class="quote-text">
                     "I approach design problems in a rational and pragmatic way, seeking the simplest and most functional solutions possible."
                 </p>
-                <div class="action-buttons">
+                <!-- <div class="action-buttons">
                     <button class="quote-action-btn">SEEN BAITUR'S POSTS</button>
-                </div>
+                </div> -->
             </div>
 
             <!-- DATA CARD 1 (Age) (Depth 3.5 - Closest element, strongest opposing movement) -->
@@ -224,14 +224,49 @@
         </div>
     </section>
     
-    <!-- 5. CONTACT CTA -->
+    <!-- 5. SHARDS SECTION - НОВАЯ СЕКЦИЯ -->
+    <section id="shards-section">
+        <div class="shards-intro">
+            <h2>My works</h2>
+            <!-- Higher than all. Better than all -->
+            <p>Above the rest. Beyond the best.</p>
+        </div>
+
+        <div id="scene-container">
+            <!-- Весь ваш контент сцены -->
+            <div id="flickering-particles-container"></div>
+            <div class="particles" id="particles-back" data-depth="0.2"></div>
+            <div class="particles" id="particles-mid" data-depth="0.5"></div>
+            <a href="#" class="shard" id="shard-1" data-depth="0.6">
+                <div class="shard-ui"><div class="shard-icon">1</div><span class="shard-title">DevProof</span></div>
+            </a>
+            <a href="#" class="shard" id="shard-2" data-depth="0.8">
+                <div class="shard-ui"><div class="shard-icon">2</div><span class="shard-title">Triple Date</span></div>
+            </a>
+            <a href="#" class="shard" id="shard-3" data-depth="1.0">
+                <div class="shard-ui"><div class="shard-icon">6</div><span class="shard-title"><br>Others</span></div>
+            </a>
+            <a href="#" class="shard" id="shard-4" data-depth="0.4" >
+                <div class="shard-ui"><div class="shard-icon" style="position: absolute; right: -20px; top: -50px;">4</div><span class="shard-title" style="position: absolute; right: -50px;"><br>BSCpetition</span></div>
+            </a>
+            <a href="#" class="shard" id="shard-5" data-depth="0.9">
+                <div class="shard-ui"><div class="shard-icon">3</div><span class="shard-title">ClearSkies</span></div>
+            </a>
+            <a href="https://comtehno.kg/" class="shard" id="shard-6" data-depth="0.5">
+                <div class="shard-ui"><div class="shard-icon">5</div><span class="shard-title">Comtehno website</span></div>
+            </a>
+            <div class="particles" id="particles-front" data-depth="0.9"></div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACT CTA -->
     <section id="contact" class="cta-section">
         <h2>Ready for a challenge?</h2>
         <p>I thrive on innovation. Let's build something truly impactful.</p>
-        <a href="raimjanovbaitur77@gmail.com" class="btn-large">Get in Touch</a>
+        <a href="mailto:raimjanovbaitur77@gmail.com" class="btn-large">Get in Touch</a>
     </section>
     
-    <!-- 6. MUSIC PLAYER -->
+    <!-- 7. MUSIC PLAYER -->
     <div id="music-player" class="music-player closed">
         <div class="vinyl-icon" title="Toggle Player">
              <i class="fas fa-compact-disc"></i>

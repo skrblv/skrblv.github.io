@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Запускаем дрейф при первоначальной загрузке страницы
-    startIdleDrift();
+setTimeout(startIdleDrift, 100); // 100 миллисекунд (0.1с) более чем достаточно
 
 
     // ======================================
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutSection = document.getElementById('about');
 
     function updateScrollVisuals() {
-        
+        if (!aboutSection) return;
         const scrollY = window.pageYOffset; 
         const sectionTop = aboutSection.offsetTop;
         const scrollRelative = scrollY - sectionTop;
@@ -133,9 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
@@ -152,13 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeSlider = document.getElementById('volume-slider');
     const trackNameElement = document.getElementById('current-track-name');
     
-    // IMPORTANT: Make sure these paths point to your files in /assets/music/
     const tracks = [
         { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" },
         { name: "The Way I Are", src: "assets/music/track3.mp3" },
         { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
         { name: "Ecstasy", src: "assets/music/track4.mp3" },
-        { name: "Digital Nomad (Beat)", src: "assets/music/track5.mp3" }
+        { name: "Lovers Rock", src: "assets/music/track5.mp3" }
     ];
 
     let currentTrackIndex = 0;
@@ -269,4 +271,93 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial setup: Load the first track and attempt to play
     loadTrack(currentTrackIndex);
     playTrack(); 
+
+
+    // ======================================
+    // 4. SHARDS SECTION LOGIC (НОВЫЙ КОД)
+    // ======================================
+
+    const sceneContainer = document.getElementById('scene-container');
+
+    // Выполняем код для осколков, только если их секция существует на странице
+    if (sceneContainer) {
+        const shards = document.querySelectorAll('.shard');
+
+        function startBreathing() {
+            shards.forEach(shard => {
+                const depth = parseFloat(shard.getAttribute('data-depth')) || 0;
+                const baseTransform = `translateZ(${depth * 40}px)`;
+                
+                shard.style.setProperty('--base-transform', baseTransform);
+                shard.classList.add('is-breathing');
+            });
+        }
+
+        function gaussianRandom(mean = 0, stdev = 1) {
+            let u = 1 - Math.random();
+            let v = Math.random();
+            let z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+            return z * stdev + mean;
+        }
+
+        function createFlickeringParticles() {
+            const container = document.getElementById('flickering-particles-container');
+            if (!container) return;
+
+            const particleCount = 150; 
+            const centerX = 1400 / 2;
+            const centerY = 900 / 2;
+            const standardDeviation = centerX / 2.5;
+            const movementStrength = 0.1; 
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'flickering-particle';
+                const size = Math.random() * 2 + 0.5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                const x = gaussianRandom(centerX, standardDeviation);
+                const y = gaussianRandom(centerY, standardDeviation);
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                const fullTargetX = centerX - x;
+                const fullTargetY = centerY - y;
+                const targetX = fullTargetX * movementStrength;
+                const targetY = fullTargetY * movementStrength;
+                particle.style.setProperty('--target-x', `${targetX}px`);
+                particle.style.setProperty('--target-y', `${targetY}px`);
+                const flickerDuration = Math.random() * 3 + 2;
+                const pullDuration = Math.random() * 10 + 10;
+                const delay = Math.random() * 10;
+                particle.style.animation = `
+                    flicker ${flickerDuration}s ${delay}s infinite linear,
+                    centerPull ${pullDuration}s ${delay}s infinite ease-in-out
+                `;
+                container.appendChild(particle);
+            }
+        }
+
+        // --- НАДЕЖНЫЙ КОД ДЛЯ АДАПТИВНОСТИ ОСКОЛКОВ ---
+        const designWidth = 1400;
+        const designHeight = 900;
+
+        function adjustScale() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            const scaleX = screenWidth / designWidth;
+            const scaleY = screenHeight / designHeight;
+
+            const scale = Math.min(scaleX, scaleY);
+            
+            document.documentElement.style.setProperty('--scene-scale', scale);
+        }
+
+        // Запускаем все функции для секции с осколками
+        startBreathing();
+        createFlickeringParticles();
+        adjustScale();
+        window.addEventListener('resize', adjustScale);
+    }
+    
 });
