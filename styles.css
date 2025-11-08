@@ -1,21 +1,15 @@
 :root {
-    /* Revised Palette for Cleaner Interface Look */
-    --color-bg: #310E10;             /* Black Bean (Primary Deep Background - subtle red hue) */
-    --color-module-bg: rgba(30, 30, 30, 0.85); /* Clean Dark Translucent BG for modules */
-    --color-accent-strong: #E53935;  /* Vibrant Red (Primary Accent/Interactive - improved contrast) */
-    --color-accent-soft: #F4E3B2;    /* Vanilla (Primary Light Text/Light BG) */
-    --color-blood: #8B0000;          /* Deep Crimson Red for bubbles */
-    
-    /* Secondary detail colors for lines and muted text */
-    --color-detail-line: #45462A;    
-    --color-detail-dim: #947268;     
-    
+    --color-bg: #310E10;
+    --color-module-bg: rgba(30, 30, 30, 0.85);
+    --color-accent-strong: #E53935;
+    --color-accent-soft: #F4E3B2;
+    --color-blood: #8B0000;
+    --color-detail-line: #45462A;
+    --color-detail-dim: #947268;
     --color-text-light: var(--color-accent-soft);
     --color-text-dark: var(--color-bg);
-    
-    --font-serif: 'Cormorant Garamond', serif; 
+    --font-serif: 'Cormorant Garamond', serif;
     --font-sans: 'Inter', sans-serif;
-    
     --padding-section: 100px 5%;
 }
 
@@ -30,8 +24,8 @@ body {
     line-height: 1.6;
     background: var(--color-bg);
     color: var(--color-text-light);
-    height: 100%; 
-    overflow-x: hidden; /* Prevent horizontal scroll due to parallax overflow */
+    height: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -53,18 +47,17 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
-/* Base Buttons */
 .btn-contact {
     background: var(--color-accent-strong);
-    color: var(--color-text-light); 
+    color: var(--color-text-light);
     padding: 8px 15px;
     border-radius: 5px;
     font-weight: 600;
     transition: background 0.3s, color 0.3s;
     border: 1px solid var(--color-accent-strong);
 }
-.btn-contact:hover { 
-    background: transparent; 
+.btn-contact:hover {
+    background: transparent;
     color: var(--color-accent-strong);
 }
 
@@ -72,23 +65,18 @@ h1, h2, h3 {
     display: inline-flex;
     align-items: center;
     background: var(--color-accent-strong);
-    color: var(--color-text-light); 
+    color: var(--color-text-light);
     padding: 12px 25px;
     border-radius: 5px;
     margin-top: 25px;
     font-weight: 600;
     transition: background 0.3s;
 }
-.link-btn:hover { 
-    background: var(--color-bg); 
-    color: var(--color-text-light); 
+.link-btn:hover {
+    background: var(--color-bg);
+    color: var(--color-text-light);
 }
 .link-btn i { margin-right: 10px; font-size: 1.2em;}
-
-
-/* ====================================== */
-/* GLOBAL KEYFRAMES */
-/* ====================================== */
 
 @keyframes fadeInUp {
     from {
@@ -117,170 +105,148 @@ h1, h2, h3 {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-/* ====================================== */
-/* GLOBAL KEYFRAMES (ДРЕЙФ)               */
-/* ====================================== */
 
-/* НОВЫЕ АНИМАЦИИ ДРЕЙФА */
 @keyframes drift-fg-v {
   0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-5px, 20px, 0); } /* Небольшой сдвиг по X, основной по Y */
+  100% { transform: translate3d(-5px, 20px, 0); }
 }
 
-/* Дрейф для заднего плана (Более медленное и тонкое движение) */
 @keyframes drift-bg-v {
   0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(3px, -8px, 0); } /* Очень медленное и противоположное движение */
+  100% { transform: translate3d(3px, -8px, 0); }
 }
 
-
-/* НОВЫЙ КЛАСС ДЛЯ ДРЕЙФА */
 [data-depth].drifting {
-    transition: transform 2s ease-in-out !important; 
+    transition: transform 2s ease-in-out !important;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    animation-direction: alternate; /* Это заставляет их двигаться туда-обратно */
+    animation-direction: alternate;
 }
 
-/* ИНДИВИДУАЛЬНАЯ НАСТРОЙКА СКОРОСТИ И ЗАДЕРЖКИ ДЛЯ НЕЗАВИСИМОСТИ */
-
-/* 1. Фон (CODE, Depth 0.3) - Самый медленный, использует BG keyframe */
-[data-depth="0.3"].drifting { 
+[data-depth="0.3"].drifting {
     animation-name: drift-bg-v;
-    animation-duration: 10s; /* Очень медленно */
+    animation-duration: 10s;
     animation-delay: 0s;
 }
 
-/* 2. Средний план / Модули (Depth 1.8 - 2.5) */
-[data-depth="1.8"].drifting { 
+[data-depth="1.8"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 5.5s; 
-    animation-delay: 0.5s; 
+    animation-duration: 5.5s;
+    animation-delay: 0.5s;
 }
-[data-depth="2.0"].drifting { 
+[data-depth="2.0"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 6.5s; 
-    animation-delay: 1.2s; 
+    animation-duration: 6.5s;
+    animation-delay: 1.2s;
 }
-[data-depth="2.2"].drifting { 
+[data-depth="2.2"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 4.8s; 
+    animation-duration: 4.8s;
     animation-delay: 0.2s;
 }
-[data-depth="2.5"].drifting { 
+[data-depth="2.5"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 7s; 
+    animation-duration: 7s;
     animation-delay: 1.5s;
 }
 
-/* 3. Передний план (Image и Data Cards) - Самый быстрый */
-[data-depth="3.0"].drifting { 
+[data-depth="3.0"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 3.5s; 
+    animation-duration: 3.5s;
     animation-delay: 0.8s;
 }
-[data-depth="3.2"].drifting { 
+[data-depth="3.2"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 4s; 
+    animation-duration: 4s;
     animation-delay: 0s;
 }
-[data-depth="3.5"].drifting { 
+[data-depth="3.5"].drifting {
     animation-name: drift-fg-v;
-    animation-duration: 4.5s; 
+    animation-duration: 4.5s;
     animation-delay: 1s;
 }
-/* ====================================== */
-/* 1. HERO SECTION (Interface Style)      */
-/* ====================================== */
 
 .hero-section {
-    min-height: 100vh; 
+    min-height: 100vh;
     background-color: var(--color-bg);
-    padding: 0; 
-    padding-bottom: 50px; 
+    padding: 0;
+    padding-bottom: 50px;
     position: relative;
     overflow: hidden;
     z-index: 10;
-    perspective: 1000px; 
+    perspective: 1000px;
     margin-bottom: 80px;
 }
 
-/* Main Content Area (Reference point for absolute items) */
 .main-content-area {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 1200px; 
+    width: 1200px;
     height: 100%;
     transform: translateX(-50%);
 }
 
-/* Background Parallax Text - CODE (Depth 0.3) */
 .parallax-text {
     position: absolute;
-    top: 0; 
-    left: 0; 
-    font-size: 35vw; 
-    color: rgba(244, 227, 178, 0.08); 
+    top: 0;
+    left: 0;
+    font-size: 35vw;
+    color: rgba(244, 227, 178, 0.08);
     line-height: 0.8;
     z-index: -5;
-    text-shadow: 0 0 30px rgba(229, 57, 53, 0.2); 
+    text-shadow: 0 0 30px rgba(229, 57, 53, 0.2);
     font-family: var(--font-serif);
-    transition: transform 0.1s linear; 
+    transition: transform 0.1s linear;
 }
 
-/* Central Image and Frame (Depth 3.0) */
 .central-image {
     position: absolute;
-    top: 18%; 
-    left: 25%; 
+    top: 18%;
+    left: 25%;
     z-index: 20;
-    width: 580px; 
+    width: 580px;
     height: 630px;
     object-fit: cover;
-    
-    mix-blend-mode: hard-light; 
+    mix-blend-mode: hard-light;
     opacity: 0.9;
     border: 3px solid var(--color-accent-strong);
-    box-shadow: 0 0 50px rgba(229, 57, 53, 0.6); 
-    transition: transform 0.1s linear; 
+    box-shadow: 0 0 50px rgba(229, 57, 53, 0.6);
+    transition: transform 0.1s linear;
 }
 
-
-/* Floating Modules (General Style) */
 .data-panel, .nav-menu, .quote-card, .action-links-module, .data-card {
     position: absolute;
     z-index: 30;
-    background: var(--color-module-bg); 
+    background: var(--color-module-bg);
     backdrop-filter: blur(8px);
     border: 1px solid var(--color-detail-line);
     border-radius: 5px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
-    transition: transform 0.1s linear; 
+    transition: transform 0.1s linear;
 }
 
-/* Data Panel (Depth 2.0) */
 .data-panel {
-    top: 10%; 
-    left: 5%; 
+    top: 10%;
+    left: 5%;
     width: 320px;
     padding: 25px;
     border: 2px solid var(--color-accent-strong);
-    box-shadow: 0 0 15px rgba(229, 57, 53, 0.5); 
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.5);
 }
 .card-title {
     font-size: 3.5em;
     line-height: 0.9;
-    color: var(--color-accent-soft); 
+    color: var(--color-accent-soft);
     letter-spacing: 5px;
     text-shadow: 0 0 8px var(--color-accent-strong);
     margin-bottom: 5px;
 }
 .card-subtitle {
-    font-size: 1.8em; 
+    font-size: 1.8em;
     font-family: var(--font-sans);
     font-weight: 800;
-    color: var(--color-accent-strong); 
+    color: var(--color-accent-strong);
     margin-bottom: 20px;
 }
 .card-role {
@@ -289,26 +255,24 @@ h1, h2, h3 {
     letter-spacing: 2px;
 }
 
-/* Nav Menu (Depth 1.8) */
 .nav-menu {
-    top: 15%; 
-    right: 5%; 
-    width: 220px; /* Ширина для текста и иконки */
-    padding: 15px; 
-    border: 1px solid var(--color-accent-strong); 
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.4); 
+    top: 15%;
+    right: 5%;
+    width: 220px;
+    padding: 15px;
+    border: 1px solid var(--color-accent-strong);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);
     display: flex;
     flex-direction: column;
-    z-index: 40; 
+    z-index: 40;
 }
 
 .nav-menu a {
-    /* Desktop: Display text and icon */
     display: flex;
     align-items: center;
     padding: 10px 10px;
     margin: 2px 0;
-    color: var(--color-accent-soft); 
+    color: var(--color-accent-soft);
     font-weight: 600;
     font-size: 0.95em;
     border-radius: 3px;
@@ -316,31 +280,29 @@ h1, h2, h3 {
 }
 
 .nav-menu a:hover {
-    background-color: var(--color-accent-strong); 
-    color: var(--color-bg); 
-    padding-left: 15px; 
+    background-color: var(--color-accent-strong);
+    color: var(--color-bg);
+    padding-left: 15px;
 }
 
 .nav-menu a i {
-    color: var(--color-accent-strong); 
+    color: var(--color-accent-strong);
     margin-right: 10px;
     width: 20px;
     text-align: center;
     transition: color 0.2s;
 }
 .nav-menu a:hover i {
-    color: var(--color-bg); 
+    color: var(--color-bg);
 }
 
-/* На рабочем столе текст виден */
 .nav-menu a .nav-text {
-    display: block; 
+    display: block;
 }
 
-/* Quote Card (Depth 2.5) */
 .quote-card {
-    bottom: 10%; 
-    right: 5%; 
+    bottom: 10%;
+    right: 5%;
     width: 350px;
     padding: 20px;
     background: var(--color-module-bg);
@@ -368,19 +330,18 @@ h1, h2, h3 {
     color: var(--color-accent-strong);
 }
 
-/* Data Cards (Age/Height - Depth 3.2 / 3.5) */
 .data-card {
     width: 100px;
     height: 100px;
     text-align: center;
-    background: var(--color-bg); 
+    background: var(--color-bg);
     color: var(--color-text-light);
     padding: 10px 5px;
-    border: 2px solid var(--color-accent-strong); 
+    border: 2px solid var(--color-accent-strong);
     border-radius: 5px;
 }
 .data-age {
-    top: 60%; 
+    top: 60%;
     left: 33%;
     z-index: 30;
     transform: rotate(-5deg);
@@ -403,10 +364,8 @@ h1, h2, h3 {
     color: var(--color-accent-strong);
 }
 
-
-/* Action Links Module (Depth 2.2) */
 .action-links-module {
-    bottom: 5%; 
+    bottom: 5%;
     left: 35%;
     width: 165px;
     display: flex;
@@ -414,8 +373,8 @@ h1, h2, h3 {
     align-items: center;
     padding: 10px 20px;
     background: var(--color-module-bg);
-    border: 1px solid var(--color-accent-strong); 
-    border-radius: 50px; 
+    border: 1px solid var(--color-accent-strong);
+    border-radius: 50px;
 }
 
 .bottom-links a {
@@ -428,47 +387,36 @@ h1, h2, h3 {
     color: var(--color-accent-strong);
 }
 
-
-/* -------------------------------------- */
-/* 2. ABOUT ME & CONTACT (LUXURY INTERFACE)*/
-/* -------------------------------------- */
-
 .about-section {
     padding: var(--padding-section);
-    padding-top: 150px; 
-    background: var(--color-accent-soft); 
-    color: var(--color-text-dark); 
-    position: relative; 
-    z-index: 16; 
+    padding-top: 150px;
+    background: var(--color-accent-soft);
+    color: var(--color-text-dark);
+    position: relative;
+    z-index: 16;
 }
 
-/* NEW WRAPPER: Limits visibility of bubbles */
 .about-content-wrapper {
     position: relative;
     height: 100%;
     width: 100%;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
-
-/* Wavy Transition from dark Hero to light About */
 .about-section::before {
     content: '';
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
     width: 100%;
-    height: 150px; 
-    z-index: 17; 
+    height: 150px;
+    z-index: 17;
     pointer-events: none;
-    
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,80 C200,160 400,0 600,80 C800,160 1000,0 1000,0 L1000,150 L0,150 Z' fill='%23F4E3B2' /%3E%3C/svg%3E") repeat-x;
     background-size: 100% 100%;
-
-    transform: translateY(-100%); 
+    transform: translateY(-100%);
 }
 
-/* Decorative grid pattern behind the content for texture */
 .decorative-grid-overlay {
     position: absolute;
     top: 0;
@@ -477,38 +425,35 @@ h1, h2, h3 {
     height: 100%;
     opacity: 0.1;
     z-index: 1;
-    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px), 
+    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px),
                       linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px);
     background-size: 20px 20px;
     pointer-events: none;
 }
 
-
-/* --- SCROLL-DRIVEN VISUAL ASSETS (BUBBLES) --- */
 .scroll-visual-asset {
-    position: absolute; 
+    position: absolute;
     border-radius: 50%;
     background: var(--color-blood);
     opacity: 0.6;
-    filter: blur(8px); 
-    z-index: 2; 
-    transition: transform 0.1s linear; 
-    box-shadow: 0 0 40px rgba(139, 0, 0, 0.8); 
+    filter: blur(8px);
+    z-index: 2;
+    transition: transform 0.1s linear;
+    box-shadow: 0 0 40px rgba(139, 0, 0, 0.8);
 }
 
-/* КОНФИГУРАЦИЯ ПУЗЫРЬКОВ */
 .bubble-1 {
-    width: 250px; 
+    width: 250px;
     height: 250px;
-    left: 15%; 
-    top: -80px; 
+    left: 15%;
+    top: -80px;
 }
 
 .bubble-2 {
     width: 120px;
     height: 120px;
-    right: 10%; 
-    top: -50px; 
+    right: 10%;
+    top: -50px;
     opacity: 0.4;
     filter: blur(10px);
 }
@@ -516,38 +461,32 @@ h1, h2, h3 {
 .bubble-3 {
     width: 100px;
     height: 100px;
-    left: 50%; 
+    left: 50%;
     top: 400px;
     opacity: 0.8;
     filter: blur(5px);
 }
-/* ------------------------------------------- */
 
-
-/* Custom asymmetrical grid for About section */
 .about-complex-grid {
-    grid-template-columns: 2.5fr 1fr; 
+    grid-template-columns: 2.5fr 1fr;
     align-items: start;
     position: relative;
-    z-index: 5; 
+    z-index: 5;
 }
 
-/* --- Animation on Load for Main Wrapper --- */
 .bio-wrapper {
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
     opacity: 0;
 }
 
-
-/* Bio Content Styling */
 .bio-heading {
-    font-size: 5em; 
-    color: var(--color-text-dark); 
+    font-size: 5em;
+    color: var(--color-text-dark);
     margin-bottom: 20px;
     line-height: 1;
     font-family: var(--font-serif);
     font-weight: 700;
-    border-bottom: 5px solid var(--color-accent-strong); 
+    border-bottom: 5px solid var(--color-accent-strong);
     padding-bottom: 10px;
     margin-bottom: 40px;
 }
@@ -577,25 +516,22 @@ h1, h2, h3 {
 }
 .github-large-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px var(--color-accent-strong); 
+    box-shadow: 0 0 15px var(--color-accent-strong);
 }
 
-
-/* Key Metrics Module (Data Panel Look) */
 .key-metrics {
     margin-top: 60px;
     padding: 25px;
-    background: var(--color-text-light); 
-    border: 3px solid var(--color-text-dark); 
-    box-shadow: 8px 8px 0 var(--color-accent-strong); 
+    background: var(--color-text-light);
+    border: 3px solid var(--color-text-dark);
+    box-shadow: 8px 8px 0 var(--color-accent-strong);
     transition: all 0.3s;
-    
     animation: fadeInUp 0.8s ease-out 0.4s forwards;
     opacity: 0;
 }
 
 .key-metrics:hover {
-    transform: translate(-3px, -3px); 
+    transform: translate(-3px, -3px);
     box-shadow: 12px 12px 0 var(--color-accent-strong);
 }
 
@@ -630,35 +566,31 @@ h1, h2, h3 {
     font-size: 2.8em;
     font-family: var(--font-serif);
     font-weight: 700;
-    color: var(--color-text-dark); 
+    color: var(--color-text-dark);
     display: block;
     line-height: 1;
     margin-bottom: 3px;
-    
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5); 
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 .metric-label {
     display: block;
-    font-size: 0.8em;
-    font-weight: 400;
-    color: var(--color-detail-dim); 
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--color-detail-dim);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-
-/* Contact Card (Sticky Module) */
 .contact-card {
-    background: var(--color-bg); 
+    background: var(--color-bg);
     color: var(--color-text-light);
     padding: 30px;
     height: fit-content;
-    border: 2px solid var(--color-accent-strong); 
+    border: 2px solid var(--color-accent-strong);
     font-size: 1.05em;
-    border-radius: 0; 
+    border-radius: 0;
     position: sticky;
-    top: 50px; 
-    
+    top: 50px;
     animation: pulseAccent 4s infinite ease-in-out, fadeInUp 0.8s ease-out 0.6s forwards;
     opacity: 0;
 }
@@ -667,7 +599,7 @@ h1, h2, h3 {
     color: var(--color-accent-soft);
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--color-accent-strong); 
+    border-bottom: 2px solid var(--color-accent-strong);
     font-family: var(--font-sans);
     font-weight: 800;
     font-size: 1.3em;
@@ -687,15 +619,13 @@ h1, h2, h3 {
     transition: transform 0.2s;
 }
 .contact-group:hover i {
-    transform: scale(1.2) rotate(-5deg); 
+    transform: scale(1.2) rotate(-5deg);
     color: var(--color-accent-soft);
 }
 
-
-/* 3. RESUME SECTION (Dark Block) */
 .resume-section {
     padding: var(--padding-section);
-    background: var(--color-bg); 
+    background: var(--color-bg);
     color: var(--color-text-light);
     position: relative;
     overflow: hidden;
@@ -703,7 +633,7 @@ h1, h2, h3 {
 
 .resume-bg-text {
     font-size: 15vw;
-    color: rgba(244, 227, 178, 0.08); 
+    color: rgba(244, 227, 178, 0.08);
 }
 
 .resume-content {
@@ -717,7 +647,7 @@ h1, h2, h3 {
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     transform: translateY(30px);
     border: 1px solid var(--color-detail-line);
-    background: rgba(0, 0, 0, 0.1); 
+    background: rgba(0, 0, 0, 0.1);
 }
 .resume-block.visible {
     opacity: 1;
@@ -727,23 +657,22 @@ h1, h2, h3 {
 .resume-block h2 {
     font-size: 2.5em;
     margin-bottom: 30px;
-    color: var(--color-accent-strong); 
-    border-bottom: 1px solid var(--color-detail-line); 
+    color: var(--color-accent-strong);
+    border-bottom: 1px solid var(--color-detail-line);
     padding-bottom: 10px;
 }
 
-/* Timeline Styling */
 .timeline-item {
     margin-bottom: 30px;
     padding-left: 30px;
-    border-left: 2px dashed var(--color-detail-line); 
+    border-left: 2px dashed var(--color-detail-line);
     position: relative;
 }
 
 .timeline-item::before {
-    content: '▶'; 
+    content: '▶';
     position: absolute;
-    left: -12px; 
+    left: -12px;
     top: 0;
     font-size: 1em;
     color: var(--color-accent-strong);
@@ -758,22 +687,20 @@ h1, h2, h3 {
 
 .tag-group span {
     display: inline-block;
-    background: var(--color-detail-line); 
+    background: var(--color-detail-line);
     color: var(--color-text-light);
     padding: 5px 12px;
-    border-radius: 50px; 
+    border-radius: 50px;
     margin-top: 20px;
     margin-right: 8px;
     font-size: 0.8em;
     font-weight: 700;
 }
 
-
-/* 4. SKILLS & HOBBIES (COMPLEX LIGHT SECTION) */
 .skills-hobbies-section {
     padding: var(--padding-section);
-    background: var(--color-accent-soft); 
-    color: var(--color-text-dark); 
+    background: var(--color-accent-soft);
+    color: var(--color-text-dark);
 }
 .skills-wrapper h2 {
     color: var(--color-text-dark);
@@ -788,14 +715,14 @@ h1, h2, h3 {
     font-family: var(--font-sans);
     font-weight: 800;
     font-size: 1.2em;
-    color: var(--color-accent-strong); 
+    color: var(--color-accent-strong);
     margin-bottom: 15px;
 }
 
 .skill-tags span {
     display: inline-block;
-    background: var(--color-detail-dim); 
-    color: var(--color-text-dark); 
+    background: var(--color-detail-dim);
+    color: var(--color-text-dark);
     padding: 10px 18px;
     border-radius: 5px;
     margin: 6px 6px 6px 0;
@@ -806,17 +733,17 @@ h1, h2, h3 {
 }
 .skill-tags span:hover {
     background: var(--color-accent-strong);
-    color: var(--color-text-light); 
+    color: var(--color-text-light);
 }
 
 .interests-card {
-    background: var(--color-bg); 
+    background: var(--color-bg);
     color: var(--color-text-light);
     padding: 30px;
     border-radius: 5px;
 }
 .interests-card h2 {
-    color: var(--color-accent-strong); 
+    color: var(--color-accent-strong);
     margin-bottom: 20px;
 }
 
@@ -824,7 +751,7 @@ h1, h2, h3 {
     font-size: 1.1em;
     margin-bottom: 15px;
     padding-left: 15px;
-    border-left: 4px solid var(--color-accent-strong); 
+    border-left: 4px solid var(--color-accent-strong);
     color: var(--color-text-light);
 }
 
@@ -841,15 +768,13 @@ h1, h2, h3 {
 }
 .soft-skills-block .tag-group span {
     background: var(--color-accent-strong);
-    color: var(--color-bg); 
+    color: var(--color-bg);
     border-radius: 50px;
     padding: 8px 15px;
     margin: 5px 8px 5px 0;
     font-size: 0.9em;
 }
 
-
-/* 5. CTA & 6. MUSIC PLAYER */
 .cta-section {
     text-align: center;
     padding: 100px 5%;
@@ -864,7 +789,7 @@ h1, h2, h3 {
 .btn-large {
     display: inline-block;
     background: var(--color-accent-strong);
-    color: var(--color-text-light); 
+    color: var(--color-text-light);
     padding: 18px 40px;
     border-radius: 8px;
     font-size: 1.3em;
@@ -873,19 +798,17 @@ h1, h2, h3 {
     border: 2px solid var(--color-accent-strong);
     transition: background 0.3s, color 0.3s;
 }
-.btn-large:hover { 
-    background: var(--color-bg); 
-    color: var(--color-accent-strong); 
+.btn-large:hover {
+    background: var(--color-bg);
+    color: var(--color-accent-strong);
 }
 
-
-/* Player Styles */
 .music-player {
     position: fixed;
-    bottom: 30px; 
+    bottom: 30px;
     right: 30px;
     z-index: 1000;
-    display: block; 
+    display: block;
 }
 
 .vinyl-icon {
@@ -911,14 +834,13 @@ h1, h2, h3 {
 .controls-panel {
     position: absolute;
     bottom: 0;
-    right: 80px; 
-    background: var(--color-module-bg); 
+    right: 80px;
+    background: var(--color-module-bg);
     color: var(--color-text-light);
     border: 1px solid var(--color-accent-strong);
     padding: 15px;
     border-radius: 10px;
     width: 250px;
-    
     transform-origin: bottom right;
     transform: scale(0);
     opacity: 0;
@@ -978,32 +900,21 @@ h1, h2, h3 {
     border: none;
 }
 
-
-/* ====================================== */
-/* 7. RESPONSIVENESS (Mobile stacking only) */
-/* ====================================== */
-
 @media (max-width: 1250px) {
-    /* На средних экранах отключаем плавность параллакса,
-       чтобы избежать странных переходов при изменении размера окна */
     .data-panel, .nav-menu, .quote-card, .data-card, .action-links-module, .central-image {
-        transition: none !important; 
-        /* Оставляем transform, чтобы анимация дрейфа работала */
-        /* transform: none !important; */ 
+        transition: none !important;
     }
 }
 
 
 @media (max-width: 900px) {
-    
-    /* About section improvements */
     .about-complex-grid {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
     
     .key-metrics {
         margin-top: 40px;
-        box-shadow: 5px 5px 0 var(--color-accent-strong); 
+        box-shadow: 5px 5px 0 var(--color-accent-strong);
     }
     
     .metrics-grid {
@@ -1011,16 +922,15 @@ h1, h2, h3 {
     }
 
     .contact-revamped {
-        position: relative; /* Отключаем sticky */
+        position: relative;
         top: initial;
     }
     
     .contact-card {
-        animation: none; 
-        opacity: 1; 
+        animation: none;
+        opacity: 1;
     }
     
-    /* SCROLL BUBBLES: Оставляем их, но делаем поменьше, чтобы не перегружать */
     .bubble-1 { width: 150px; height: 150px; }
     .bubble-2 { width: 80px; height: 80px; }
     .bubble-3 { width: 60px; height: 60px; }
@@ -1028,12 +938,10 @@ h1, h2, h3 {
 
 
 @media (max-width: 768px) {
-    
     :root {
         --padding-section: 60px 5%;
     }
 
-    /* Grid stacking */
     .container-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1043,72 +951,61 @@ h1, h2, h3 {
         font-size: 3em;
     }
 
-    /* ------------------------------------------- */
-    /* HERO SECTION REDESIGN (Mobile Interface) - Сохраняем абсолюты! */
-    /* ------------------------------------------- */
-
     .hero-section {
-        min-height: 80vh; /* Уменьшаем общую высоту */
+        min-height: 80vh;
         padding-top: 0;
         padding-bottom: 0;
         margin-bottom: 0;
     }
     
-    /* Фоновый текст */
     .parallax-text {
-        font-size: 25vw; /* Увеличиваем, чтобы лучше выглядел */
-        top: 5%; 
+        font-size: 25vw;
+        top: 5%;
         left: 50%;
         transform: translateX(-50%);
-        position: absolute; /* Возвращаем absolute */
+        position: absolute;
         opacity: 0.15;
     }
     
-    /* Main Content Area: Теперь это просто контейнер, привязанный к центру */
     .main-content-area {
-        position: absolute; 
-        width: 90%; 
+        position: absolute;
+        width: 90%;
         max-width: 500px;
         height: 100%;
         left: 50%;
         top: 0;
         transform: translateX(-50%);
-        padding: 0; 
+        padding: 0;
     }
     
-    /* ОБЩИЕ ПРАВИЛА ДЛЯ МОДУЛЕЙ НА МОБИЛЬНОМ */
     .data-panel, .nav-menu, .quote-card, .action-links-module, .data-card, .central-image {
-        /* Все они остаются absolute, но используют процентные размеры и меньшие отступы */
-        margin: 0 !important; 
+        margin: 0 !important;
         width: auto;
-        padding: 15px; 
+        padding: 15px;
     }
     
-    /* 1. Центральное изображение (Central Image) */
     .central-image {
-        top: 25%; 
-        left: 0; 
-        /* width: 70%; Уменьшаем размер */
+        top: 25%;
+        left: 0;
         height: 85%;
         width: 100%;
         transform: translate(-50%, 0);
-        opacity: 1; /* Убираем hard-light, делаем ярче */
-        mix-blend-mode: normal; 
+        opacity: 1;
+        mix-blend-mode: normal;
         border-width: 2px;
         border: none;
         box-shadow: none;
     }
     
-    /* 2. Data Panel (Имя) - Сверху слева */
     .data-panel {
-        top: 13%; 
-        left: 2%; 
-        width: 45%; 
+        top: 13%;
+        left: 2%;
+        width: 45%;
         padding: 15px;
-        box-shadow: 0 0 10px rgba(229, 57, 53, 0.4); 
+        box-shadow: 0 0 10px rgba(229, 57, 53, 0.4);
     }
     .card-title {
-        font-size: 1.8em; 
+        font-size: 1.8em;
         letter-spacing: 2px;
     }
     .card-subtitle {
@@ -1116,65 +1013,59 @@ h1, h2, h3 {
         margin-bottom: 10px;
     }
     .card-role {
-        font-size: 0.7em; /* Уменьшаем до минимума */
+        font-size: 0.7em;
         letter-spacing: 1px;
     }
 
-    /* 3. Nav Menu (Навигация) - Сверху справа (ИКОНКИ ONLY) */
     .nav-menu {
-        top: 8%; 
+        top: 8%;
         right: 5%;
         display: grid;
         grid-template-columns: 50px 50px;
-
-        width: 120px; /* Уменьшенная ширина для режима только иконок */
-        padding: 8px; /* Уменьшаем паддинг контейнера */
-        align-items: center; 
-        box-shadow: 0 0 5px rgba(229, 57, 53, 0.2); 
+        width: 120px;
+        padding: 8px;
+        align-items: center;
+        box-shadow: 0 0 5px rgba(229, 57, 53, 0.2);
     }
     
-    /* Скрываем текст */
     .nav-menu a .nav-text {
-        display: none; 
+        display: none;
     }
 
     .nav-menu a {
-        padding: 8px 0; /* Оптимизируем вертикальный паддинг */
+        padding: 8px 0;
         margin: 4px 0;
         width: 100%;
-        justify-content: center; /* Центрируем иконку */
-        font-size: 1.2em; /* Базовый размер шрифта для контроля размера иконки */
+        justify-content: center;
+        font-size: 1.2em;
     }
 
     .nav-menu a:hover,
     .nav-menu a:active {
-        background-color: var(--color-accent-strong); 
-        padding-left: 8px; /* Сброс анимации отступа */
+        background-color: var(--color-accent-strong);
+        padding-left: 8px;
         color: var(--color-bg);
     }
 
     .nav-menu a i {
-        /* Делаем иконку крупнее и убираем горизонтальный отступ */
-        font-size: 1.5em; /* Делаем иконку заметной */
-        margin-right: 0; 
+        font-size: 1.5em;
+        margin-right: 0;
         width: auto;
-        color: var(--color-accent-strong); 
+        color: var(--color-accent-strong);
     }
     
     .nav-menu a:hover i,
     .nav-menu a:active i {
-        color: var(--color-bg); 
+        color: var(--color-bg);
     }
 
-
-    /* 4. Quote Card (Цитата) - Внизу справа */
     .quote-card {
         background: transparent;
         border: none;
         box-shadow: none;
         backdrop-filter: none;
-        bottom: 18%; 
-        right: 1%; 
+        bottom: 18%;
+        right: 1%;
         width: 45%;
         padding: 15px;
     }
@@ -1187,17 +1078,16 @@ h1, h2, h3 {
         font-size: 0.7em;
     }
     
-    /* 5. Data Cards (Возраст/Рост) */
     .data-age {
-        display: block; /* Показываем Age */
-        top: 65%; 
+        display: block;
+        top: 65%;
         left: 10%;
         width: 80px;
         height: 80px;
         padding: 5px;
     }
     .data-height {
-        display: block; /* Показываем Height */
+        display: block;
         bottom: 50%;
         left: 70%;
         width: 80px;
@@ -1208,11 +1098,10 @@ h1, h2, h3 {
         font-size: 1.5em;
     }
     
-    /* 6. Action Links Module (Соц. сети) - Внизу слева */
     .action-links-module {
-        bottom: 10%; 
+        bottom: 10%;
         left: 5%;
-        width: 45%; 
+        width: 45%;
         padding: 8px 15px;
         border-radius: 5px;
     }
@@ -1221,21 +1110,16 @@ h1, h2, h3 {
         margin-inline: 5px;
     }
 
-
-    /* About Section */
     .about-section::before {
-        height: 100px; 
+        height: 100px;
         transform: translateY(-98%);
     }
     
-    /* Bubbles: Снова включаем их, т.к. они адаптированы выше */
     .scroll-visual-asset {
         display: block !important;
     }
 
-    /* Метрики */
     .metrics-grid {
-        /* Принудительный перенос на две строки на очень маленьких экранах */
         grid-template-columns: 1fr 1fr;
         gap: 10px;
     }
@@ -1255,48 +1139,43 @@ h1, h2, h3 {
     }
     .controls-panel {
         width: 200px;
-        right: 70px; 
+        right: 70px;
     }
 }
-
-/* ====================================== */
-/* 8. SHARDS SECTION (НОВЫЕ СТИЛИ)        */
-/* ====================================== */
 
 #shards-section {
     position: relative;
     height: 100vh;
-    min-height: 950px; /* Гарантируем достаточно места для сцены */
-    /* background: #0c0a1d; */
+    min-height: 950px;
     color: #e0e6f0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Начинаем сверху */
+    justify-content: flex-start;
     align-items: center;
     padding-top: 100px;
     box-sizing: border-box;
 }
 @media (max-width: 768px) {
     #shards-section {
-        padding-top: 70px; /* Меньший отступ сверху на мобильных */
-        min-height: 650px; /* Меньшая минимальная высота */
-        height: auto; /* Позволяем высоте адаптироваться */
+        padding-top: 70px;
+        min-height: 650px;
+        height: auto;
     }
 }
 
 .shards-intro {
     text-align: center;
-    margin-bottom: -100px; /* Отрицательный отступ, чтобы сцена оказалась ближе к центру */
+    margin-bottom: -100px;
     position: relative;
-    z-index: 200; /* Убедимся, что текст поверх частиц */
-    color: #e0e6f0; /* Цвет текста из проекта с осколками */
+    z-index: 200;
+    color: #e0e6f0;
 }
 
 .shards-intro h2 {
-    font-size: 3.5em; /* Используем ваш стиль заголовков */
+    font-size: 3.5em;
     font-family: var(--font-serif);
-    color: var(--color-accent-soft); /* Яркий цвет для заголовка */
+    color: var(--color-accent-soft);
     margin-bottom: 20px;
 }
 
@@ -1307,26 +1186,18 @@ h1, h2, h3 {
     opacity: 0.8;
 }
 
-/* --- СКОПИРОВАННЫЕ СТИЛИ ИЗ ПРОЕКТА С ОСКОЛКАМИ --- */
-
 :root {
-    /* Создаем переменную для масштаба, которой будет управлять JS */
     --scene-scale: 1;
 }
 
 #scene-container {
-    /* Приводим в соответствие с JS для точности */
-    width: 1400px; 
+    width: 1400px;
     height: 900px;
-    
-    /* Эта логика теперь будет работать идеально на ВСЕХ экранах */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(var(--scene-scale));
-    
     perspective: 1200px;
-    /* background: radial-gradient(circle at 50% 50%, rgba(38, 43, 75, 0.9) 0%, #0c0a1d 65%); */
 }
 
 .shard {
@@ -1339,7 +1210,7 @@ h1, h2, h3 {
 .shard {
     backdrop-filter: blur(4px) brightness(1.2);
     -webkit-backdrop-filter: blur(4px) brightness(1.2);
-    box-shadow: 
+    box-shadow:
         inset 0 0 1px 1px rgba(220, 230, 255, 0.4),
         inset 0 0 25px rgba(10, 12, 30, 0.7),
         0 20px 50px rgba(0, 0, 0, 0.3);
@@ -1353,35 +1224,24 @@ h1, h2, h3 {
     width: 100%; height: 100%;
     background-size: cover, cover;
     background-position: center, center;
-    background-blend-mode: screen; 
+    background-blend-mode: screen;
     z-index: -1;
     opacity: 0.6; transition: opacity 0.4s;
-    clip-path: inherit; 
-    background-image: 
+    clip-path: inherit;
+    background-image:
         radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%);
 }
 
 .shard:hover {
     border-color: rgba(230, 240, 255, 0.9);
-    box-shadow: 
+    box-shadow:
         inset 0 0 1px 1px rgba(230, 240, 255, 0.9),
         inset 0 0 15px rgba(10, 12, 30, 0.5),
         0 25px 60px rgba(0, 0, 0, 0.4);
-    filter: 
-        drop-shadow(0 0 16px rgba(200, 225, 255, 0.9)) 
+    filter:
+        drop-shadow(0 0 16px rgba(200, 225, 255, 0.9))
         drop-shadow(0 0 4px rgba(255, 255, 255, 1));
 }
-/* .shard:active{
-        border-color: rgba(230, 240, 255, 0.9);
-    box-shadow: 
-        inset 0 0 1px 1px rgba(230, 240, 255, 0.9),
-        inset 0 0 15px rgba(10, 12, 30, 0.5),
-        0 25px 60px rgba(0, 0, 0, 0.4);
-    filter: 
-        drop-shadow(0 0 16px rgba(200, 225, 255, 0.9)) 
-        drop-shadow(0 0 4px rgba(255, 255, 255, 1));
-
-} */
 .shard:hover::before { opacity: 1; }
 
 .shard-ui {
@@ -1394,25 +1254,17 @@ h1, h2, h3 {
     font-size: 24px; font-weight: 700; background: rgba(0,0,0,0.25);
     font-family: 'Roboto', sans-serif;
 }
-.shard-title { 
-    font-size: 24px; 
-    font-weight: 300; 
-    line-height: 1.4; 
-    opacity: 0.9; 
+.shard-title {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.4;
+    opacity: 0.9;
     font-family: 'Roboto', sans-serif;
-    /* top: 10px; */
 }
 
 .particles { position: absolute; inset: 0; pointer-events: none; }
 .particle { position: absolute; background: white; border-radius: 50%; box-shadow: 0 0 6px rgba(255, 255, 255, 0.8); animation: drift infinite alternate ease-in-out; }
 @keyframes drift { from { transform: translateY(-15px); } to { transform: translateY(15px); opacity: 0.2; } }
-
-/* #shard-1::before { background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/henry-cavill-superman-batman-v-superman-dawn-of-justice.jpg?w=1200&h=628&fit=crop'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); }
-#shard-2::before { background-image: url('https://upload.wikimedia.org/wikipedia/ru/a/a2/Batman_Jim_Lee.jpg'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); }
-#shard-3::before { background-image: url('https://i.redd.it/male-model-francisco-lachowski-on-top-of-being-handsome-asf-v0-rrxuw64ie29c1.jpg?width=471&format=pjpg&auto=webp&s=ad5940bc9724af5d963f08259aeda606dcc6cf2b'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); }
-#shard-4::before { background-image: url('https://bookingagentinfo.com/wp-content/uploads/2022/06/Jordan-Barrett-1.png'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); }
-#shard-5::before { background-image: url('https://f4.bcbits.com/img/0016828305_10.jpg'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); }
-#shard-6::before { background-image: url('https://www.atj.com/wp-content/uploads/2024/07/Destination-Highlights-Korea1-Highlights-Seoul.jpg'), radial-gradient(circle at 50% 50%, rgba(100, 120, 200, 0.6), transparent 70%); } */
 
 #shard-1 { position: absolute; top: 200px; left: 410px; z-index: 100; clip-path: polygon(25.5% 23.6%, 30.7% 19.6%, 39.9% 13.9%, 43.1% 11.7%, 44.7% 8.7%, 55.3% 5.5%, 59.3% 4.8%, 61.7% 3.3%, 62.5% 3.3%, 64.1% 4.1%, 64.9% 4.1%, 73.9% 11.2%, 73.9% 12%, 73.1% 13.6%, 72.3% 16.8%, 71.5% 19.2%, 71.5% 21.6%, 72.3% 23.2%, 72.3% 24.8%, 73.1% 27.2%, 73.1% 28%, 72.3% 29.6%, 67.5% 31.2%, 65.1% 32.8%, 61.9% 32.8%, 57.1% 33.6%, 53.1% 33.6%, 50.1% 34.4%, 48.5% 34.4%, 45.1% 34.4%, 34.3% 29.2%, 29.5% 26.8%); }
 #shard-2 { top: 190px; left: 270px; clip-path: polygon(47.5% 60.7%, 49.1% 59.9%, 52.3% 56.1%, 53.9% 55.3%, 60.1% 53.8%, 60.1% 50.8%, 60.9% 46.8%, 61.7% 42.8%, 63.3% 39.7%, 64.9% 37.3%, 67.4% 32%, 64.9% 30.4%, 60.1% 30.4%, 53.9% 32%, 48.3% 33.5%, 45.9% 33.5%, 45.1% 36.6%, 44.4% 37.4%, 42.1% 40.6%, 39.8% 42.2%, 37.4% 44.5%, 34.2% 47.7%, 33.4% 47.7%, 34.2% 50.6%, 34.2% 53.8%, 36.6% 55.3%, 37.4% 58.5%, 39% 60.9%, 40.6% 64.9%); }
