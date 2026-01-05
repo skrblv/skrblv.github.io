@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    const heroSection = document.getElementById('hero');
+        const heroSection = document.getElementById('hero');
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
         let idleTimer;
@@ -122,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            if (this.classList.contains('shard')) return;
+
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId && targetId.length > 1) {
@@ -315,5 +316,115 @@ document.addEventListener('DOMContentLoaded', () => {
         createFlickeringParticles();
         adjustScale();
         window.addEventListener('resize', adjustScale, { passive: true });
+    }
+
+    const modalOverlay = document.getElementById('project-modal');
+    
+    if (modalOverlay) {
+        
+        const projectsData = {
+            'shard-1': {
+                title: 'DevProof',
+                tags: ['React', 'Django-Rest-Framework', 'Typescript'],
+                description: 'A comprehensive coding education platform inspired by the engagement mechanics of Duolingo. It features meticulously designed interactive courses and unique learning features. The journey culminates in a rigorous, IELTS-standard final examination to authentically verify and certify technical proficiency.',
+                link: null 
+
+            },
+            'shard-2': {
+                title: 'Triple Date',
+                tags: ['HTML/CSS', 'Django', 'MVP'],
+                description: 'A solution born from a personal pain point: the complexity of planning the perfect date. This MVP features a polished UI/UX that allows users to seamlessly schedule dates and discover curated venue recommendations. Designed to remove the stress of logistics, letting users focus on the connection.',
+                link: null 
+
+            },
+            'shard-3': {
+                title: 'ORIENT',
+                tags: ['React', 'Django-Rest-Framework', 'Algorithms'],
+                description: 'An adaptive Life-OS that acts as a personal strategic engine. It aggregates user profiles, goals, and constraints to generate actionable daily plans. The system dynamically recalibrates schedules based on real-time events and emotional states, providing transparent logic (Why & How) for every adjustment.',
+                link: null 
+                
+            },
+            'shard-4': {
+                title: 'BSCpetition',
+                tags: ['Telegram Bot', 'Aiogram', 'Automation'],
+                description: 'An automation tool built to preserve our student group and teaching staff composition. I developed a Telegram bot that collects digital signatures and user data. It automatically generates organized Excel reports for tracking and fully formatted Word petition documents for administration submission.',
+                link: null 
+
+            },
+            'shard-5': {
+                title: 'Finance_bot',
+                tags: ['Telegram Bot', 'Business Logic', 'Data Visualization'],
+                description: 'A robust financial management tool integrated entirely within Telegram. Functioning as a streamlined, modern alternative to complex systems like 1C, it handles full-cycle accounting—tracking sales, expenses, and income—with perfect logic and a user-friendly interface.',
+                link: null 
+
+            },
+            'shard-6': {
+                title: 'Comtehno',
+                tags: ['Production', 'Collaboration', 'College Site'],
+                description: 'The official website for the Bishkek College of Computer Systems & Technologies. Developed collaboratively with the faculty during my second year of studies, this project represents my transition from learning to delivering production-grade software for an educational institution.',
+                link: 'https://comtehno.kg/'
+            }
+        };
+
+        const modalTitle = document.getElementById('modal-title');
+        const modalTags = document.getElementById('modal-tags');
+        const modalDesc = document.getElementById('modal-description');
+        const closeModalBtn = modalOverlay.querySelector('.close-modal-btn');
+        const modalFooter = modalOverlay.querySelector('.modal-footer'); 
+        const shards = document.querySelectorAll('.shard');
+
+        function openModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            modalTitle.textContent = project.title;
+            modalDesc.textContent = project.description;
+            
+            modalTags.innerHTML = '';
+            project.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'modal-tag';
+                span.textContent = tag;
+                modalTags.appendChild(span);
+            });
+
+            if (project.link) {
+                modalFooter.innerHTML = `<a href="${project.link}" target="_blank" class="status-badge live">View Live Project <i class="fas fa-external-link-alt"></i></a>`;
+            } else {
+                modalFooter.innerHTML = `<span class="status-badge">Not Deployed</span>`;
+            }
+
+            modalOverlay.classList.add('active');
+            document.body.classList.add('modal-open'); 
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        shards.forEach(shard => {
+            shard.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const id = shard.id; 
+                openModal(id);
+            });
+        });
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
     }
 });

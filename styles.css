@@ -274,7 +274,7 @@ h1, h2, h3 {
     margin: 2px 0;
     color: var(--color-accent-soft);
     font-weight: 600;
-    font-size: 0.95em;
+    font-size: 1em;
     border-radius: 3px;
     transition: all 0.2s;
 }
@@ -1020,16 +1020,17 @@ h1, h2, h3 {
     .nav-menu {
         top: 8%;
         right: 5%;
-        display: grid;
-        grid-template-columns: 50px 50px;
-        width: 120px;
+        /* display: grid;
+        grid-template-columns: 50px 50px; */
+        width: 160px;
         padding: 8px;
+        padding-left: 10px;
         align-items: center;
         box-shadow: 0 0 5px rgba(229, 57, 53, 0.2);
     }
     
     .nav-menu a .nav-text {
-        display: none;
+        margin-left: 20px;
     }
 
     .nav-menu a {
@@ -1298,3 +1299,131 @@ h1, h2, h3 {
 .flickering-particle { position: absolute; border-radius: 50%; background: #ffffff; box-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px #aaccff; }
 @keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(0.7); } }
 @keyframes centerPull { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(var(--target-x), var(--target-y)); } }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 5, 5, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 2000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent-strong);
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(229, 57, 53, 0.3);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-image: linear-gradient(rgba(49, 14, 16, 0.9), rgba(49, 14, 16, 0.9)), 
+                      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--color-detail-dim);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close-modal-btn:hover {
+    color: var(--color-accent-strong);
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--color-accent-strong);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-detail-line);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.modal-tags {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modal-tag {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border: 1px solid var(--color-detail-dim);
+    border-radius: 20px;
+    color: var(--color-text-light);
+    font-family: var(--font-sans);
+}
+
+.modal-body p {
+    font-family: var(--font-sans);
+    color: #e0e6f0;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.status-badge {
+    background: rgba(229, 57, 53, 0.1);
+    color: var(--color-accent-strong);
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: 1px solid var(--color-accent-strong);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+.status-badge.live {
+    background: rgba(76, 175, 80, 0.15); 
+    color: #4CAF50; 
+    border-color: #4CAF50;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-badge.live:hover {
+    background: rgba(76, 175, 80, 0.3);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
