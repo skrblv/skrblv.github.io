@@ -1,13 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-        const heroSection = document.getElementById('hero');
+    
+    // --- 1. HERO SECTION (Parallax) ---
+    const heroSection = document.getElementById('hero');
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
         let idleTimer;
-        
         let lastMouseEvent = null;
         let isParallaxTicking = false;
+        
+        // Кэшируем размеры секции, чтобы не считать их при каждом движении мыши
+        let heroRect = heroSection.getBoundingClientRect();
 
         const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Обновляем кэш размеров при ресайзе
+        window.addEventListener('resize', () => {
+            heroRect = heroSection.getBoundingClientRect();
+        }, { passive: true });
 
         function startIdleDrift() {
             parallaxItems.forEach(item => {
@@ -27,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateParallax(e) {
             if (!e) return;
 
-            const rect = heroSection.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+            // Используем кэшированный heroRect
+            const centerX = heroRect.left + heroRect.width / 2;
+            const centerY = heroRect.top + heroRect.height / 2;
             const offsetX = (e.clientX - centerX) / 50; 
             const offsetY = (e.clientY - centerY) / 50;
             
@@ -60,16 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!isTouchDevice() || window.innerWidth > 1024) {
-            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mousemove', onMouseMove, { passive: true });
         }
         
         setTimeout(startIdleDrift, 100);
     }
     
+    // --- 2. ABOUT SECTION (Scroll Animation) ---
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
         const visualAssets = document.querySelectorAll('.scroll-visual-asset');
-        
         let lastScrollY = window.pageYOffset;
         let isScrollTicking = false;
 
@@ -99,11 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateScrollVisuals();
     }
     
+    // --- 3. RESUME SECTION (Intersection Observer) ---
     const revealElements = document.querySelectorAll('.resume-block');
     if (revealElements.length > 0) {
         const observerOptions = {
             root: null, 
-            threshold: 0.3,
+            threshold: 0.2, // Чуть раньше срабатывает
         };
 
         const observerCallback = (entries, observer) => {
@@ -119,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(element => revealObserver.observe(element));
     }
 
+    // --- 4. SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             if (this.classList.contains('shard')) return;
@@ -136,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- 5. MUSIC PLAYER ---
     const player = document.getElementById('music-player');
     if (player) {
         const vinylIcon = player.querySelector('.vinyl-icon');
@@ -174,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     player.classList.remove('closed');
                     resetHideTimer(); 
                 }).catch(error => {
-                    console.warn("Autoplay was prevented by the browser:", error);
+                    console.warn("Autoplay / Play prevented:", error);
                 });
             }
         }
@@ -244,14 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         volumeSlider.addEventListener('input', (e) => {
             audio.volume = parseFloat(e.target.value);
+            resetHideTimer();
         });
 
         audio.addEventListener('ended', nextTrack);
         
+        // Initial Load
         loadTrack(currentTrackIndex);
-        playTrack(); 
     }
 
+    // --- 6. SHARDS SECTION (OPTIMIZED) ---
     const sceneContainer = document.getElementById('scene-container');
     if (sceneContainer) {
         const shards = document.querySelectorAll('.shard');
@@ -259,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function startBreathing() {
             shards.forEach(shard => {
                 const depth = parseFloat(shard.getAttribute('data-depth')) || 0;
+                // Настраиваем CSS переменные для анимации дыхания
                 const baseTransform = `translateZ(${depth * 40}px)`;
                 shard.style.setProperty('--base-transform', baseTransform);
                 shard.classList.add('is-breathing');
@@ -305,19 +320,35 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(fragment);
         }
 
+        // --- OPTIMIZATION START: Debounced Resize ---
         const designWidth = 1400;
         const designHeight = 900;
+        let resizeTimeout;
+
         function adjustScale() {
-            const scale = Math.min(window.innerWidth / designWidth, window.innerHeight / designHeight);
-            document.documentElement.style.setProperty('--scene-scale', scale);
+            window.requestAnimationFrame(() => {
+                const scaleX = window.innerWidth / designWidth;
+                const scaleY = window.innerHeight / designHeight;
+                
+                const scale = Math.min(scaleX, scaleY);
+                const finalScale = Math.min(Math.max(scale, 0.35), 1.1); 
+                
+                document.documentElement.style.setProperty('--scene-scale', finalScale);
+            });
         }
+
+
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(adjustScale, 100);
+        }, { passive: true });
 
         startBreathing();
         createFlickeringParticles();
-        adjustScale();
-        window.addEventListener('resize', adjustScale, { passive: true });
+        adjustScale(); 
     }
 
+    // --- 7. MODAL LOGIC ---
     const modalOverlay = document.getElementById('project-modal');
     
     if (modalOverlay) {
@@ -328,35 +359,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 tags: ['React', 'Django-Rest-Framework', 'Typescript'],
                 description: 'A comprehensive coding education platform inspired by the engagement mechanics of Duolingo. It features meticulously designed interactive courses and unique learning features. The journey culminates in a rigorous, IELTS-standard final examination to authentically verify and certify technical proficiency.',
                 link: null 
-
             },
             'shard-2': {
                 title: 'Triple Date',
                 tags: ['HTML/CSS', 'Django', 'MVP'],
                 description: 'A solution born from a personal pain point: the complexity of planning the perfect date. This MVP features a polished UI/UX that allows users to seamlessly schedule dates and discover curated venue recommendations. Designed to remove the stress of logistics, letting users focus on the connection.',
                 link: null 
-
             },
             'shard-3': {
                 title: 'ORIENT',
                 tags: ['React', 'Django-Rest-Framework', 'Algorithms'],
                 description: 'An adaptive Life-OS that acts as a personal strategic engine. It aggregates user profiles, goals, and constraints to generate actionable daily plans. The system dynamically recalibrates schedules based on real-time events and emotional states, providing transparent logic (Why & How) for every adjustment.',
                 link: null 
-                
             },
             'shard-4': {
                 title: 'BSCpetition',
                 tags: ['Telegram Bot', 'Aiogram', 'Automation'],
                 description: 'An automation tool built to preserve our student group and teaching staff composition. I developed a Telegram bot that collects digital signatures and user data. It automatically generates organized Excel reports for tracking and fully formatted Word petition documents for administration submission.',
                 link: null 
-
             },
             'shard-5': {
                 title: 'Finance_bot',
                 tags: ['Telegram Bot', 'Business Logic', 'Data Visualization'],
                 description: 'A robust financial management tool integrated entirely within Telegram. Functioning as a streamlined, modern alternative to complex systems like 1C, it handles full-cycle accounting—tracking sales, expenses, and income—with perfect logic and a user-friendly interface.',
                 link: null 
-
             },
             'shard-6': {
                 title: 'Comtehno',
