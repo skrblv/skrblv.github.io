@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const scaleY = window.innerHeight / designHeight;
                 
                 const scale = Math.min(scaleX, scaleY);
-                const finalScale = Math.min(Math.max(scale, 0.35), 1.1); 
+                const finalScale = Math.min(Math.max(scale, 0.40), 1.1); 
                 
                 document.documentElement.style.setProperty('--scene-scale', finalScale);
             });
