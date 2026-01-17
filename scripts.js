@@ -287,38 +287,38 @@ document.addEventListener('DOMContentLoaded', () => {
             return z * stdev + mean;
         }
 
-        function createFlickeringParticles() {
-            const container = document.getElementById('flickering-particles-container');
-            if (!container) return;
+        // function createFlickeringParticles() {
+        //     const container = document.getElementById('flickering-particles-container');
+        //     if (!container) return;
 
-            const particleCount = 150; 
-            const designWidth = 1400;
-            const designHeight = 900;
-            const centerX = designWidth / 2;
-            const centerY = designHeight / 2;
-            const standardDeviation = centerX / 2.5;
-            const movementStrength = 0.1; 
+        //     const particleCount = 150; 
+        //     const designWidth = 1400;
+        //     const designHeight = 900;
+        //     const centerX = designWidth / 2;
+        //     const centerY = designHeight / 2;
+        //     const standardDeviation = centerX / 2.5;
+        //     const movementStrength = 0.1; 
             
-            const fragment = document.createDocumentFragment();
+        //     const fragment = document.createDocumentFragment();
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'flickering-particle';
-                const size = Math.random() * 2 + 0.5;
-                particle.style.cssText = `
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${gaussianRandom(centerX, standardDeviation)}px;
-                    top: ${gaussianRandom(centerY, standardDeviation)}px;
-                    --target-x: ${(centerX - parseFloat(particle.style.left)) * movementStrength}px;
-                    --target-y: ${(centerY - parseFloat(particle.style.top)) * movementStrength}px;
-                    animation: flicker ${Math.random() * 3 + 2}s ${Math.random() * 10}s infinite linear,
-                               centerPull ${Math.random() * 10 + 10}s ${Math.random() * 10}s infinite ease-in-out;
-                `;
-                fragment.appendChild(particle);
-            }
-            container.appendChild(fragment);
-        }
+        //     for (let i = 0; i < particleCount; i++) {
+        //         const particle = document.createElement('div');
+        //         particle.className = 'flickering-particle';
+        //         const size = Math.random() * 2 + 0.5;
+        //         particle.style.cssText = `
+        //             width: ${size}px;
+        //             height: ${size}px;
+        //             left: ${gaussianRandom(centerX, standardDeviation)}px;
+        //             top: ${gaussianRandom(centerY, standardDeviation)}px;
+        //             --target-x: ${(centerX - parseFloat(particle.style.left)) * movementStrength}px;
+        //             --target-y: ${(centerY - parseFloat(particle.style.top)) * movementStrength}px;
+        //             animation: flicker ${Math.random() * 3 + 2}s ${Math.random() * 5}s infinite linear,
+        //                        centerPull ${Math.random() * 10 + 10}s ${Math.random() * 10}s infinite ease-in-out;
+        //         `;
+        //         fragment.appendChild(particle);
+        //     }
+        //     container.appendChild(fragment);
+        // }
 
         // --- OPTIMIZATION START: Debounced Resize ---
         const designWidth = 1400;
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
 
         startBreathing();
-        createFlickeringParticles();
+        // createFlickeringParticles();
         adjustScale(); 
     }
 
