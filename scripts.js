@@ -275,39 +275,83 @@ document.addEventListener('DOMContentLoaded', () => {
             const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
             return z * stdev + mean;
         }
-
         function createFlickeringParticles() {
             const container = document.getElementById('flickering-particles-container');
             if (!container) return;
 
-            const particleCount = 150; 
-            const designWidth = 1400;
-            const designHeight = 900;
-            const centerX = designWidth / 2;
-            const centerY = designHeight / 2;
-            const standardDeviation = centerX / 2.5;
-            const movementStrength = 0.1; 
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
             
-            const fragment = document.createDocumentFragment();
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            container.appendChild(canvas);
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'flickering-particle';
-                const size = Math.random() * 2 + 0.5;
-                particle.style.cssText = `
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${gaussianRandom(centerX, standardDeviation)}px;
-                    top: ${gaussianRandom(centerY, standardDeviation)}px;
-                    --target-x: ${(centerX - parseFloat(particle.style.left)) * movementStrength}px;
-                    --target-y: ${(centerY - parseFloat(particle.style.top)) * movementStrength}px;
-                    animation: flicker ${Math.random() * 3 + 2}s ${Math.random() * 5}s infinite linear,
-                               centerPull ${Math.random() * 10 + 10}s ${Math.random() * 10}s infinite ease-in-out;
-                `;
-                fragment.appendChild(particle);
+            let particles = [];
+            // На мобилках 40 частиц, на пк 100 - для скорости
+            const particleCount = window.innerWidth < 768 ? 40 : 100;
+            
+            let width, height;
+
+            function resize() {
+                width = container.offsetWidth;
+                height = container.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
             }
-            container.appendChild(fragment);
+            
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Создаем частицы
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 0.5, // Размер от 0.5 до 2.5px
+                    // Фиксированная прозрачность (разная для каждой, но не меняется)
+                    alpha: Math.random() * 0.5 + 0.2, 
+                    // Медленная скорость дрейфа
+                    vx: (Math.random() - 0.5) * 0.5, 
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                particles.forEach(p => {
+                    // Просто двигаем координаты
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Если улетела за экран - возвращаем с другой стороны
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+                    
+                    // Легкое статичное свечение (не нагружает так как не меняется)
+                    ctx.shadowBlur = 3; 
+                    ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+                    
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // Сброс для оптимизации
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         }
+
 
         const designWidth = 1400;
         const designHeight = 900;
@@ -386,35 +430,50 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalFooter = modalOverlay.querySelector('.modal-footer'); 
         const shards = document.querySelectorAll('.shard');
 
-        function openModal(projectId) {
-            const project = projectsData[projectId];
-            if (!project) return;
+function openModal(projectId) {
+    const project = projectsData[projectId];
+    if (!project) return;
 
-            modalTitle.textContent = project.title;
-            modalDesc.textContent = project.description;
-            
-            modalTags.innerHTML = '';
-            project.tags.forEach(tag => {
-                const span = document.createElement('span');
-                span.className = 'modal-tag';
-                span.textContent = tag;
-                modalTags.appendChild(span);
-            });
+    modalTitle.textContent = project.title;
+    modalDesc.textContent = project.description;
 
-            if (project.link) {
-                modalFooter.innerHTML = `<a href="${project.link}" target="_blank" class="status-badge live">View Live Project <i class="fas fa-external-link-alt"></i></a>`;
-            } else {
-                modalFooter.innerHTML = `<span class="status-badge">Not Deployed</span>`;
-            }
+    modalTags.innerHTML = '';
+    project.tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'modal-tag';
+        span.textContent = tag;
+        modalTags.appendChild(span);
+    });
 
-            modalOverlay.classList.add('active');
-            document.body.classList.add('modal-open'); 
-        }
+    if (project.link) {
+        modalFooter.innerHTML = `<a href="${project.link}" target="_blank" class="status-badge live">View Live Project <i class="fas fa-external-link-alt"></i></a>`;
+    } else {
+        modalFooter.innerHTML = `<span class="status-badge">Not Deployed</span>`;
+    }
 
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            document.body.classList.remove('modal-open');
-        }
+    modalOverlay.classList.add('active');
+    modalOverlay.removeAttribute('aria-hidden'); // показываем скринридерам
+    modalOverlay.removeAttribute('inert');       // делаем интерактивной
+    document.body.classList.add('modal-open');
+
+    // Переносим фокус на кнопку закрытия модалки
+    closeModalBtn.focus();
+}
+
+function closeModal() {
+    modalOverlay.classList.remove('active');
+    modalOverlay.setAttribute('aria-hidden', 'true'); // скрываем скринридерам
+    modalOverlay.setAttribute('inert', 'true');       // блокируем интерактивность
+    document.body.classList.remove('modal-open');
+
+    // Возвращаем фокус на кнопку открытия модалки
+    const firstShard = document.querySelector('.shard');
+    if (firstShard) firstShard.focus();
+}
+
+// Инициализация
+modalOverlay.setAttribute('aria-hidden', 'true');
+modalOverlay.setAttribute('inert', 'true');
 
         shards.forEach(shard => {
             shard.addEventListener('click', (e) => {
@@ -476,11 +535,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const skillsSection = document.getElementById('skills-hobbies');
 
             function resize() {
-                inkCanvas.width = inkSection.offsetWidth;
-                inkCanvas.height = inkSection.offsetHeight;
+                // ОПТИМИЗАЦИЯ ЗДЕСЬ:
+                // Проверяем, мобилка ли это
+                const isMobile = window.innerWidth < 768;
+                
+                // На ПК качество 1.0 (полное), на мобиле 0.35 (примерно треть)
+                // Для эффекта дыма/чернил понижение разрешения почти незаметно глазу,
+                // но спасает телефон от перегрева.
+                const pixelRatio = isMobile ? 0.65 : 1.0; 
+
+                // Устанавливаем внутреннее разрешение канваса меньше реального размера CSS
+                inkCanvas.width = inkSection.offsetWidth * pixelRatio;
+                inkCanvas.height = inkSection.offsetHeight * pixelRatio;
+                
                 gl.viewport(0, 0, inkCanvas.width, inkCanvas.height);
                 gl.uniform2f(uRes, inkCanvas.width, inkCanvas.height);
             }
+
             window.addEventListener('resize', resize);
             resize();
 
