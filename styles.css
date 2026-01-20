@@ -725,10 +725,7 @@ h1, h2, h3 {
     z-index: 2;
 }
 
-.skills-wrapper h2 {
-    color: var(--color-accent-strong);
-    margin-bottom: 20px;
-}
+
 
 .skill-group {
     padding: 20px 0;

@@ -227,7 +227,6 @@
       </div>
       <div class="container-grid content-layer">
         <div class="skills-wrapper">
-          <h2>Technical Skills</h2>
           <div class="skill-group coding-skills">
             <h3>Core Technologies</h3>
             <div class="skill-tags">
@@ -252,15 +251,15 @@
         <div class="interests-card">
           <h2>Extracurricular activities</h2>
           <div class="hobby-list">
-            <p>Full-Stack Architecture</p>
+            <p>Volunteering</p>
             <p>Volleyball & Gym Training</p>
             <p>Musician (Komuz x Taiko)</p>
-            <p>Coding</p>
+            <p>Mentoring</p>
           </div>
           <div class="soft-skills-block">
             <h3>Soft Skills</h3>
             <div class="tag-group">
-              <span>Mentoring</span><span>Communication</span
+              <span>Team Work</span><span>Communication</span
               ><span>Leadership</span><span>Problem Solving</span>
             </div>
           </div>
@@ -442,6 +441,7 @@
         uniform float u_time;
         uniform float u_progress;
 
+        // Стандартная функция шума
         vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
         float snoise(vec2 v){
             const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
@@ -466,14 +466,14 @@
             return 130.0 * dot(m, g);
         }
 
+        // ОПТИМИЗАЦИЯ: Уменьшили количество циклов с 5 до 3
+        // Это снижает нагрузку на телефон почти в 2 раза
         float fbm(vec2 x) {
             float v = 0.0;
             float a = 0.5;
             vec2 shift = vec2(100.0);
             mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
-            // БЫЛО: i < 5
-            // СТАЛО: i < 3 (Это снизит нагрузку почти в два раза)
-            for (int i = 0; i < 4; ++i) { 
+            for (int i = 0; i < 3; ++i) {
                 v += a * snoise(x);
                 x = rot * x * 2.0 + shift;
                 a *= 0.5;
@@ -481,13 +481,24 @@
             return v;
         }
 
-
         void main() {
             vec2 st = gl_FragCoord.xy/u_resolution.xy;
             float ratio = u_resolution.x/u_resolution.y;
             st.x *= ratio;
 
-            vec2 center = vec2(ratio * 0.2, 0.5);
+            // Определяем, телефон это или нет (портретный режим)
+            float isPortrait = step(u_resolution.x, u_resolution.y);
+
+            // 1. Позиция по горизонтали (X)
+            float centerOffset = mix(0.2, 0.4, isPortrait);
+            
+            // 2. Позиция по вертикали (Y)
+            // 0.5 = центр. Чем больше число, тем выше.
+            // mix(0.5, 0.65, ...) значит: на ПК 0.5, на телефоне 0.65 (чуть выше)
+            float centerY = mix(0.5, 0.85, isPortrait); // <--- ВОТ ЗДЕСЬ МЕНЯЕМ ВЫСОТУ
+
+            vec2 center = vec2(ratio * centerOffset, centerY);
+            
             float d = length(st - center);
 
             vec2 q = vec2(0.);
@@ -499,10 +510,16 @@
             float f = fbm(st + r);
 
             float morphFactor = smoothstep(0.0, 0.4, u_progress);
-            float liquidDistortion = 0.85 * morphFactor;
+            
+            float distStr = mix(0.85, 0.5, isPortrait);
+            float liquidDistortion = distStr * morphFactor;
             float liquidOffset = 0.35 * morphFactor;
+            
             float mask = d - (f * liquidDistortion) + liquidOffset;
-            float radius = u_progress * 1.5;
+
+            float maxRadius = mix(1.5, 1.0, isPortrait);
+            float radius = u_progress * maxRadius;
+            
             float edgeSoftness = 0.02 + (0.1 * morphFactor); 
             float ink = 1.0 - smoothstep(radius, radius + edgeSoftness, mask);
 
@@ -516,6 +533,7 @@
             gl_FragColor = vec4(finalColor, 1.0);
         }
     </script>
+
     <script src="scripts.js"></script>
   </body>
 </html>

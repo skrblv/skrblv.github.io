@@ -570,7 +570,7 @@ modalOverlay.setAttribute('inert', 'true');
 
             function render(time) {
                 updateScroll();
-                gl.uniform1f(uTime, time * 0.0004);
+                gl.uniform1f(uTime, time * 0.0003);
                 gl.uniform1f(uProg, currentProgress);
                 gl.drawArrays(gl.TRIANGLES, 0, 6);
                 requestAnimationFrame(render);
