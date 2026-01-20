@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. HERO SECTION (Parallax) ---
     const heroSection = document.getElementById('hero');
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
@@ -8,12 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let lastMouseEvent = null;
         let isParallaxTicking = false;
         
-        // Кэшируем размеры секции, чтобы не считать их при каждом движении мыши
         let heroRect = heroSection.getBoundingClientRect();
 
         const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        // Обновляем кэш размеров при ресайзе
         window.addEventListener('resize', () => {
             heroRect = heroSection.getBoundingClientRect();
         }, { passive: true });
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateParallax(e) {
             if (!e) return;
 
-            // Используем кэшированный heroRect
             const centerX = heroRect.left + heroRect.width / 2;
             const centerY = heroRect.top + heroRect.height / 2;
             const offsetX = (e.clientX - centerX) / 50; 
@@ -75,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(startIdleDrift, 100);
     }
     
-    // --- 2. ABOUT SECTION (Scroll Animation) ---
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
         const visualAssets = document.querySelectorAll('.scroll-visual-asset');
@@ -108,12 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateScrollVisuals();
     }
     
-    // --- 3. RESUME SECTION (Intersection Observer) ---
     const revealElements = document.querySelectorAll('.resume-block');
     if (revealElements.length > 0) {
         const observerOptions = {
             root: null, 
-            threshold: 0.2, // Чуть раньше срабатывает
+            threshold: 0.2,
         };
 
         const observerCallback = (entries, observer) => {
@@ -129,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(element => revealObserver.observe(element));
     }
 
-    // --- 4. SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             if (this.classList.contains('shard')) return;
@@ -147,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 5. MUSIC PLAYER ---
     const player = document.getElementById('music-player');
     if (player) {
         const vinylIcon = player.querySelector('.vinyl-icon');
@@ -261,11 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         audio.addEventListener('ended', nextTrack);
         
-        // Initial Load
         loadTrack(currentTrackIndex);
     }
 
-    // --- 6. SHARDS SECTION (OPTIMIZED) ---
     const sceneContainer = document.getElementById('scene-container');
     if (sceneContainer) {
         const shards = document.querySelectorAll('.shard');
@@ -273,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function startBreathing() {
             shards.forEach(shard => {
                 const depth = parseFloat(shard.getAttribute('data-depth')) || 0;
-                // Настраиваем CSS переменные для анимации дыхания
                 const baseTransform = `translateZ(${depth * 40}px)`;
                 shard.style.setProperty('--base-transform', baseTransform);
                 shard.classList.add('is-breathing');
@@ -320,7 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(fragment);
         }
 
-        // --- OPTIMIZATION START: Debounced Resize ---
         const designWidth = 1400;
         const designHeight = 900;
         let resizeTimeout;
@@ -348,7 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
         adjustScale(); 
     }
 
-    // --- 7. MODAL LOGIC ---
     const modalOverlay = document.getElementById('project-modal');
     
     if (modalOverlay) {
@@ -452,5 +439,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         });
+    }
+
+    const inkSection = document.getElementById('inkSection');
+    const inkCanvas = document.getElementById('skillsCanvas');
+    
+    if (inkSection && inkCanvas) {
+        const gl = inkCanvas.getContext('webgl');
+        if (gl) {
+            function createShader(gl, type, src) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, src);
+                gl.compileShader(shader);
+                return shader;
+            }
+            const prog = gl.createProgram();
+            const vsSrc = document.getElementById('vertex-shader').text;
+            const fsSrc = document.getElementById('fragment-shader').text;
+            
+            gl.attachShader(prog, createShader(gl, gl.VERTEX_SHADER, vsSrc));
+            gl.attachShader(prog, createShader(gl, gl.FRAGMENT_SHADER, fsSrc));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+            const posLoc = gl.getAttribLocation(prog, "position");
+            gl.enableVertexAttribArray(posLoc);
+            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+            const uRes = gl.getUniformLocation(prog, "u_resolution");
+            const uTime = gl.getUniformLocation(prog, "u_time");
+            const uProg = gl.getUniformLocation(prog, "u_progress");
+
+            let currentProgress = 0;
+            const skillsSection = document.getElementById('skills-hobbies');
+
+            function resize() {
+                inkCanvas.width = inkSection.offsetWidth;
+                inkCanvas.height = inkSection.offsetHeight;
+                gl.viewport(0, 0, inkCanvas.width, inkCanvas.height);
+                gl.uniform2f(uRes, inkCanvas.width, inkCanvas.height);
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function updateScroll() {
+                const rect = skillsSection.getBoundingClientRect();
+                const winH = window.innerHeight;
+                
+                let raw = (winH - rect.top) / (winH + rect.height);
+                
+                if (raw < 0) raw = 0;
+                if (raw > 1) raw = 1;
+
+                const eased = 1 - Math.pow(1 - raw, 1.6);
+                currentProgress = eased;
+            }
+
+            function render(time) {
+                updateScroll();
+                gl.uniform1f(uTime, time * 0.0004);
+                gl.uniform1f(uProg, currentProgress);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        }
     }
 });
