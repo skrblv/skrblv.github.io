@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const tracks = [
             { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" },
-            { name: "The Way I Are", src: "assets/music/track3.mp3" },
-            { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
+            // { name: "The Way I Are", src: "assets/music/track3.mp3" },
+            // { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
             { name: "Ecstasy", src: "assets/music/track4.mp3" },
-            { name: "Lovers Rock", src: "assets/music/track5.mp3" }
+            // { name: "Lovers Rock", src: "assets/music/track5.mp3" }
         ];
 
         let currentTrackIndex = 0;
