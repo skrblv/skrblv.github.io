@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    const resumeEntries = document.querySelectorAll('.resume-entry');
+
+    const resumeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        }
+    });
+    }, { threshold: 0.3 });
+
+    resumeEntries.forEach(el => resumeObserver.observe(el));
+
     
     const heroSection = document.getElementById('hero');
     if (heroSection) {
