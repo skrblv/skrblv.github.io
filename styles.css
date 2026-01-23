@@ -1188,11 +1188,11 @@ h1, h2, h3 {
         /* bottom: 0; */
         right: 1%;
         width: 45%;
-        padding: 15px;
+        padding: 10px;
     }
     .quote-text {
         font-size: 1em;
-        margin-bottom: 0;
+        margin: 0;
     }
     .not{
         font-size: 0;
