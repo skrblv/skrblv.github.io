@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" },
             // { name: "The Way I Are", src: "assets/music/track3.mp3" },
             // { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
-            { name: "Ecstasy", src: "assets/music/track4.mp3" },
+            // { name: "Ecstasy", src: "assets/music/track4.mp3" },
             // { name: "Lovers Rock", src: "assets/music/track5.mp3" }
         ];
 
@@ -405,9 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 link: null 
             },
             'shard-2': {
-                title: 'Triple Date',
-                tags: ['HTML/CSS', 'Django', 'MVP'],
-                description: 'A solution born from a personal pain point: the complexity of planning the perfect date. This MVP features a polished UI/UX that allows users to seamlessly schedule dates and discover curated venue recommendations. Designed to remove the stress of logistics, letting users focus on the connection.',
+                title: 'Clear Skies',
+                tags: ['React', 'Django', 'MVP'],
+                description: 'A minimalist weather application focused on delivering essential meteorological data with clarity and precision. It offers real-time weather updates, forecasts, and alerts through a clean, user-friendly interface designed for quick access to vital information without unnecessary distractions.',
                 link: null 
             },
             'shard-3': {

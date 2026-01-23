@@ -326,12 +326,18 @@ h1, h2, h3 {
     padding: 20px;
     background: var(--color-module-bg);
     border: 2px solid var(--color-detail-line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .quote-text {
     font-style: italic;
     font-size: 1.05em;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     color: var(--color-accent-soft);
+}
+.mobile{
+    font-size: 0;
 }
 .quote-action-btn {
     background: var(--color-accent-strong);
@@ -372,7 +378,7 @@ h1, h2, h3 {
     transform: rotate(5deg);
 }
 .data-card .data-label {
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 600;
     color: var(--color-detail-dim);
 }
@@ -527,7 +533,7 @@ h1, h2, h3 {
 }
 
 .bio-main-text {
-    font-size: 1.25em;
+    font-size: 1.35em;
     margin-bottom: 30px;
     line-height: 1.8;
 }
@@ -599,7 +605,7 @@ h1, h2, h3 {
 }
 .metric-label {
     display: block;
-    font-size: 1em;
+    font-size: 1.em;
     font-weight: 500;
     color: var(--color-detail-dim);
     text-transform: uppercase;
@@ -612,7 +618,7 @@ h1, h2, h3 {
     padding: 30px;
     height: fit-content;
     border: 2px solid var(--color-accent-strong);
-    font-size: 1.05em;
+    font-size: 1.3em;
     border-radius: 0;
     position: sticky;
     top: 50px;
@@ -871,7 +877,12 @@ h1, h2, h3 {
     color: var(--color-text-light);
     margin-bottom: 15px;
 }
+.tag-group{
+    display: flex;
+    flex-wrap: wrap;
+}
 .soft-skills-block .tag-group span {
+    
     background: var(--color-accent-strong);
     color: var(--color-bg);
     border-radius: 50px;
@@ -1018,6 +1029,7 @@ h1, h2, h3 {
     }
     
     .key-metrics {
+        width: 95%;
         margin-top: 40px;
         box-shadow: 5px 5px 0 var(--color-accent-strong);
     }
@@ -1046,6 +1058,11 @@ h1, h2, h3 {
     :root {
         --padding-section: 60px 5%;
     }
+    .soft-skills-block .tag-group span {
+        padding: 4px 10px;
+        margin: 3px 4px 3px 0;
+    }
+
 
     .container-grid {
         grid-template-columns: 1fr;
@@ -1071,7 +1088,7 @@ h1, h2, h3 {
         position: absolute;
         opacity: 0.15;
     }
-    
+
     .main-content-area {
         position: absolute;
         width: 90%;
@@ -1163,18 +1180,23 @@ h1, h2, h3 {
     }
 
     .quote-card {
-        background: transparent;
+        /* background: transparent;
         border: none;
         box-shadow: none;
-        backdrop-filter: none;
-        bottom: 18%;
+        backdrop-filter: none; */
+        bottom: 80%;
+        /* bottom: 0; */
         right: 1%;
         width: 45%;
+        height: auto;
         padding: 15px;
     }
     .quote-text {
+        font-size: 1em;
+        margin-bottom: 0;
+    }
+    .not{
         font-size: 0;
-        margin-bottom: 10px;
     }
     .quote-action-btn {
         padding: 5px 10px;
@@ -1185,21 +1207,19 @@ h1, h2, h3 {
         /* display: block; */
         top: 65%;
         left: 10%;
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         padding: 5px;
     }
     .data-height {
         display: block;
         bottom: 50%;
         left: 70%;
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         padding: 5px;
     }
-    .data-card .data-value {
-        font-size: 1.5em;
-    }
+
     
     .action-links-module {
         bottom: 11%;
