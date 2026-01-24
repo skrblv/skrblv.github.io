@@ -338,6 +338,7 @@ h1, h2, h3 {
 }
 .mobile{
     font-size: 0;
+    display: none;
 }
 .quote-action-btn {
     background: var(--color-accent-strong);
@@ -1197,10 +1198,14 @@ h1, h2, h3 {
     }
     .not{
         font-size: 0;
+        display: none;
     }
     .quote-action-btn {
         padding: 5px 10px;
         font-size: 0.7em;
+    }
+    .mobile{
+        display: block;
     }
     
     .data-age {
