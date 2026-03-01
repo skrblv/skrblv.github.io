@@ -444,6 +444,21 @@ h1, h2, h3 {
     background-size: 100% 100%;
     transform: translateY(-100%);
 }
+.about-section::after{
+        content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    z-index: 16;
+    pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 60 C 276 -147 480 140 728 2 C 1026 -58 1200 100 1440 60 L 1440 100 L 0 100 Z' fill='%23F4E3B2'/%3E%3C/svg%3E") repeat-x;
+    background-size: 100% 100%;
+    /* transform: translateY(-100%); */
+    transform: rotate(180deg);
+
+}
 
 /* .decorative-grid-overlay {
     position: absolute;
@@ -514,13 +529,13 @@ h1, h2, h3 {
 .bio-heading {
     font-size: 5em;
     color: var(--color-text-dark);
-    margin-bottom: 20px;
     line-height: 1;
     font-family: var(--font-serif);
     font-weight: 700;
     border-bottom: 5px solid var(--color-accent-strong);
     padding-bottom: 10px;
     margin-bottom: 40px;
+    margin-top: 20px;
 }
 .bio-heading .serif-title {
     display: block;
@@ -1397,7 +1412,7 @@ h1, h2, h3 {
     font-family: 'Roboto', sans-serif;
 }
 .shard-title {
-    font-size: 24px;
+    font-size: 34px;
     font-weight: 300;
     line-height: 1.4;
     opacity: 0.9;
@@ -1419,8 +1434,8 @@ h1, h2, h3 {
 #shard-2 .shard-ui { top: 45%; left: 45%; flex-direction: row-reverse; text-align: right; }
 #shard-3 .shard-ui { bottom: 25%; right: 10%; flex-direction: row-reverse; text-align: right; }
 #shard-4 .shard-ui { bottom: 25%; left: 65%; }
-#shard-5 .shard-ui { bottom: 15%; left: 40%; }
-#shard-6 .shard-ui { bottom: 38%; left: 15%; }
+#shard-5 .shard-ui { bottom: 15%; left: 38%; }
+#shard-6 .shard-ui { bottom: 38%; left: 12%; }
 
 .shard.is-breathing { --base-transform: none; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
 @keyframes breathe-1 { 0%, 100% { transform: var(--base-transform) translateY(-6px) translateX(0px) rotateX(-1deg) rotateY(1deg); } 50% { transform: var(--base-transform) translateY(6px) translateX(3px) rotateX(1deg) rotateY(-1deg); } }
