@@ -3,7 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Baitur Raimjanov - Developer Interface</title>
+    <title>Baitur Raimjanov - Full-Stack Web Developer & Mentor</title>
+    
+    <meta name="description" content="Portfolio of Baitur Raimjanov, an 18-year-old self-taught web developer, mentor, and musician based in Bishkek, Kyrgyzstan." />
+    <meta name="keywords" content="Baitur Raimjanov, Web Developer, Full-Stack, Frontend, Backend, React, Python, Django, TypeScript, Mentor, Bishkek, Kyrgyzstan" />
+    <meta name="author" content="Baitur Raimjanov" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#310E10" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Baitur Raimjanov - Web Developer" />
+    <meta property="og:description" content="18-year-old self-taught web developer, mentor, and musician. Discover my projects and skills." />
+    <meta property="og:image" content="lucas (2).png" />
+    <meta property="og:url" content="https://skrblv.github.io/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Baitur Raimjanov - Web Developer" />
+    <meta name="twitter:description" content="18-year-old self-taught web developer, mentor, and musician." />
+    <meta name="twitter:image" content="lucas (2).png" />
+
+    <link rel="canonical" href="https://skrblv.github.io/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +42,27 @@
     />
 
     <link rel="stylesheet" href="styles.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Baitur Raimjanov",
+      "jobTitle": "Web Developer",
+      "description": "18-year-old self-taught web developer passionate about technology, design, and education.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bishkek",
+        "addressCountry": "Kyrgyzstan"
+      },
+      "email": "mailto:raimjanovbaitur77@gmail.com",
+      "sameAs": [
+        "https://github.com/skrblv",
+        "https://t.me/yshkg",
+        "https://www.instagram.com/raimzhanovba?igsh=ZnVnMm1waWo4bmYw"
+      ]
+    }
+    </script>
   </head>
   <body>
     <section id="hero" class="hero-section">
@@ -38,7 +78,7 @@
 
         <img
           src="lucas (2).png"
-          alt="Baitur Raimjanov"
+          alt="Baitur Raimjanov - Web Developer"
           class="central-image"
           data-depth="2.5"
           fetchpriority="high"
@@ -46,20 +86,7 @@
           height="630"
         />
 
-        <!-- <div class="nav-menu right-float" data-depth="1.2">
-          <div class="link">
-            <a
-              href="assets/Baitur_Raimjanov_Resume.pdf"
-              download="Baitur_Raimjanov_CV.pdf"
-            >
-              <i class="fas fa-file-download"></i
-              ><span class="nav-text">Resume</span>
-            </a>
-          </div>
-        </div> -->
-
         <div class="quote-card bottom-float" data-depth="1.4">
-          <!-- <p class="quote-text not">"Right here and right now"</p> -->
           <p class="quote-text not">"I'll keep moving forward"</p>
           <p class="quote-text mobile">"Strong? Then prove it"</p>
         </div>
@@ -100,7 +127,6 @@
     </section>
 
     <section id="about" class="about-section">
-      <!-- <div class="decorative-grid-overlay"></div> -->
       <div class="about-content-wrapper">
         <div
           class="scroll-visual-asset bubble-1"
@@ -178,6 +204,7 @@
         </div>
       </div>
     </section>
+
 <section id="resume" class="resume-section">
   <h1 class="parallax-text resume-bg-text" data-depth="0.3">RESUME</h1>
 
@@ -196,8 +223,6 @@
       </p>
     </div>
 
-
-
     <div class="resume-entry right">
       <span class="entry-year">Beginning of 2025</span>
       <h3 class="entry-title">Mentor — Codify</h3>
@@ -215,6 +240,7 @@
         Full delivery cycle and revisions.
       </p>
     </div>
+    
     <div class="resume-entry right">
       <span class="entry-year">Present</span>
       <h3 class="entry-title">Employee at Doscredo Bank</h3>
@@ -225,7 +251,6 @@
   </div>
 </section>
 
-    
     <section id="skills-hobbies" class="skills-hobbies-section">
       <div class="ink-background" id="inkSection">
          <canvas id="skillsCanvas"></canvas>
@@ -427,7 +452,7 @@
           <h2 id="modal-title" class="modal-title">PROJECT NAME</h2>
           <div class="modal-tags" id="modal-tags"></div>
           <div class="modal-body">
-            <p id="modal-description">Description goes here...</p>
+            <p id="modal-description"></p>
           </div>
           <div class="modal-footer">
             <span class="status-badge">Not Deployed</span>
@@ -446,7 +471,6 @@
         uniform float u_time;
         uniform float u_progress;
 
-        // Стандартная функция шума
         vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
         float snoise(vec2 v){
             const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
@@ -471,8 +495,6 @@
             return 130.0 * dot(m, g);
         }
 
-        // ОПТИМИЗАЦИЯ: Уменьшили количество циклов с 5 до 3
-        // Это снижает нагрузку на телефон почти в 2 раза
         float fbm(vec2 x) {
             float v = 0.0;
             float a = 0.5;
@@ -491,16 +513,11 @@
             float ratio = u_resolution.x/u_resolution.y;
             st.x *= ratio;
 
-            // Определяем, телефон это или нет (портретный режим)
             float isPortrait = step(u_resolution.x, u_resolution.y);
 
-            // 1. Позиция по горизонтали (X)
             float centerOffset = mix(0.2, 0.4, isPortrait);
             
-            // 2. Позиция по вертикали (Y)
-            // 0.5 = центр. Чем больше число, тем выше.
-            // mix(0.5, 0.65, ...) значит: на ПК 0.5, на телефоне 0.65 (чуть выше)
-            float centerY = mix(0.5, 0.85, isPortrait); // <--- ВОТ ЗДЕСЬ МЕНЯЕМ ВЫСОТУ
+            float centerY = mix(0.5, 0.85, isPortrait); 
 
             vec2 center = vec2(ratio * centerOffset, centerY);
             

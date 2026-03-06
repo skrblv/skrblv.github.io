@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resumeEntries.forEach(el => resumeObserver.observe(el));
 
-    
     const heroSection = document.getElementById('hero');
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
@@ -163,11 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const trackNameElement = document.getElementById('current-track-name');
         
         const tracks = [
-            { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" },
-            // { name: "The Way I Are", src: "assets/music/track3.mp3" },
-            // { name: "No 1 Party Anthem", src: "assets/music/track1.mp3" },
-            // { name: "Ecstasy", src: "assets/music/track4.mp3" },
-            // { name: "Lovers Rock", src: "assets/music/track5.mp3" }
+            { name: "Judas Electric Guitar", src: "assets/music/track2.mp3" }
         ];
 
         let currentTrackIndex = 0;
@@ -191,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     player.classList.remove('closed');
                     resetHideTimer(); 
                 }).catch(error => {
-                    console.warn("Autoplay / Play prevented:", error);
                 });
             }
         }
@@ -304,7 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(canvas);
 
             let particles = [];
-            // На мобилках 40 частиц, на пк 100 - для скорости
             const particleCount = window.innerWidth < 768 ? 40 : 100;
             
             let width, height;
@@ -319,15 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('resize', resize);
             resize();
 
-            // Создаем частицы
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 2 + 0.5, // Размер от 0.5 до 2.5px
-                    // Фиксированная прозрачность (разная для каждой, но не меняется)
+                    radius: Math.random() * 2 + 0.5, 
                     alpha: Math.random() * 0.5 + 0.2, 
-                    // Медленная скорость дрейфа
                     vx: (Math.random() - 0.5) * 0.5, 
                     vy: (Math.random() - 0.5) * 0.5
                 });
@@ -337,11 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.clearRect(0, 0, width, height);
                 
                 particles.forEach(p => {
-                    // Просто двигаем координаты
                     p.x += p.vx;
                     p.y += p.vy;
 
-                    // Если улетела за экран - возвращаем с другой стороны
                     if (p.x < 0) p.x = width;
                     if (p.x > width) p.x = 0;
                     if (p.y < 0) p.y = height;
@@ -351,12 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
                     
-                    // Легкое статичное свечение (не нагружает так как не меняется)
                     ctx.shadowBlur = 3; 
                     ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
                     
                     ctx.fill();
-                    ctx.shadowBlur = 0; // Сброс для оптимизации
+                    ctx.shadowBlur = 0; 
                 });
 
                 requestAnimationFrame(animate);
@@ -364,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             animate();
         }
-
 
         const designWidth = 1400;
         const designHeight = 900;
@@ -381,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.style.setProperty('--scene-scale', finalScale);
             });
         }
-
 
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -408,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Clear Skies',
                 tags: ['React', 'Django', 'MVP'],
                 description: 'A minimalist weather application focused on delivering essential meteorological data with clarity and precision. It offers real-time weather updates, forecasts, and alerts through a clean, user-friendly interface designed for quick access to vital information without unnecessary distractions.',
-                link: null 
+                link: 'https://clearskies-brown.vercel.app/' 
             },
             'shard-3': {
                 title: 'ORIENT',
@@ -465,26 +450,23 @@ function openModal(projectId) {
     }
 
     modalOverlay.classList.add('active');
-    modalOverlay.removeAttribute('aria-hidden'); // показываем скринридерам
-    modalOverlay.removeAttribute('inert');       // делаем интерактивной
+    modalOverlay.removeAttribute('aria-hidden'); 
+    modalOverlay.removeAttribute('inert');       
     document.body.classList.add('modal-open');
 
-    // Переносим фокус на кнопку закрытия модалки
     closeModalBtn.focus();
 }
 
 function closeModal() {
     modalOverlay.classList.remove('active');
-    modalOverlay.setAttribute('aria-hidden', 'true'); // скрываем скринридерам
-    modalOverlay.setAttribute('inert', 'true');       // блокируем интерактивность
+    modalOverlay.setAttribute('aria-hidden', 'true'); 
+    modalOverlay.setAttribute('inert', 'true');       
     document.body.classList.remove('modal-open');
 
-    // Возвращаем фокус на кнопку открытия модалки
     const firstShard = document.querySelector('.shard');
     if (firstShard) firstShard.focus();
 }
 
-// Инициализация
 modalOverlay.setAttribute('aria-hidden', 'true');
 modalOverlay.setAttribute('inert', 'true');
 
@@ -548,16 +530,10 @@ modalOverlay.setAttribute('inert', 'true');
             const skillsSection = document.getElementById('skills-hobbies');
 
             function resize() {
-                // ОПТИМИЗАЦИЯ ЗДЕСЬ:
-                // Проверяем, мобилка ли это
                 const isMobile = window.innerWidth < 768;
                 
-                // На ПК качество 1.0 (полное), на мобиле 0.35 (примерно треть)
-                // Для эффекта дыма/чернил понижение разрешения почти незаметно глазу,
-                // но спасает телефон от перегрева.
                 const pixelRatio = isMobile ? 0.65 : 1.0; 
 
-                // Устанавливаем внутреннее разрешение канваса меньше реального размера CSS
                 inkCanvas.width = inkSection.offsetWidth * pixelRatio;
                 inkCanvas.height = inkSection.offsetHeight * pixelRatio;
                 
