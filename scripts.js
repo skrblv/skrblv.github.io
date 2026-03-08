@@ -55,12 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
         let idleTimer;
-        let lastMouseEvent = null;
+        let lastX = window.innerWidth / 2;
+        let lastY = window.innerHeight / 2;
         let isParallaxTicking = false;
         
         let heroRect = heroSection.getBoundingClientRect();
-
-        const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
         window.addEventListener('resize', () => {
             heroRect = heroSection.getBoundingClientRect();
@@ -78,16 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
             parallaxItems.forEach(item => {
                 item.classList.remove('drifting');
             });
+            // Возвращаем плавный дрейф, если пользователь не трогает экран 300мс
             idleTimer = setTimeout(startIdleDrift, 300);
         }
         
-        function updateParallax(e) {
-            if (!e) return;
-
+        function updateParallax() {
             const centerX = heroRect.left + heroRect.width / 2;
             const centerY = heroRect.top + heroRect.height / 2;
-            const offsetX = (e.clientX - centerX) / 50; 
-            const offsetY = (e.clientY - centerY) / 50;
+            
+            const offsetX = (lastX - centerX) / 50; 
+            const offsetY = (lastY - centerY) / 50;
             
             parallaxItems.forEach(item => {
                 if (!item.classList.contains('drifting')) {
@@ -100,27 +99,36 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function onMouseMove(e) {
-            if (isTouchDevice() && window.innerWidth <= 1024) return;
-            
+        function handleInput(x, y) {
             stopIdleDrift();
-            lastMouseEvent = e;
+            lastX = x;
+            lastY = y;
             
+            // Оптимизация производительности: обновляем кадр только когда браузер готов отрисовать его
             if (!isParallaxTicking) {
                 window.requestAnimationFrame(() => {
-                    updateParallax(lastMouseEvent);
+                    updateParallax();
                     isParallaxTicking = false;
                 });
                 isParallaxTicking = true;
             }
         }
 
-        if (!isTouchDevice() || window.innerWidth > 1024) {
-            window.addEventListener('mousemove', onMouseMove, { passive: true });
-        }
+        // Событие для мышки (ПК)
+        window.addEventListener('mousemove', (e) => {
+            handleInput(e.clientX, e.clientY);
+        }, { passive: true });
+
+        // Событие для пальца (Телефоны / Планшеты)
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                handleInput(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
         
         setTimeout(startIdleDrift, 100);
     }
+
     
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
@@ -435,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 link: null 
             },
             'shard-4': {
-                title: 'BSCpetition',
+                title: 'Petition',
                 tags: ['Telegram Bot', 'Aiogram', 'Automation'],
                 description: 'An automation tool built to preserve our student group and teaching staff composition. I developed a Telegram bot that collects digital signatures and user data. It automatically generates organized Excel reports for tracking and fully formatted Word petition documents for administration submission.',
                 link: null 
