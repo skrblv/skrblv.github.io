@@ -55,11 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroSection) {
         const parallaxItems = heroSection.querySelectorAll('[data-depth]');
         let idleTimer;
-        let lastX = window.innerWidth / 2;
-        let lastY = window.innerHeight / 2;
+        let lastMouseEvent = null;
         let isParallaxTicking = false;
         
         let heroRect = heroSection.getBoundingClientRect();
+
+        const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
         window.addEventListener('resize', () => {
             heroRect = heroSection.getBoundingClientRect();
@@ -77,16 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
             parallaxItems.forEach(item => {
                 item.classList.remove('drifting');
             });
-            // Возвращаем плавный дрейф, если пользователь не трогает экран 300мс
             idleTimer = setTimeout(startIdleDrift, 300);
         }
         
-        function updateParallax() {
+        function updateParallax(e) {
+            if (!e) return;
+
             const centerX = heroRect.left + heroRect.width / 2;
             const centerY = heroRect.top + heroRect.height / 2;
-            
-            const offsetX = (lastX - centerX) / 50; 
-            const offsetY = (lastY - centerY) / 50;
+            const offsetX = (e.clientX - centerX) / 50; 
+            const offsetY = (e.clientY - centerY) / 50;
             
             parallaxItems.forEach(item => {
                 if (!item.classList.contains('drifting')) {
@@ -99,36 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function handleInput(x, y) {
-            stopIdleDrift();
-            lastX = x;
-            lastY = y;
+        function onMouseMove(e) {
+            if (isTouchDevice() && window.innerWidth <= 1024) return;
             
-            // Оптимизация производительности: обновляем кадр только когда браузер готов отрисовать его
+            stopIdleDrift();
+            lastMouseEvent = e;
+            
             if (!isParallaxTicking) {
                 window.requestAnimationFrame(() => {
-                    updateParallax();
+                    updateParallax(lastMouseEvent);
                     isParallaxTicking = false;
                 });
                 isParallaxTicking = true;
             }
         }
 
-        // Событие для мышки (ПК)
-        window.addEventListener('mousemove', (e) => {
-            handleInput(e.clientX, e.clientY);
-        }, { passive: true });
-
-        // Событие для пальца (Телефоны / Планшеты)
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                handleInput(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: true });
+        if (!isTouchDevice() || window.innerWidth > 1024) {
+            window.addEventListener('mousemove', onMouseMove, { passive: true });
+        }
         
         setTimeout(startIdleDrift, 100);
     }
-
     
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
