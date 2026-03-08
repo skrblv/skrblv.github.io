@@ -43,6 +43,12 @@
 
     <link rel="stylesheet" href="styles.css" />
 
+    <!-- Script to instantly load theme and prevent flashing -->
+    <script>
+      const savedTheme = localStorage.getItem('selected-theme') || 'default';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -402,6 +408,20 @@
         >Get in Touch</a
       >
     </section>
+
+    <!-- Theme Switcher UI -->
+    <div id="theme-switcher" class="theme-switcher">
+      <div class="theme-options closed" id="theme-options">
+        <button class="theme-option" data-theme="default" title="Crimson Blood"></button>
+        <button class="theme-option" data-theme="ocean" title="Deep Ocean"></button>
+        <button class="theme-option" data-theme="forest" title="Mystic Forest"></button>
+        <button class="theme-option" data-theme="cyberpunk" title="Cyberpunk Night"></button>
+      </div>
+      <div class="theme-toggle-btn" id="theme-toggle-btn" title="Choose Theme">
+        <i class="fas fa-palette"></i>
+      </div>
+    </div>
+
     <div id="music-player" class="music-player closed">
       <div
         class="vinyl-icon"
@@ -470,6 +490,8 @@
         uniform vec2 u_resolution;
         uniform float u_time;
         uniform float u_progress;
+        uniform vec3 u_colorBg; // Added for dynamic theme switching
+        uniform vec3 u_colorInk; // Added for dynamic theme switching
 
         vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
         float snoise(vec2 v){
@@ -514,13 +536,9 @@
             st.x *= ratio;
 
             float isPortrait = step(u_resolution.x, u_resolution.y);
-
             float centerOffset = mix(0.2, 0.4, isPortrait);
-            
             float centerY = mix(0.5, 0.85, isPortrait); 
-
             vec2 center = vec2(ratio * centerOffset, centerY);
-            
             float d = length(st - center);
 
             vec2 q = vec2(0.);
@@ -547,10 +565,7 @@
 
             float inner = fbm(st * 6.0);
             
-            vec3 colorBg = vec3(0.956, 0.890, 0.698); 
-            vec3 colorInk = vec3(0.192, 0.054, 0.062); 
-
-            vec3 finalColor = mix(colorBg, mix(colorInk, colorInk * (0.8 + inner * 0.2), morphFactor), ink);
+            vec3 finalColor = mix(u_colorBg, mix(u_colorInk, u_colorInk * (0.8 + inner * 0.2), morphFactor), ink);
 
             gl_FragColor = vec4(finalColor, 1.0);
         }

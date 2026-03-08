@@ -1,4 +1,4 @@
-:root {
+:root, [data-theme="default"] {
     --color-bg: #310E10;
     --color-module-bg: rgba(30, 30, 30, 0.85);
     --color-accent-strong: #E53935;
@@ -11,6 +11,42 @@
     --font-serif: 'Cormorant Garamond', serif;
     --font-sans: 'Inter', sans-serif;
     --padding-section: 100px 5%;
+}
+
+[data-theme="ocean"] {
+    --color-bg: #130420;
+    --color-module-bg: #2C0548;
+    --color-accent-strong: #6F2EA8;
+    --color-accent-soft: #CFA8FF;
+    --color-blood: #490968;
+    --color-detail-line: #571B39;
+    --color-detail-dim: #A36BCB;
+}
+
+
+
+[data-theme="forest"] {
+    --color-bg: #051F20;
+    --color-module-bg: #0B2B26;
+    --color-accent-strong: #8EB69B;
+    --color-accent-soft: #DAF1DE;
+    --color-blood: #235347;
+    --color-detail-line: #163832;
+    --color-detail-dim: #235347;
+}
+
+[data-theme="cyberpunk"] {
+    --color-bg: #3A345B;
+    --color-module-bg: #71557A;
+    --color-accent-strong: #D183A9;
+    --color-accent-soft: #F3C8DD;
+    --color-blood: #4B1535;
+    --color-detail-line: #4B1535;
+    --color-detail-dim: #D183A9;
+}
+
+.theme-transition * {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, fill 0.5s ease !important;
 }
 
 * {
@@ -200,7 +236,8 @@ h1, h2, h3 {
 .parallax-text {
     position: absolute;
     font-size: 35vw;
-    color: rgba(244, 227, 178, 0.08);
+    color: var(--color-accent-soft);
+    opacity: 0.08;
     line-height: 0.8;
     z-index: -5;
     text-shadow: 0 0 30px rgba(229, 57, 53, 0.2);
@@ -216,7 +253,7 @@ h1, h2, h3 {
     height: 700px;
     object-fit: cover;
     opacity: 0.9;
-    border: 3px solid var(--color-accent-strong);
+    /* border: 3px solid var(--color-accent-strong); */
     transition: transform 0.1s linear;
 }
 
@@ -426,6 +463,7 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
+/* Modded SVGs via CSS Masks to dynamically inherit colors */
 .about-section::before {
     content: '';
     position: absolute;
@@ -435,22 +473,32 @@ h1, h2, h3 {
     height: 150px;
     z-index: 16;
     pointer-events: none;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,80 C200,160 400,0 600,80 C800,160 1000,0 1000,0 L1000,150 L0,150 Z' fill='%23F4E3B2' /%3E%3C/svg%3E") repeat-x;
-    background-size: 100% 100%;
+    background-color: var(--color-accent-soft);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,80 C200,160 400,0 600,80 C800,160 1000,0 1000,0 L1000,150 L0,150 Z' fill='black' /%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 150' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0,80 C200,160 400,0 600,80 C800,160 1000,0 1000,0 L1000,150 L0,150 Z' fill='black' /%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
     transform: translateY(-100%);
 }
 
 .about-section::after {
     content: '';
     position: absolute;
-    top: -42px;
+    top: -45px;
     left: 0;
     width: 100%;
     height: 150px;
     z-index: 16;
     pointer-events: none;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 60 C 276 -147 480 140 728 2 C 1026 -58 1200 100 1440 60 L 1440 100 L 0 100 Z' fill='%23F4E3B2'/%3E%3C/svg%3E") repeat-x;
-    background-size: 100% 100%;
+    background-color: var(--color-accent-soft);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 60 C 276 -147 480 140 728 2 C 1026 -58 1200 100 1440 60 L 1440 100 L 0 100 Z' fill='black'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 60 C 276 -147 480 140 728 2 C 1026 -58 1200 100 1440 60 L 1440 100 L 0 100 Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
     transform: rotate(180deg);
 }
 
@@ -913,6 +961,76 @@ h1, h2, h3 {
     color: var(--color-accent-strong);
 }
 
+/* --- Theme Switcher UI --- */
+.theme-switcher {
+    position: fixed;
+    bottom: 105px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-toggle-btn {
+    width: 50px;
+    height: 50px;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent-strong);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-soft);
+    font-size: 1.3em;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--color-accent-strong);
+    transition: transform 0.3s, background 0.3s, color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+    background: var(--color-accent-strong);
+    color: var(--color-bg);
+}
+
+.theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-options.closed {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.theme-option {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent-soft);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.theme-option:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--color-accent-soft);
+}
+
+.theme-option[data-theme="default"] { background: linear-gradient(45deg, #310E10, #F4E3B2); }
+.theme-option[data-theme="ocean"] { background: linear-gradient(45deg, #051F20, #CFA8FF); }
+.theme-option[data-theme="forest"] { background: linear-gradient(45deg, #051F20, #DAF1DE); }
+.theme-option[data-theme="cyberpunk"] { background: linear-gradient(45deg, #3A345B, #F3C8DD); }
+/* ------------------------ */
+
 .music-player {
     position: fixed;
     bottom: 30px;
@@ -1272,6 +1390,11 @@ h1, h2, h3 {
         right: 15px;
     }
 
+    .theme-switcher {
+        bottom: 85px;
+        right: 20px;
+    }
+
     .controls-panel {
         width: 250px;
         right: 70px;
@@ -1370,7 +1493,7 @@ h1, h2, h3 {
 }
 
 .shard:hover {
-    border-color: rgba(230, 240, 255, 0.9);
+    border-color: var(--color-accent-soft);
 }
 
 .shard:hover::before { 
@@ -1389,7 +1512,7 @@ h1, h2, h3 {
 
 .shard-icon {
     width: 38px; height: 38px; 
-    border: 1px solid rgba(255, 255, 255, 0.4); 
+    border: 1px solid var(--color-accent-strong); 
     border-radius: 50%;
     display: flex; 
     align-items: center; 
@@ -1398,6 +1521,7 @@ h1, h2, h3 {
     font-weight: 700; 
     background: rgba(0,0,0,0.25);
     font-family: 'Roboto', sans-serif;
+    color: var(--color-accent-soft);
 }
 
 .shard-title {
@@ -1406,6 +1530,7 @@ h1, h2, h3 {
     line-height: 1.4;
     opacity: 0.9;
     font-family: 'Roboto', sans-serif;
+    color: var(--color-text-light);
 }
 
 .particles { 
@@ -1516,11 +1641,24 @@ h1, h2, h3 {
     max-width: 600px;
     position: relative;
     padding: 40px;
-    box-shadow: 0 0 30px rgba(229, 57, 53, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     transform: scale(0.9) translateY(20px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-image: linear-gradient(rgba(49, 14, 16, 0.9), rgba(49, 14, 16, 0.9)), 
-                      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+}
+
+.modal-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.modal-content, .close-modal-btn {
+    position: relative;
+    z-index: 1;
 }
 
 .modal-overlay.active .modal-container {

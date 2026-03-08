@@ -1,5 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const themeSwitcher = document.getElementById('theme-switcher');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const themeOptions = document.getElementById('theme-options');
+    const themeButtons = document.querySelectorAll('.theme-option');
+
+    if (themeSwitcher && themeToggleBtn && themeOptions) {
+        themeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeOptions.classList.toggle('closed');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!themeSwitcher.contains(e.target)) {
+                themeOptions.classList.add('closed');
+            }
+        });
+
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                
+                document.body.classList.add('theme-transition');
+                
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('selected-theme', theme);
+                
+                themeOptions.classList.add('closed');
+                
+                if (window.updateCanvasColors) {
+                    window.updateCanvasColors();
+                }
+
+                setTimeout(() => {
+                    document.body.classList.remove('theme-transition');
+                }, 500);
+            });
+        });
+    }
+
     const resumeEntries = document.querySelectorAll('.resume-entry');
 
     const resumeObserver = new IntersectionObserver(entries => {
@@ -276,12 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function gaussianRandom(mean = 0, stdev = 1) {
-            const u = 1 - Math.random();
-            const v = Math.random();
-            const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-            return z * stdev + mean;
-        }
         function createFlickeringParticles() {
             const container = document.getElementById('flickering-particles-container');
             if (!container) return;
@@ -428,47 +461,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalFooter = modalOverlay.querySelector('.modal-footer'); 
         const shards = document.querySelectorAll('.shard');
 
-function openModal(projectId) {
-    const project = projectsData[projectId];
-    if (!project) return;
+        function openModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
 
-    modalTitle.textContent = project.title;
-    modalDesc.textContent = project.description;
+            modalTitle.textContent = project.title;
+            modalDesc.textContent = project.description;
 
-    modalTags.innerHTML = '';
-    project.tags.forEach(tag => {
-        const span = document.createElement('span');
-        span.className = 'modal-tag';
-        span.textContent = tag;
-        modalTags.appendChild(span);
-    });
+            modalTags.innerHTML = '';
+            project.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'modal-tag';
+                span.textContent = tag;
+                modalTags.appendChild(span);
+            });
 
-    if (project.link) {
-        modalFooter.innerHTML = `<a href="${project.link}" target="_blank" class="status-badge live">View Live Project <i class="fas fa-external-link-alt"></i></a>`;
-    } else {
-        modalFooter.innerHTML = `<span class="status-badge">Not Deployed</span>`;
-    }
+            if (project.link) {
+                modalFooter.innerHTML = `<a href="${project.link}" target="_blank" class="status-badge live">View Live Project <i class="fas fa-external-link-alt"></i></a>`;
+            } else {
+                modalFooter.innerHTML = `<span class="status-badge">Not Deployed</span>`;
+            }
 
-    modalOverlay.classList.add('active');
-    modalOverlay.removeAttribute('aria-hidden'); 
-    modalOverlay.removeAttribute('inert');       
-    document.body.classList.add('modal-open');
+            modalOverlay.classList.add('active');
+            modalOverlay.removeAttribute('aria-hidden'); 
+            modalOverlay.removeAttribute('inert');       
+            document.body.classList.add('modal-open');
 
-    closeModalBtn.focus();
-}
+            closeModalBtn.focus();
+        }
 
-function closeModal() {
-    modalOverlay.classList.remove('active');
-    modalOverlay.setAttribute('aria-hidden', 'true'); 
-    modalOverlay.setAttribute('inert', 'true');       
-    document.body.classList.remove('modal-open');
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            modalOverlay.setAttribute('aria-hidden', 'true'); 
+            modalOverlay.setAttribute('inert', 'true');       
+            document.body.classList.remove('modal-open');
 
-    const firstShard = document.querySelector('.shard');
-    if (firstShard) firstShard.focus();
-}
+            const firstShard = document.querySelector('.shard');
+            if (firstShard) firstShard.focus();
+        }
 
-modalOverlay.setAttribute('aria-hidden', 'true');
-modalOverlay.setAttribute('inert', 'true');
+        modalOverlay.setAttribute('aria-hidden', 'true');
+        modalOverlay.setAttribute('inert', 'true');
 
         shards.forEach(shard => {
             shard.addEventListener('click', (e) => {
@@ -525,13 +558,44 @@ modalOverlay.setAttribute('inert', 'true');
             const uRes = gl.getUniformLocation(prog, "u_resolution");
             const uTime = gl.getUniformLocation(prog, "u_time");
             const uProg = gl.getUniformLocation(prog, "u_progress");
+            
+            // Connect to JS Uniforms dynamically
+            const uColorBg = gl.getUniformLocation(prog, "u_colorBg");
+            const uColorInk = gl.getUniformLocation(prog, "u_colorInk");
+
+            window.updateCanvasColors = function() {
+                if (!gl) return;
+                const rootStyles = getComputedStyle(document.documentElement);
+                let bgHex = rootStyles.getPropertyValue('--color-accent-soft').trim();
+                let inkHex = rootStyles.getPropertyValue('--color-bg').trim();
+
+                // Helper to decode Hex -> Normalized RGB array for Shader
+                function hexToRgb(hex) {
+                    hex = hex.replace('#', '');
+                    if(hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+                    if(hex.length !== 6) return [0,0,0];
+                    return [
+                        parseInt(hex.substring(0,2), 16) / 255,
+                        parseInt(hex.substring(2,4), 16) / 255,
+                        parseInt(hex.substring(4,6), 16) / 255
+                    ];
+                }
+
+                const rgbBg = hexToRgb(bgHex);
+                const rgbInk = hexToRgb(inkHex);
+
+                gl.uniform3f(uColorBg, rgbBg[0], rgbBg[1], rgbBg[2]);
+                gl.uniform3f(uColorInk, rgbInk[0], rgbInk[1], rgbInk[2]);
+            };
+
+            // Call it initially
+            window.updateCanvasColors();
 
             let currentProgress = 0;
             const skillsSection = document.getElementById('skills-hobbies');
 
             function resize() {
                 const isMobile = window.innerWidth < 768;
-                
                 const pixelRatio = isMobile ? 0.65 : 1.0; 
 
                 inkCanvas.width = inkSection.offsetWidth * pixelRatio;
