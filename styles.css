@@ -247,8 +247,11 @@ h1, h2, h3 {
 
 .central-image {
     position: absolute;
+        inset: 0;
+    margin: auto;
+
     top: 8%;
-    left: 25%;
+    left: 10%;
     width: 650px;
     height: 700px;
     object-fit: cover;
