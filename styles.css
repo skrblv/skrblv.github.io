@@ -250,7 +250,7 @@ h1, h2, h3 {
         inset: 0;
     margin: auto;
 
-    top: 8%;
+    top: 20%;
     left: 10%;
     width: 650px;
     height: 700px;
@@ -408,7 +408,7 @@ h1, h2, h3 {
 
 .data-height {
     bottom: 50%;
-    left: 61%;
+    left: 75%;
     z-index: 1;
     transform: rotate(5deg);
 }
@@ -1216,7 +1216,7 @@ h1, h2, h3 {
 
     .main-content-area {
         position: absolute;
-        width: 90%;
+        /* width: 90%; */
         max-width: 500px;
         height: 100%;
         left: 50%;
@@ -1232,9 +1232,9 @@ h1, h2, h3 {
     }
     
     .central-image {
-        top: 15%;
+        top: 18%;
         left: 0;
-        height: 85%;
+        height: 80%;
         width: 100%;
         opacity: 1;
         mix-blend-mode: normal;
@@ -1245,7 +1245,7 @@ h1, h2, h3 {
     
     .data-panel {
         top: 20%;
-        left: 2%;
+        left: 10%;
         width: 45%;
         padding: 15px;
         box-shadow: 0 0 10px rgba(229, 57, 53, 0.4);
@@ -1309,7 +1309,7 @@ h1, h2, h3 {
 
     .quote-card {
         bottom: 80%;
-        right: 1%;
+        right: 10%;
         width: 45%;
         padding: 10px;
     }
