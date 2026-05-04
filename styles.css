@@ -401,14 +401,14 @@ h1, h2, h3 {
 
 .data-age {
     top: 60%;
-    left: 33%;
+    left: 20%;
     z-index: 30;
     transform: rotate(-5deg);
 }
 
 .data-height {
     bottom: 50%;
-    left: 75%;
+    left: 80%;
     z-index: 1;
     transform: rotate(5deg);
 }
