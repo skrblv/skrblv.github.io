@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let globalResizeTimeout;
+    const resizeCallbacks = [];
+    
+    window.addEventListener('resize', () => {
+        clearTimeout(globalResizeTimeout);
+        globalResizeTimeout = setTimeout(() => {
+            resizeCallbacks.forEach(cb => cb());
+        }, 150);
+    }, { passive: true });
 
     const themeSwitcher = document.getElementById('theme-switcher');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -42,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const resumeEntries = document.querySelectorAll('.resume-entry');
 
     const resumeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        }
-    });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
     }, { threshold: 0.3 });
 
     resumeEntries.forEach(el => resumeObserver.observe(el));
@@ -62,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        window.addEventListener('resize', () => {
+        resizeCallbacks.push(() => {
             heroRect = heroSection.getBoundingClientRect();
-        }, { passive: true });
+        });
 
         function startIdleDrift() {
             parallaxItems.forEach(item => {
@@ -304,6 +313,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sceneContainer = document.getElementById('scene-container');
     if (sceneContainer) {
+        let isSceneVisible = false;
+        const sceneObserver = new IntersectionObserver((entries) => {
+            isSceneVisible = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        sceneObserver.observe(document.getElementById('shards-section'));
+
         const shards = document.querySelectorAll('.shard');
 
         function startBreathing() {
@@ -342,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 canvas.height = height;
             }
             
-            window.addEventListener('resize', resize);
+            resizeCallbacks.push(resize);
             resize();
 
             for (let i = 0; i < particleCount; i++) {
@@ -357,6 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function animate() {
+                if (!isSceneVisible) {
+                    requestAnimationFrame(animate);
+                    return;
+                }
+
                 ctx.clearRect(0, 0, width, height);
                 
                 particles.forEach(p => {
@@ -387,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const designWidth = 1400;
         const designHeight = 900;
-        let resizeTimeout;
 
         function adjustScale() {
             window.requestAnimationFrame(() => {
@@ -401,10 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(adjustScale, 100);
-        }, { passive: true });
+        resizeCallbacks.push(adjustScale);
 
         startBreathing();
         createFlickeringParticles();
@@ -532,6 +548,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const inkCanvas = document.getElementById('skillsCanvas');
     
     if (inkSection && inkCanvas) {
+        let isInkVisible = false;
+        const inkObserver = new IntersectionObserver((entries) => {
+            isInkVisible = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        
+        const skillsSection = document.getElementById('skills-hobbies');
+        if (skillsSection) {
+            inkObserver.observe(skillsSection);
+        }
+
         const gl = inkCanvas.getContext('webgl');
         if (gl) {
             function createShader(gl, type, src) {
@@ -559,7 +585,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const uTime = gl.getUniformLocation(prog, "u_time");
             const uProg = gl.getUniformLocation(prog, "u_progress");
             
-            // Connect to JS Uniforms dynamically
             const uColorBg = gl.getUniformLocation(prog, "u_colorBg");
             const uColorInk = gl.getUniformLocation(prog, "u_colorInk");
 
@@ -569,7 +594,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let bgHex = rootStyles.getPropertyValue('--color-accent-soft').trim();
                 let inkHex = rootStyles.getPropertyValue('--color-bg').trim();
 
-                // Helper to decode Hex -> Normalized RGB array for Shader
                 function hexToRgb(hex) {
                     hex = hex.replace('#', '');
                     if(hex.length === 3) hex = hex.split('').map(c => c + c).join('');
@@ -588,13 +612,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 gl.uniform3f(uColorInk, rgbInk[0], rgbInk[1], rgbInk[2]);
             };
 
-            // Call it initially
             window.updateCanvasColors();
 
             let currentProgress = 0;
-            const skillsSection = document.getElementById('skills-hobbies');
 
-            function resize() {
+            function resizeInk() {
                 const isMobile = window.innerWidth < 768;
                 const pixelRatio = isMobile ? 0.65 : 1.0; 
 
@@ -605,10 +627,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 gl.uniform2f(uRes, inkCanvas.width, inkCanvas.height);
             }
 
-            window.addEventListener('resize', resize);
-            resize();
+            resizeCallbacks.push(resizeInk);
+            resizeInk();
 
             function updateScroll() {
+                if (!skillsSection) return;
                 const rect = skillsSection.getBoundingClientRect();
                 const winH = window.innerHeight;
                 
@@ -622,6 +645,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function render(time) {
+                if (!isInkVisible) {
+                    requestAnimationFrame(render);
+                    return;
+                }
+
                 updateScroll();
                 gl.uniform1f(uTime, time * 0.0003);
                 gl.uniform1f(uProg, currentProgress);

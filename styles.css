@@ -1308,7 +1308,7 @@ h1, h2, h3 {
     }
 
     .quote-card {
-        bottom: 80%;
+        bottom: 78%;
         right: 10%;
         width: 45%;
         padding: 10px;
@@ -1351,15 +1351,19 @@ h1, h2, h3 {
     }
     
     .action-links-module {
-        bottom: 11%;
+        bottom: 9%;
         left: 30%;
         width: 45%;
         padding: 8px 15px;
         border-radius: 5px;
     }
+    .bottom-links{
+        display: flex;
+        gap: 20px;
+    }
 
     .bottom-links a {
-        font-size: 1.5em;
+        font-size: 1.8em;
         margin-inline: 5px;
     }
 
