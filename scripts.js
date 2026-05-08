@@ -439,22 +439,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 link: null 
             },
             'shard-2': {
-                title: 'Clear Skies',
-                tags: ['React', 'Django', 'MVP'],
-                description: 'A minimalist weather application focused on delivering essential meteorological data with clarity and precision. It offers real-time weather updates, forecasts, and alerts through a clean, user-friendly interface designed for quick access to vital information without unnecessary distractions.',
-                link: 'https://clearskies-brown.vercel.app/' 
+                title: 'Doscredobank',
+                tags: ['n8n', 'AI-Integration', 'Automation'],
+                description: 'Design and implementation of automated systems using automation logic  and JavaScript. Key use cases include autonomous parsing of banking data, automated reporting, and the creation of interaction chains between APIs of various services, eliminating human error in routine operations.',
+                link: null 
             },
             'shard-3': {
                 title: 'ORIENT',
-                tags: ['React', 'Django-Rest-Framework', 'Algorithms'],
+                tags: ['React', 'Django-Rest-Framework', 'PostgreSQL'],
                 description: 'An adaptive Life-OS that acts as a personal strategic engine. It aggregates user profiles, goals, and constraints to generate actionable daily plans. The system dynamically recalibrates schedules based on real-time events and emotional states, providing transparent logic (Why & How) for every adjustment.',
                 link: null 
             },
             'shard-4': {
-                title: 'Petition',
-                tags: ['Telegram Bot', 'Aiogram', 'Automation'],
-                description: 'An automation tool built to preserve our student group and teaching staff composition. I developed a Telegram bot that collects digital signatures and user data. It automatically generates organized Excel reports for tracking and fully formatted Word petition documents for administration submission.',
-                link: null 
+                title: 'Tamyr',
+                tags: ['Next.js', 'Startup', 'Hackathon'],
+                description: 'A platform designed to transform Kyrgyzstan’s brain drain into talent circulation by connecting the global Kyrgyz diaspora with local startups and companies. The system enables professionals abroad to mentor, consult, and collaborate remotely, while AI-powered matching helps startups quickly discover relevant experts worldwide.',
+                link: "https://tamyr-project.vercel.app/" 
             },
             'shard-5': {
                 title: 'Finance_bot',
