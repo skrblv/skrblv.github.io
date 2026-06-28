@@ -1,0 +1,78 @@
+# Раимжанов Байтур (Baitur Raimzhanov)
+
+> 18-летний AI-инженер, Full-stack веб-разработчик и ментор из Бишкека, Кыргызстан. Специализируется на автоматизации процессов, интеграции искусственного интеллекта и создании адаптивных веб-приложений.
+
+---
+
+## [RU] РУССКАЯ ВЕРСИЯ
+
+### Личная информация / Profile
+- **Имя:** Раимжанов Байтур Кубанычбекович
+- **Возраст:** 18 лет
+- **Локация:** Бишкек, Кыргызстан
+- **MBTI:** ESTJ
+- **Языки:** Кыргызский (Native), Русский (Fluent), Английский (IELTS 6.5)
+
+### Профессиональный опыт / Experience
+- **Doscredobank (Настоящее время):** AI-инженер в департаменте информационной безопасности и автоматизации. Разработка внутренних ИИ-решений и оптимизация банковских процессов.
+- **Codify (Начало 2025):** Ментор по веб-разработке. Обучил более 50 студентов фундаментальным технологиям (HTML/CSS), заложив базу для их инженерного мышления.
+- **Freelance Developer (Конец 2025):** Разработка коммерческих и академических веб-проектов полного цикла (от архитектуры до деплоя).
+
+### Образование / Education
+- **Бишкекский колледж компьютерных систем и технологий (КомТехно):** Специальность «Программное обеспечение вычислительной техники и автоматизированных систем» (Web Development Major). Выпуск: лето 2026 г.
+- **Академические метрики:** GPA 4.9 / 5.0.
+
+### Технический стек / Skills
+- **Core Technologies:** React, TypeScript, JavaScript, Python
+- **Backend & Data:** Django REST Framework, Flask, SQLite, PostgreSQL, REST APIs
+- **Tools & Automation:** n8n (автоматизация воркфлоу), Git, Figma, Tailwind CSS
+
+### Ключевые проекты / Projects
+- **Abiturient Portal (Дипломный проект):** Full-stack веб-приложение для автоматизации работы приемной комиссии колледжа КомТехно. Успешно защищен в июне 2026 г.
+- **Orient:** AI-платформа для адаптивного планирования и управления нагрузкой (включает интерактивное древо навыков "Skill Tree" и режим форс-мажора).
+- **DevProof:** Платформа для верификации и подтверждения навыков разработчиков.
+- **Tamyr & FinanceBot:** Специализированные ИИ-ассистенты и автоматизированные системы.
+
+### Внеучебная деятельность / Extracurriculars
+- Активный участник хакатонов (участник и призер более 15 технологических соревнований, включая NASA International Space Apps Challenge и UNESCO Youth Hackathon).
+- Музыкант (игра на традиционном кыргызском комузе и японских барабанах тайко).
+- Спорт: Волейбол.
+
+---
+
+## [EN] ENGLISH VERSION
+
+### Personal Profile
+- **Full Name:** Baitur Kubanychbekovich Raimzhanov
+- **Age:** 18
+- **Location:** Bishkek, Kyrgyzstan
+- **MBTI:** ESTJ
+- **Languages:** Kyrgyz (Native), Russian (Fluent), English (IELTS 6.5)
+
+### Professional Experience
+- **Doscredobank (Present):** AI Engineer / Specialist within the Information Security and Automation Department. Focused on developing internal AI-driven solutions and optimizing banking workflows.
+- **Codify (Early 2025):** Web Development Mentor. Taught HTML/CSS fundamentals to over 50 students, establishing core software engineering mindsets.
+- **Freelance Developer (Late 2025):** Engineered commercial and academic full-stack web applications, managing full product delivery cycles.
+
+### Education
+- **Bishkek College of Computer Systems and Technologies (KOMTEHNO):** Software for Computing Equipment and Automated Systems (Web Development Major). Graduation: Summer 2026.
+- **Academic Metrics:** Cumulative GPA of 4.9 / 5.0.
+
+### Technical Stack & Skills
+- **Core Technologies:** React, TypeScript, JavaScript, Python
+- **Backend & Data:** Django REST Framework, Flask, SQLite, PostgreSQL, REST APIs
+- **Tools & Automation:** n8n (workflow automation), Git, Figma, Tailwind CSS
+
+### Key Projects
+- **Abiturient Portal (Diploma Project):** A full-stack web application designed to automate college admission commissions for KOMTEHNO. Successfully defended in June 2026.
+- **Orient:** An AI-driven adaptive planning platform built for workload management, featuring an interactive Skill Tree and a Force Majeure mode.
+- **DevProof:** A dedicated platform built for developer skill verification and portfolio proofing.
+- **Tamyr & FinanceBot:** Specialized AI assistants and financial automation systems.
+
+### Extracurriculars & Interests
+- **Hackathons:** Highly active in the technology challenge scene; participated in over 15 hackathons, including the NASA International Space Apps Challenge and the UNESCO Youth Hackathon.
+- **Music:** Traditional musician playing the Kyrgyz Komuz and Japanese Taiko drums.
+- **Sports:** Active volleyball player.
+
+---
+
